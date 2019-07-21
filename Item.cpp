@@ -6,6 +6,7 @@ This is the implementation of the base class for the items Class
 #include <iostream>
 #include <stdio.h>
 #include "Item.hpp"
+#include "gameState.hpp"
 using namespace std;
 
 //Room constructor
@@ -22,14 +23,27 @@ string Item::getName(){
 }
 
 //This function determines whether or not to get Desc 1 or Desc2
-string Item::getDesc(string verb)
+void Item::getDesc(string verb)
 {
-  if(strcmp(verb, secondVerb)
-    return desc1;
+  //print the correct description
+  if(strcmp(verb, secondVerb))
+    cout << desc2 << "\n";
   else
-    return desc2;
+    cout << desc1 << "\n";
 }
 
 bool Item::getPickup(){
   return pickup;
+}
+
+void Item::actionFunction(string verb)
+{
+  if(strcmp(verb, "look"))
+  {
+    Item.getDesc(verb);
+  }
+  else
+  {
+    cout << "Error, you cannot do that.\n";
+  }
 }
