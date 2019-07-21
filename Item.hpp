@@ -19,9 +19,9 @@ class Item
    
    public:
     //functions
-    Item item(string nameInput, string desc1Input, bool pickupInput, string desc2Input, string secondVerbInput){};
-    string getDesc(string verb){};
+    Item item(string nameInput, string desc1Input, bool pickupInput, string desc2Input, string secondVerbInput);
+    void getDesc(string verb);
     bool getPickup();
-    
+    virtual void actionFunction(string verb);
 };
 #endif
