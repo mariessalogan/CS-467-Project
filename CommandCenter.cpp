@@ -1,12 +1,13 @@
 /**********************************************************************************
-Class Implementation - Rooms Base Class 
-This is the implementation of the base class for the rooms Class that will be linked 
-together by the Gamestate function.
+Name: Mariessa Logan
+Class Implementation - Command Center Class 
+This is the implementation of the command center that will have the alien as the
+feature
 **********************************************************************************/
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include "Room.hpp"
+#include "CommandCenter.hpp"
 using namespace std;
 
 //Room constructor
@@ -71,3 +72,47 @@ string Room::getItem(string itemName){
 void Room::setVisited(){
   visited = true;
 }
+
+  //check player inventory for the requirements
+  bool CommandCenter::metRequ(Gamestate *G)
+  {
+    int reqs = 0;
+    for(int i = 0;i < 8; i++)
+    {
+      //if item is armor, phaser gun, or goggles then increment
+      if(strcmp(G->inventory, "armor"))
+      {
+          reqs++;
+      }
+      else if(strcmp(G->inventory, "phaser gun"))
+      {
+          reqs++;
+      }
+      else if(strcmp(G->inventory, "goggles"))
+      {
+        reqs++;
+      }
+      else
+        continue;
+    }
+    if(reqs == 3)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+    
+    void CommandCenter::actionFunction(gameState *G)
+    {
+      if(metRequ(G) == false
+      {
+        cout << deathDescription;
+      }
+      else
+      {
+        printFunction();
+      }
+    }
+  }
