@@ -10,8 +10,22 @@ together by the Gamestate function.
 using namespace std;
 
 //Room constructor
-Room::room(File * roomFile){
-  
+Room::room(string nameInput, string shortInput, string longInput, bool visitInput, int itemCount, Item *inventInput[], Item *featInput[], Room *nInput, Room *eInput, Room *wInput, Room *sInput){
+  name = nameInput;
+  shortDesc = shortInput;
+  longDesc = longInput;
+  visited = visitInput;
+  for(int i = 0; i < itemCount; i++)
+  {
+    inventory[i] = inventInput[i];
+  }
+  features[0] = featInput[0];
+  features[1] = featInput[1];
+  north = nInput;
+  east = eInput;
+  west = wInput;
+  south = sInput;
+
 }
 
 string Room::getName(){
