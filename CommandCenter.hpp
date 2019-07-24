@@ -7,6 +7,7 @@ together by the Gamestate function.
 #define ROOM_H
 #include <string>
 #include <stdio.h>
+#include "gameState.hpp"
 using namespace std;
 class Room
 {
@@ -34,6 +35,7 @@ class Room
     Item getFeature(string featureName);
     Item getItem(string itemName);
     void setVisited();
+    bool metRequ(Gamestate *G);
     
 };
 #endif
