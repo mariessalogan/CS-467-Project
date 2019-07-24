@@ -15,8 +15,9 @@ class Room
     string shortDesc;
     string longDesc;
     bool visited
+    int itemCount;
     Item * inventory[8];
-    Item * features[8];
+    Item *features[2];
     Room * north;
     Room * east;
     Room * south;
@@ -24,7 +25,7 @@ class Room
    
    public:
     //functions
-    Room room(File *roomFile);
+    Room room(string nameInput, string shortInput, string longInput, bool visitInput, Item *inventInput[], Item *featInput[], Room *nInput, Room *eInput, Room *wInput, Room *sInput);
     string getName();
     string getLongDesc();
     string getshortDesc();
