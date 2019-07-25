@@ -7,16 +7,31 @@
 ******************************************************************************/
 #include "gameState.hpp"
 
+/******************************************************************************************************************/
+//Constructor and Destructor Functions
+/**************************************************************************************************************/
 //Constructor
 gameState::gameState(char * loadDir){
 
+	//Open the directory from passed in pointer
+	//Create a blank gameState object. 
+	//Change gameState variables to match those of gameState file. 
+	//If an item is present in gameState
+		//Allocate memroy for the item, set item variables to match file data	//Allocated 16 room objects
+	//Populate room objects with file data
+	//If an item/feature is present in the room
+		//Allocate memroy for the item, set item variables to match file data
+	//Link rooms
 }
 
 //Destructor
 gameState::~gameState(){
-
+	
 }
 
+/******************************************************************************************************************/
+//Getter functions
+/******************************************************************************************************************/
 //Return pointer to current room.
 Room * gameState::getPosition(){
 	return position;
@@ -32,16 +47,55 @@ bool gameState::getGameWon(){
 	return gameWon;
 }
 
+//Return game quit bool. 
+bool gameState::getGameQuit() {
+	return gameQuit;
+}
+
 //Get number of items in inventory.
 int gameState::getInventorySize(){
 	return inventorySize;
 }
 
+/******************************************************************************************************************/
+//Print functions
+/******************************************************************************************************************/
 //Print game intro.
-void gameState::printIntro(){
-	cout << gameIntro << endl;
+void gameState::printIntro() {
+	cout << intro << endl;
 	return;
 }
+
+//Print game won description.
+void gameState::printWinDesc() {
+	cout << winDes << endl;
+	return;
+}
+
+//Print game lost / game over description
+void gameState::printLossDesc() {
+	cout << lossDesc << endl;
+	return;
+}
+
+//Check if a room has been visited, print correct description 
+//then update visited bool. 
+void gameState::printCurRoomDesc() {
+
+	if (position->visited == false) {
+		cout << position->longDesc << endl;
+		position->setVisited(true);
+	}
+	else {
+		cout << position->shortDesc << endl;
+	}
+}
+
+
+
+/******************************************************************************************************************/
+//Setter / Modifier functions
+/******************************************************************************************************************/
 
 //Change current position pointer.
 void gameState::setPosition(Room * newRoom){
@@ -87,14 +141,18 @@ void gameState::decInventorySize(){
 }
 
 
+
+/******************************************************************************************************************/
+//Parser Functions
+/******************************************************************************************************************/
+
 //Checks if a particular feature is present in the current room. Returns
-//true if present, false otherwise.
+//a pointer to the feature if present, otherwise it returns NULL.
 Item * gameState::_checkForFeature(string noun){
 
 	int i;
 
-	//The number 8 refects the current array size in Rooms.hpp, this is larger than necessary. 
-	for(i = 0; i < 8 ; i++){
+	for(i = 0; i < 2 ; i++){
 		if(position->features[i]->name == noun){
 			return position->features[i];
 		}
@@ -103,8 +161,8 @@ Item * gameState::_checkForFeature(string noun){
 	return NULL;
 }
 
-//Checks if a particular item is present in the current room. Returns true
-//if present, false otherwise.
+//Checks if a particular item is present in the current room. Returns a
+//pointer to the item if present, otherwise it returns NULL.
 Item * gameState::_checkForItem(string noun){
 
 	int i;
@@ -118,7 +176,8 @@ Item * gameState::_checkForItem(string noun){
 	return NULL;
 }
 
-//Check if parsed noun is an item in inventory. If 
+//Checks if an item is in inventory, returns a pointer to the item if found, 
+//otherwise it returns NULL;
 Item * gameState::_checkInventory(string noun){
 
 	int i;
@@ -185,7 +244,31 @@ void gameState::_lookAt(string noun){
 }
 
 //How is parser sending room data to this function?
-void gameState::_moveRooms(){
+void gameState::_moveRooms(string noun){
+
+
+	//Check if noun is cardinal direction AND that direction is not null OR that the noun is
+	//the name of the room at that location. 
+	if((noun == "north" && position->north != NULL) || (noun == position->north->name)){
+		position = position->north;
+		decOxygen();
+	}
+	else if((noun == "east" && position->east != NULL) || (noun == position->east->name)){
+		position = position->east;
+		decOxygen();
+	}
+	else if((noun == "south" && position->south != NULL) || (noun == position->south->name)){
+		position = position->south;
+		decOxygen();
+	}
+	else if((noun == "west" && position->west != NULL) || (noun == position->west->name)){
+		position = position->west;
+		decOxygen();
+	}
+	else{
+		cout << "You cannot go that way!" << endl;
+	}
+	
 
 }
 
@@ -273,6 +356,7 @@ void gameState::_help(){
 	return;
 }
 
+//Print the contents of the player inventory. 
 void gameState::_printInventory(){
 
 	int i;
@@ -289,12 +373,63 @@ void gameState::_printInventory(){
 	return;
 }
 
+//Figure out file structure. Need to export gameState and room data.
+void gameState::_saveGame() {
 
-void enactVerb(string verb, string noun){
+}
 
-	
+
+void gameState::_quitGame() {
+	gameQuit = true;
+
+}
+
+
+//Check with Maressia on how this is passing to items. 
+void _itemAction(string verb, string noun, gameState game) {
+
+}
+
+
+void enactVerb(string verb, string noun) {
+
+
 
 	//verb == look
+	if (verb == "look") {
+		_look(noun);
+	}
+	else if (verb == "lookAt") {
+		_lookAt(noun);
+	}
+	else if (verb == "go") {
+		_moveRooms(noun);
+	}
+	else if (verb == "take") {
+		_takeItem(noun);
+	}
+	else if (verb == "drop") {
+		dropItem(noun);
+	}
+	else if (verb == "inventory") {
+		_printInventory();
+	}
+	else if (verb == "help") {
+		_help();
+	}
+	//Function not created yet.
+	else if (verb == "save") {
+
+	}
+	else if (verb == "quit") {
+		_quitGame();
+	}
+	//Check with Hamiltion what the passed verb will be to call 
+	//unique object functions. Check with Mareissa on how this is
+	//called in item.
+	else if (verb == "act") {
+
+	}
 
 	//verb == lookAt
 		//Determine location of item
