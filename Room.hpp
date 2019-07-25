@@ -34,6 +34,6 @@ class Room
     Item getFeature(string featureName);
     Item getItem(string itemName);
     void setVisited();
-    
+    virtual void actionFunction();
 };
 #endif
