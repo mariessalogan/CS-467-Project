@@ -7,6 +7,7 @@ together by the Gamestate function.
 #define ROOM_H
 #include <string>
 #include <stdio.h>
+#include "Item.hpp"
 using namespace std;
 class Room
 {
@@ -14,7 +15,7 @@ class Room
     string name;
     string shortDesc;
     string longDesc;
-    bool visited
+    bool visited;
     int itemCount;
     Item * inventory[8];
     Item *features[2];

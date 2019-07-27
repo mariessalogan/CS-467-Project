@@ -1,18 +1,77 @@
 /*****************************************************************************
 * Program: Adventure Time Text Based Game
 * Author: Justin Azevedo
-* Date: 7/15/19
+* Last Modified: 7-27-19
 * Class: CS 467 Capstone Summer '19
 * Description: Implementation of gameState class and functions. 
 ******************************************************************************/
 #include "gameState.hpp"
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+
+using namespace std;
+
 
 /******************************************************************************************************************/
 //Constructor and Destructor Functions
 /**************************************************************************************************************/
-//Constructor
-gameState::gameState(char * loadDir){
+//Demo Constructor
+gameState::gameState(){
 
+	int i;
+	
+	//Update these once I get more data on room constructors. 
+	//for(i = 0 ; i < 16 ; i++){
+	//	ship[i] = NULL;
+	//}
+	//position = NULL;
+
+	oxygen = 100; 
+	gameWon = false;
+	gameQuit = false;
+	
+	verbList[0] = "look";
+	verbList[1] = "look at";
+	verbList[2] = "go";
+	verbList[3] = "take";
+	verbList[4] = "drop";
+	verbList[5] = "help";
+	verbList[6] = "inventory";
+	verbList[7] = "save";
+	verbList[8] = "quit";
+	verbList[9] = "open";
+	verbList[10] = "close";
+	verbList[11] = "push";
+	verbList[12] = "turn on";
+	verbList[13] = "turn off";
+	verbList[14] = "drink";
+	verbList[15] = "shake";
+	verbList[16] = "read";
+	verbList[17] = "scan";
+	verbList[18] = "shoot";
+	verbList[19] = "listen";
+
+	//Change this once I get info from Mariessa
+	intro = "Welcome to our adventure game!" ;
+	winDesc = "You Won!";
+	lossDesc = "You Lost, haha!";
+
+	//for(i = 0 ; i < 8 ; i++){
+	//	inventory[i] = NULL;
+	//}
+
+	inventorySize = 0;
+	
+	//Need room data, need to build features / items first to pass in. 
+	//ship = new Room()
+
+
+	//*********************************************************************************************
+	//Considerations for final constructor.
+	//*********************************************************************************************
 	//Open the directory from passed in pointer
 	//Create a blank gameState object. 
 	//Change gameState variables to match those of gameState file. 
@@ -26,16 +85,17 @@ gameState::gameState(char * loadDir){
 
 //Destructor
 gameState::~gameState(){
-	
+	cout << "The destructor is now running." << endl;
 }
 
 /******************************************************************************************************************/
 //Getter functions
 /******************************************************************************************************************/
+
 //Return pointer to current room.
-Room * gameState::getPosition(){
-	return position;
-}
+//Room * gameState::getPosition(){
+//	return position;
+//}
 
 //Return current O2 level.
 int gameState::getOxygen(){
@@ -68,7 +128,7 @@ void gameState::printIntro() {
 
 //Print game won description.
 void gameState::printWinDesc() {
-	cout << winDes << endl;
+	cout << winDesc << endl;
 	return;
 }
 
@@ -80,16 +140,16 @@ void gameState::printLossDesc() {
 
 //Check if a room has been visited, print correct description 
 //then update visited bool. 
-void gameState::printCurRoomDesc() {
-
-	if (position->visited == false) {
-		cout << position->longDesc << endl;
-		position->setVisited(true);
-	}
-	else {
-		cout << position->shortDesc << endl;
-	}
-}
+//void gameState::printCurRoomDesc() {
+//
+//	if (position->visited == false) {
+//		cout << position->longDesc << endl;
+//		position->setVisited(true);
+//	}
+//	else {
+//		cout << position->shortDesc << endl;
+//	}
+//}
 
 
 
@@ -98,10 +158,10 @@ void gameState::printCurRoomDesc() {
 /******************************************************************************************************************/
 
 //Change current position pointer.
-void gameState::setPosition(Room * newRoom){
-	position = newRoom; 
-	return;
-}
+//void gameState::setPosition(Room * newRoom){
+//	position = newRoom; 
+//	return;
+//}
 
 //Change oxygen level.
 void gameState::setOxygen(int oxygenLevel){
@@ -145,6 +205,8 @@ void gameState::decInventorySize(){
 /******************************************************************************************************************/
 //Parser Functions
 /******************************************************************************************************************/
+
+/*
 
 //Checks if a particular feature is present in the current room. Returns
 //a pointer to the feature if present, otherwise it returns NULL.
@@ -350,9 +412,11 @@ void gameState::_help(){
 	
 	cout << "Here is a list of acceptable game commands:" << endl;
 	
-	for(i = 0 ; i < 10 ; i++){
-		cout << verbList[i] << endl;
+	for(i = 0 ; i < 19 ; i++){
+		cout << verbList[i] << ", ";
 	}
+	cout << verbList[19]<< "." << endl;
+
 	return;
 }
 
@@ -391,8 +455,19 @@ void _itemAction(string verb, string noun, gameState game) {
 }
 
 
-void enactVerb(string verb, string noun) {
+void enactVerb(vector<string> parsedInput) {
 
+	string noun;
+	string verb; 
+
+	//Copy contents from vector.
+	if(parsedInput.size() == 2){
+		verb = parsedInput[0];
+		noun = parsedInput[1];
+	}
+	else{
+		verb = parsedInput[0];
+	}
 
 
 	//verb == look
@@ -479,3 +554,4 @@ void enactVerb(string verb, string noun) {
 
 
 }
+*/
