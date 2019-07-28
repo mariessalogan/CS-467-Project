@@ -1,6 +1,9 @@
 
 CFLAGS = -g -Wall -std=c++11
 
+mainLoopTest: GameState.o Room.o Item.o mainLoopTest.cpp parser.o
+	g++ $(CFLAGS) GameState.o Room.o Item.o mainLoopTest.cpp parser.o -o mainLoopTest
+
 mainTest: GameState.o Room.o Item.o mainTest.o parser.o
 	g++ $(CFLAGS) GameState.o Room.o Item.o mainTest.o parser.o -o mainTest
 
