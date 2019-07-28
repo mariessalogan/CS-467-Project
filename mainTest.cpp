@@ -48,5 +48,22 @@ int main(){
 
 	game->decInventorySize();
 	cout << "Decrement inventory to 7: " << game->getInventorySize() << endl;
+
+	//added for room and item testing
+
+	Room * newRoom = new Room();
+	Item * newItem = new Item();
+
+	cout << "Room Name: "
+	cout << newRoom->getName();
+
+	cout << "Room description:\n";
+	cout << newRoom->getLongDesc();
+
+	cout << "Item name:  ";
+	cout << newItem->getName();
+
+	cout << "Item Description"
+	cout << newItem->getDesc1();
 	return 0;
 }
