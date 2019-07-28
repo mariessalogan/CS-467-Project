@@ -54,16 +54,16 @@ int main(){
 	Room * newRoom = new Room();
 	Item * newItem = new Item();
 
-	cout << "Room Name: "
-	cout << newRoom->getName();
+	cout << "\nRoom Name: ";
+	cout << newRoom->getName() << "\n";
 
 	cout << "Room description:\n";
-	cout << newRoom->getLongDesc();
+	cout << newRoom->getLongDesc() << "\n";
 
 	cout << "Item name:  ";
-	cout << newItem->getName();
+	cout << newItem->getName() << "\n";
 
-	cout << "Item Description"
-	cout << newItem->getDesc1();
+	cout << "Item Description: ";
+	cout << newItem->getDesc1() << "\n";
 	return 0;
 }
