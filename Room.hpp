@@ -26,7 +26,7 @@ class Room
    
    public:
     //functions
-    Room(string nameInput, string shortInput, string longInput, bool visitInput, int itemCount, Item *itemInput[], Item *featInput[], Room *nInput, Room *eInput, Room *wInput, Room *sInput);
+    Room();
     string getName();
     string getLongDesc();
     string getShortDesc();
