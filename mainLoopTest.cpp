@@ -17,33 +17,52 @@
 
 using namespace std;
 
+
 int main() {
 
 	GameState * game = new GameState();
 
 	game->printIntro();
 
+	game->printCurRoomDesc();
+
 	while(game->getGameQuit() == false){
-
-		game->printCurRoomDesc();
-
-		game->_takeItem("Employee Manual");
-
-		game->_dropItem("Employee Manual");
-
+	
 		string input; 
+		vector<string> parsedLine;
 
-		cout << "To quit type quit" << endl;
+		cout << "> ";
 
-		cin >> input ;
-
+		getline(cin, input);
 
 		if(input == "quit"){
 			game->_quitGame();
 		} 
+
+		parsedLine = parse(input, ' ');
+
+		if(parsedLine[0] == "look"){
+			game->printCurRoomDesc();
+		}
+		else if(parsedLine[0] == "grab"){
+			game->_takeItem(parsedLine[1]);
+		}
+		else if(parsedLine[0] == "look at"){
+			game->getPosition()->getItem(parsedLine[1])->getDesc1();
+		}
+		else if(parsedLine[0] == "drop"){
+			game->_dropItem(parsedLine[1]);
+		}
+		else{
+			cout << "Invalid entry" << endl;
+		}	
+	
+
+		input.clear();
 
 	}
 
 
 	return 0;
 }
+
