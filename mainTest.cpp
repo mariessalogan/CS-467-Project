@@ -8,6 +8,7 @@
 #include "GameState.hpp"
 #include "Room.hpp"
 #include "Item.hpp"
+#include "parser.hpp"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -21,7 +22,6 @@ int main(){
 
 	GameState * game = new GameState();
 
-	
 	cout << "Oxygen Levels: " << game->getOxygen() << endl;
 	cout << "gameWon: " << game->getGameWon() << endl;
 	cout << "gameQuit: " << game->getGameQuit() << endl;
@@ -49,8 +49,14 @@ int main(){
 	game->decInventorySize();
 	cout << "Decrement inventory to 7: " << game->getInventorySize() << endl;
 
-	//added for room and item testing
+	cout << "Current Room Name: " << game->getPosition()->getName() << endl;
 
+	cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
+
+	cout << "Item name in current Room: " << game->getPosition()->getItem("Employee Manual")->getName() << endl;
+
+	//added for room and item testing
+/*
 	Room * newRoom = new Room();
 	Item * newItem = new Item();
 
@@ -65,5 +71,6 @@ int main(){
 
 	cout << "Item Description: ";
 	cout << newItem->getDesc1() << "\n";
+*/
 	return 0;
 }

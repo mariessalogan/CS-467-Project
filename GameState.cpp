@@ -23,11 +23,19 @@ GameState::GameState(){
 
 	int i;
 	
+
 	//Update these once I get more data on room constructors. 
 	for(i = 0 ; i < 16 ; i++){
 		ship[i] = NULL;
 	}
-	position = NULL;
+
+	Room * testRoom = new Room();
+	Item * testItem = new Item();
+
+	position = testRoom;
+	ship[1] = testRoom;
+
+	testRoom->setItemToPointer(testItem);
 
 	oxygen = 100; 
 	gameWon = false;
