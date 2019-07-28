@@ -55,7 +55,7 @@ GameState::GameState(){
 	verbList[19] = "listen";
 
 	//Change this once I get info from Mariessa
-	intro = "Welcome to our adventure game!" ;
+	intro = "You are a member of the Elite Space Force for the Federated Alliance.  A month ago you departed from the capital to explore the uncharted reaches of the galaxy. Your mission was to search for other cultures and create diplomatic relations. Last night was your turn for night watch. After a normal night, you retired to your bed at 0500 hours. All is well... Or so you thought.\n" ;
 	winDesc = "You Won!";
 	lossDesc = "You Lost, haha!";
 
