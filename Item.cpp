@@ -14,8 +14,8 @@ Item::Item(){
   name = "Employee Manual";
   desc1 = "This is a manual that will list the commands that you can use in the game.\n";
   pickup = NULL;
-  desc2 = NULL;
-  secondVerb = NULL;
+  desc2 = "second description\n";
+  secondVerb = "second verb\n";
 }
 
 string Item::getName(){
