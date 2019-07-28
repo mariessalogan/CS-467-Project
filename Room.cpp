@@ -11,22 +11,23 @@ together by the Gamestate function.
 using namespace std;
 
 //Room constructor
-Room::Room(string nameInput, string shortInput, string longInput, bool visitInput, int itemCount, Item *itemInput[], Item *featInput[], Room *nInput, Room *eInput, Room *wInput, Room *sInput){
-  name = nameInput;
-  shortDesc = shortInput;
-  longDesc = longInput;
-  visited = visitInput;
-  this->itemCount = itemCount;
-  for(int i = 0; i < itemCount; i++)
-  {
-    itemInventory[i] = itemInput[i];
-  }
-  features[0] = featInput[0];
-  features[1] = featInput[1];
-  north = nInput;
-  east = eInput;
-  west = wInput;
-  south = sInput;
+Room::Room(){
+  name = "Bunk";
+  shortDesc = "There is a dresser across the door, a picture frame on the floor, and an employee manual on the floor.";
+  longDesc = "\"WARNING! WARNING! OXYGEN LEVELS DROPPING TO CRITICAL LEVEL! PLEASE EVACUATE TO THE NEAREST ESCAPE POD\" You groggily awaken to the sound of a robotic voice booming over the PA system.  You look around and see that the bunk room is in disarray. Other bunks are tipped over, dressers have come apart, and Lopez’ angel figurines are shattered on the ground. You are wedged between your bunk and the wall, a lamp with blood lies directly next to your head.  You touch your forehead and wince, the lamp must have hit you while you slept, possibly causing a minor concussion.  There is blood on your face, but it seems the wound has clotted and is no longer bleeding.  There is a dresser laying across the door to the break room. You will have to push it out of the way to get through the door.  You see a cracked frame on the floor.  Your employee manual is sticking out from a pile of rubble.\n";
+  visited = 0;
+  this->itemCount = 1;
+  //for(int i = 0; i < itemCount; i++)
+  //{
+    //itemInventory[i] = itemInput[i];
+  //}
+  itemInventory[0] = NULL;
+  features[0] = NULL;
+  features[1] = NULL;
+  north = NULL;
+  east = NULL;
+  west = NULL;
+  south = NULL;
 
 }
 
