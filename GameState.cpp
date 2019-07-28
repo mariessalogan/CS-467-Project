@@ -54,9 +54,9 @@ GameState::GameState(){
 	verbList[18] = "shoot";
 	verbList[19] = "listen";
 
-	//Change this once I get info from Mariessa
+	//Changed by Mariessa except loss desc.  We may need to have 2? one for loss of oxygen and the other for death by alien
 	intro = "You are a member of the Elite Space Force for the Federated Alliance.  A month ago you departed from the capital to explore the uncharted reaches of the galaxy. Your mission was to search for other cultures and create diplomatic relations. Last night was your turn for night watch. After a normal night, you retired to your bed at 0500 hours. All is well... Or so you thought.\n" ;
-	winDesc = "You Won!";
+	winDesc = "You have successfully escaped the space ship.  You take a sip of the vodka, and stare out the window at the rapidly diminishing space ship you once called home. The lights on it flicker and go out and you're left staring at the vast emptiness of space.  You put on the hibernation mask, take a deep breath and go into hibernation until you arrive back at the capital. You are safe.\n";
 	lossDesc = "You Lost, haha!";
 
 	for(i = 0 ; i < 8 ; i++){
