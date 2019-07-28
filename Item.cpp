@@ -1,16 +1,16 @@
 /**********************************************************************************
 Class Implementation - Items Base Class 
-This is the implementation of the base class for the items Class 
+This is the implementation of the base class for the Items Class 
 **********************************************************************************/
 #include <string>
 #include <iostream>
 #include <stdio.h>
+#include <cstring>
 #include "Item.hpp"
-#include "gameState.hpp"
 using namespace std;
 
 //Room constructor
-Item::item(string nameInput, string desc1Input, bool pickupInput, string desc2Input, string secondVerbInput){
+Item::Item(string nameInput, string desc1Input, bool pickupInput, string desc2Input, string secondVerbInput){
   name = nameInput;
   desc1 = desc1Input;
   pickup = pickupInput;
@@ -22,11 +22,14 @@ string Item::getName(){
   return name;
 }
 
+string Item::getDesc1(){
+  return desc1;
+}
 //This function determines whether or not to get Desc 1 or Desc2
 void Item::getDesc(string verb)
 {
   //print the correct description
-  if(strcmp(verb, secondVerb))
+  if(verb == secondVerb)
     cout << desc2 << "\n";
   else
     cout << desc1 << "\n";
@@ -38,9 +41,9 @@ bool Item::getPickup(){
 
 void Item::actionFunction(string verb)
 {
-  if(strcmp(verb, "look"))
+  if(verb == "look")
   {
-    Item.getDesc(verb);
+    getDesc(verb);
   }
   else
   {

@@ -5,7 +5,9 @@
 * Class: CS 467 Capstone Summer '19
 * Description: Test main file for midway project evalution.
 ************************************************************************************************/
-#include "gameState.hpp"
+#include "GameState.hpp"
+#include "Room.hpp"
+#include "Item.hpp"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -17,7 +19,7 @@ using namespace std;
 
 int main(){
 
-	gameState * game = new gameState();
+	GameState * game = new GameState();
 
 	
 	cout << "Oxygen Levels: " << game->getOxygen() << endl;

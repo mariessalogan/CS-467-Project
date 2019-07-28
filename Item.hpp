@@ -1,12 +1,13 @@
 /**********************************************************************************
 Class Definition - Item Base Class Definition
-This is the definition of the base class for the items Class that will be the parent
-of the features and different types of items.
+This is the definition of the base class for the Items Class that will be the parent
+of the features and different types of Items.
 **********************************************************************************/
 #ifndef ITEM_H
 #define ITEM_H
 #include <string>
 #include <stdio.h>
+#include <cstring>
 using namespace std;
 class Item
 {
@@ -19,7 +20,9 @@ class Item
    
    public:
     //functions
-    Item item(string nameInput, string desc1Input, bool pickupInput, string desc2Input, string secondVerbInput);
+    Item(string nameInput, string desc1Input, bool pickupInput, string desc2Input, string secondVerbInput);
+    string getName();
+    string getDesc1();
     void getDesc(string verb);
     bool getPickup();
     virtual void actionFunction(string verb);

@@ -1,6 +1,6 @@
 /**********************************************************************************
 Class Definition - Rooms Base Class Definition
-This is the definition of thebase class for the rooms Class that will be linked 
+This is the definition of thebase class for the Rooms Class that will be linked 
 together by the Gamestate function.
 **********************************************************************************/
 #ifndef ROOM_H
@@ -17,8 +17,8 @@ class Room
     string longDesc;
     bool visited;
     int itemCount;
-    Item * inventory[8];
-    Item *features[2];
+    Item * itemInventory[8];
+    Item * features[2];
     Room * north;
     Room * east;
     Room * south;
@@ -26,15 +26,27 @@ class Room
    
    public:
     //functions
-    Room room(string nameInput, string shortInput, string longInput, bool visitInput, Item *inventInput[], Item *featInput[], Room *nInput, Room *eInput, Room *wInput, Room *sInput);
+    Room(string nameInput, string shortInput, string longInput, bool visitInput, int itemCount, Item *itemInput[], Item *featInput[], Room *nInput, Room *eInput, Room *wInput, Room *sInput);
     string getName();
     string getLongDesc();
-    string getshortDesc();
+    string getShortDesc();
     bool getVisited();
     string getExits();
-    Item getFeature(string featureName);
-    Item getItem(string itemName);
-    void setVisited();
-    virtual void actionFunction();
+    Room * getNorth();
+    Room * getSouth();
+    Room * getEast();
+    Room * getWest();
+    string getNorthName();
+    string getSouthName();
+    string getEastName();
+    string getWestName();
+    Item * getFeature(string featureName);
+    Item * getItem(string itemName);
+    int getItemCount();
+    void setItemCount(int count);
+    void setItemToNull(string takeName); 
+    void setItemToPointer(Item * dropItem);    
+    void setVisited(bool value);
+    //virtual void actionFunction();
 };
 #endif
