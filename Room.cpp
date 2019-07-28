@@ -95,9 +95,12 @@ Item * Room::getFeature(string featureName){
 Item * Room::getItem(string itemName){
 //check inventory for the item
   for(int i = 0; i < 8; i++){
-    if(itemName == itemInventory[i]->getName()){
-      return itemInventory[i];
+    if(itemInventory[i] != NULL){
+        if(itemName == itemInventory[i]->getName()){
+          return itemInventory[i];
+      }
     }
+  
   }
   return NULL;
 }

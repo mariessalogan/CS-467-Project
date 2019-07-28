@@ -244,9 +244,11 @@ Item * GameState::_checkInventory(string noun){
 
 	int i;
 
-	for(i = 0; i < inventorySize ; i++){
-		if(inventory[i]->getName() == noun){
-			return inventory[i];
+	for(i = 0; i < 8 ; i++){
+		if(inventory[i] != NULL){
+			if(inventory[i]->getName() == noun){
+				return inventory[i];
+			}
 		}
 	}
 
@@ -344,17 +346,23 @@ void GameState::_takeItem(string noun){
 
 	if(itemToTake != NULL){
 		
+		int emptySlot = -1;
+
+
+		//Find an empty slot in the inventory array	
 		for(int i = 0 ; i < 8 ; i++){
-	
-			//Find an empty slot in the inventory array	
 			if(inventory[i] == NULL){
-				inventory[i] = itemToTake;
-				incInventorySize();
+				emptySlot = i;
+				break;
 			}
 
-			//Set room itemArr pointer to null and decrement itemCount in room
-			position->setItemToNull(noun);
 		}
+
+		inventory[emptySlot] = itemToTake;
+		incInventorySize();
+
+		//Set room itemArr pointer to null and decrement itemCount in room
+		position->setItemToNull(noun);
 
 		cout << "You picked up the " << noun << endl;
 
@@ -377,17 +385,20 @@ void GameState::_dropItem(string noun){
 
 	if(itemToDrop != NULL){
 
-		for(int i = 0 ; i < inventorySize ; i++){
-			
+		for(int i = 0 ; i < 8 ; i++){
 			//Find item and remove from inventory array.
-			if(inventory[i]->getName() == noun){
-				inventory[i] = NULL;
-				decInventorySize();
+			if(inventory[i] != NULL){
+				if(inventory[i]->getName() == noun){
+					inventory[i] = NULL;
+					decInventorySize();
+				}	
 			}
-
-			position->setItemToPointer(itemToDrop);
+			
+				
 		}
-		
+	
+		position->setItemToPointer(itemToDrop);
+
 		cout << "You dropped the " << noun << endl;
 
 		itemToDrop = NULL;

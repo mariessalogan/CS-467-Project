@@ -27,12 +27,16 @@ int main() {
 
 		game->printCurRoomDesc();
 
+		game->_takeItem("Employee Manual");
+
+		game->_dropItem("Employee Manual");
 
 		string input; 
 
 		cout << "To quit type quit" << endl;
 
 		cin >> input ;
+
 
 		if(input == "quit"){
 			game->_quitGame();
