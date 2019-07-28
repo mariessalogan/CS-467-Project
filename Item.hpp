@@ -20,7 +20,7 @@ class Item
    
    public:
     //functions
-    Item(string nameInput, string desc1Input, bool pickupInput, string desc2Input, string secondVerbInput);
+    Item();
     string getName();
     string getDesc1();
     void getDesc(string verb);
