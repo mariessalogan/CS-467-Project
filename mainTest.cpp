@@ -55,6 +55,9 @@ int main(){
 
 	cout << "Item name in current Room: " << game->getPosition()->getItem("Employee Manual")->getName() << endl;
 
+	cout << "Testing printing item descriptions: " ;
+	game->printItems();
+
 	//added for room and item testing
 /*
 	Room * newRoom = new Room();

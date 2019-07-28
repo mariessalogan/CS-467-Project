@@ -159,7 +159,17 @@ void GameState::printCurRoomDesc() {
 	}
 }
 
+void GameState::printItems(){
+	
+	position->printItemNames();
+	return;
+}
 
+void GameState::printFeatures(){
+	
+	position->printFeatureNames();
+	return;
+}
 
 /******************************************************************************************************************/
 //Setter / Modifier functions
@@ -458,7 +468,7 @@ void GameState::enactVerb(vector<string> parsedInput) {
 	if (verb == "look") {
 		_look();
 	}
-	else if (verb == "lookAt") {
+	else if (verb == "look at") {
 		_lookAt(noun);
 	}
 	else if (verb == "go") {

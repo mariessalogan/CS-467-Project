@@ -27,7 +27,6 @@ int main() {
 
 		game->printCurRoomDesc();
 
-		
 
 		string input; 
 

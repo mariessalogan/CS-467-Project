@@ -49,8 +49,9 @@ class GameState{
 		void printIntro();								//Print game intro for new game
 		void printWinDesc();							//Print game won message
 		void printLossDesc();							//Print game loss message
-		void printCurRoomDesc();						//Prints long or short desc for room depending on room.visted bool. Sets visited to true after
-														//printing the long desc.
+		void printCurRoomDesc();						//Prints long or short desc for room depending on room.visted bool. Sets visited to true after printing the long desc.
+		void printItems();								//Prints all the item descriptions for a room
+		void printFeatures();							//Prints all the feature descriptions for a room. 
 
 		//Setter / Modifier functions
 		void setPosition(Room * newRoom);				//Set position to new room

@@ -81,6 +81,7 @@ string Room::getWestName(){
   return west->getName();
 }
 
+
 Item * Room::getFeature(string featureName){
 //check if features are in Room
   for(int i = 0; i < 2; i++){
@@ -109,6 +110,31 @@ int Room::getItemCount(){
 void Room::setItemCount(int count){
   itemCount = count;
   return;
+}
+
+//This may need to be reworked 
+void Room::printItemNames(){
+  
+  if(itemCount != 0){
+    for(int i = 0 ; i < 8 ; i++){
+      if(itemInventory[i] != NULL){
+        cout << "You see a " << itemInventory[i]->getName() << ". " ;
+      }
+    }
+    cout << endl;
+  }
+
+ 
+}
+
+//This may need to be reworked 
+void Room::printFeatureNames(){
+
+  for(int i = 0 ; i < 2 ; i++){
+    if(itemInventory[i] != NULL){      
+      cout << "You see a " << features[i]->getName() << ". ";
+    }
+  }
 }
 
 

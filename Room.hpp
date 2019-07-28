@@ -43,6 +43,8 @@ class Room
     Item * getFeature(string featureName);
     Item * getItem(string itemName);
     int getItemCount();
+    void printItemNames();
+    void printFeatureNames();
     void setItemCount(int count);
     void setItemToNull(string takeName); 
     void setItemToPointer(Item * dropItem);    
