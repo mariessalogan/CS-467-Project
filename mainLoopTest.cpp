@@ -41,6 +41,12 @@ int main() {
 
 		parsedLine = parse(input, ' ');
 
+		cout << "**parsed input: " << endl;
+		for( auto token: parsedLine){
+			cout << token << endl;
+		}
+		
+
 		if(parsedLine[0] == "look"){
 			game->printCurRoomDesc();
 		}
