@@ -1,24 +1,25 @@
 /**********************************************************************************
-Class Definition - Command Center Class Definition
-This is the definition of thebase class for the rooms Class that will be linked 
-together by the Gamestate function.
+Name: Mariessa Logan
+Class Definition - Holodeck Class Definition
+This is the definition of the holodeck class which is a child of  the rooms Class 
+that will be linked together by the Gamestate function.
 **********************************************************************************/
-#ifndef COMMANDCENTER_H
-#define COMMANDCENTER_H
+#ifndef HOLODECK_H
+#define HOLODECK_H
 #include <string>
 #include <stdio.h>
 #include "gameState.hpp"
 #include "Room.hpp"
 using namespace std;
-class CommandCenter
+class Holodeck
 {
   private:
-    int dead;
+    bool pushed;
    
    public:
     //functions
     void actionFunction(Gamestate *G);
-    bool metRequ(Gamestate *G);
+    
     
 };
 #endif

@@ -31,6 +31,7 @@ class Room
     string getLongDesc();
     string getShortDesc();
     bool getVisited();
+    string getExits();
     Room * getNorth();
     Room * getSouth();
     Room * getEast();
@@ -47,15 +48,7 @@ class Room
     void setItemCount(int count);
     void setItemToNull(string takeName); 
     void setItemToPointer(Item * dropItem);    
-    void setVisited(bool state);
-    void setName(string input);
-    void setShortDesc(string input);
-    void setLongDesc(string input);
-
-    void setNorth(Room * room);
-    void setEast(Room * room);
-    void setSouth(Room * room);
-    void setWest(Room * room);
-    //virtual void actionFunction();
+    void setVisited(bool value);
+    virtual void actionFunction(Gamestate *G){};
 };
 #endif

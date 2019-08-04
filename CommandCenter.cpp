@@ -10,72 +10,34 @@ feature
 #include "CommandCenter.hpp"
 using namespace std;
 
-//Room constructor
-Room::room(string nameInput, string shortInput, string longInput, bool visitInput, int itemCount, Item *inventInput[], Item *featInput[], Room *nInput, Room *eInput, Room *wInput, Room *sInput){
-  name = nameInput;
-  shortDesc = shortInput;
-  longDesc = longInput;
-  visited = visitInput;
-  for(int i = 0; i < itemCount; i++)
+  void CommandCenter::actionFunction(Gamestate *G)
   {
-    inventory[i] = inventInput[i];
+    
+      if(metRequ(G) == true)
+      {
+        //check if the alien is dead, if not print description for fighting the alien
+        if(dead == false)
+        {
+          cout << "You see movement on the left side of the room thanks to your thermal goggles.  As soon as you notice the heat signature of the alien, it lands a blow across your chest.  Luckily you are wearing the armor that you found earlier.  His claw bounces off the armor, and you swing your phaser up in response.  You squeeze the trigger twice, just as you were trained and they both land squarely between the alien’s eyes.  the alien falls over dead.\n";      
+          dead = true;
+        }
+        else
+        {
+          cout << "You sigh with relief, the alien is still dead.\n";
+        }
+      }
+      //
+      else
+      {
+        //Ask justin about a set function??
+        G.setGameLost(true);
+      }
+    
   }
-  features[0] = featInput[0];
-  features[1] = featInput[1];
-  north = nInput;
-  east = eInput;
-  west = wInput;
-  south = sInput;
 
-}
-
-string Room::getName(){
-  return name;
-}
-
-string Room::longDesc(){
-  return longDesc;
-}
-
-string Room::shortDesc(){
-  return shortDesc;
-}
-
-bool Room::getVisited(){
-  return visited;
-}
-
-//Unsure if this is supposed to be a string or set of objects? check with Justin on what he needs
-string Room::getexits(){
-  string exits = north->name + "\n" + east->name + "\n" + south->name + "\n" + west->name +"\n";
-  return name;
-}
-
-string Room::getFeature(string featureName){
-//check if features are in room
-  for(int i = 0; i < 4; i++){
-    if(strcmp(featureName, features[i]->name)){
-      return features[i];
-    }
-  return NULL;
-}
-
-string Room::getItem(string itemName){
-//check inventory for the item
-  for(int i = 0; i < 4; i++){
-    if(strcmp(itemName, inventory[i]->name)){
-      return inventory[i];
-    }
-  return NULL;
-}
-
-void Room::setVisited(){
-  visited = true;
-}
-
-  //check player inventory for the requirements
-  bool CommandCenter::metRequ(Gamestate *G)
-  {
+//check player inventory for the requirements
+bool CommandCenter::metRequ(Gamestate *G)
+{
     int reqs = 0;
     for(int i = 0;i < 8; i++)
     {
@@ -103,16 +65,4 @@ void Room::setVisited(){
     {
       return false;
     }
-    
-    void CommandCenter::actionFunction(gameState *G)
-    {
-      if(metRequ(G) == false
-      {
-        cout << deathDescription;
-      }
-      else
-      {
-        printFunction();
-      }
-    }
-  }
+ }
