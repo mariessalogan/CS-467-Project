@@ -36,7 +36,7 @@ using namespace std;
   }
 
 //check player inventory for the requirements
-bool CommandCenter::metRequ(Gamestate *G)
+bool CommandCenter::metRequ(GameState *G)
 {
     int reqs = 0;
     for(int i = 0;i < 8; i++)
