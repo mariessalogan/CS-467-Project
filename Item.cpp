@@ -11,11 +11,11 @@ using namespace std;
 
 //Room constructor
 Item::Item(){
-  this->name = name;
-  this->desc1 = desc1;
-  this->pickup = pickup;
-  this->desc2 = desc2;
-  this->secondVerb = secondVerb;
+  name = "item";
+  desc1 = "Desc1";
+  pickup = false;
+  desc2 = "desc";
+  secondVerb = "hello";
 }
 
 string Item::getName(){
