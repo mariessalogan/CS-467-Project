@@ -1,4 +1,5 @@
 /**********************************************************************************
+Author: Mariessa Logan
 Class Definition - Command Center Class Definition
 This is the definition of thebase class for the rooms Class that will be linked 
 together by the Gamestate function.
@@ -7,7 +8,6 @@ together by the Gamestate function.
 #define COMMANDCENTER_H
 #include <string>
 #include <stdio.h>
-#include "gameState.hpp"
 #include "Room.hpp"
 using namespace std;
 class CommandCenter
@@ -17,8 +17,8 @@ class CommandCenter
    
    public:
     //functions
-    void actionFunction(Gamestate *G);
-    bool metRequ(Gamestate *G);
+    void actionFunction(GameState *G);
+    bool metRequ(GameState *G);
     
 };
 #endif
