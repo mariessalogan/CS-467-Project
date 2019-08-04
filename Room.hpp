@@ -1,4 +1,5 @@
 /**********************************************************************************
+Author: Mariessa Logan
 Class Definition - Rooms Base Class Definition
 This is the definition of thebase class for the Rooms Class that will be linked 
 together by the Gamestate function.
@@ -9,6 +10,10 @@ together by the Gamestate function.
 #include <stdio.h>
 #include "Item.hpp"
 using namespace std;
+//include gamestate without circular dependency
+class GameState;
+
+//class declaration
 class Room
 {
   private:
@@ -27,6 +32,22 @@ class Room
    public:
     //functions
     Room();
+    //set functions
+    void setName(string roomName);
+    void setLongDesc(string desc);
+    void setShortDesc(string desc);
+    void setVisited(bool visit);
+    void setNorth(Room *newRoom);
+    void setSouth(Room *newRoom);
+    void setEast(Room *newRoom);
+    void setWest(Room *newRoom);
+    void setFeature(Item * feature);
+    void setItem(Item * item);
+    void setItemCount(int count);
+    void setItemToNull(string takeName);
+    void setItemToPointer(Item * dropItem); 
+
+    //get functions
     string getName();
     string getLongDesc();
     string getShortDesc();
@@ -43,12 +64,10 @@ class Room
     Item * getFeature(string featureName);
     Item * getItem(string itemName);
     int getItemCount();
+
+    //other functions
     void printItemNames();
     void printFeatureNames();
-    void setItemCount(int count);
-    void setItemToNull(string takeName); 
-    void setItemToPointer(Item * dropItem);    
-    void setVisited(bool value);
-    virtual void actionFunction(Gamestate *G){};
+    virtual void actionFunction(){};
 };
 #endif
