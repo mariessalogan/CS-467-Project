@@ -17,16 +17,20 @@ class Item
     string desc2;
     bool pickup;
     string secondVerb;
+    bool charged;//for phaser, but should we do locked
+    string locationName;//for location of item
    
    public:
     //functions
-    Item(string name, string desc1, bool pickup, string desc2, string secondVerb);
+    Item();
+    
+    //add setters and getters
     string getName();
     string getDesc1();
-    string getDesc2();
-    string getSecondVerb();
     void getDesc(string verb);
     bool getPickup();
+
+    //virtual function for actions on unique items
     virtual void actionFunction(string verb);
 };
 #endif
