@@ -27,6 +27,8 @@ class Item
     //add setters and getters
     string getName();
     string getDesc1();
+    string getDesc2();
+    string getSecondVerb();
     void getDesc(string verb);
     bool getPickup();
 
