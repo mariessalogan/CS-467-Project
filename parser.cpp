@@ -20,9 +20,10 @@ vector<string> parse(const string& inputStr, char delim)
 {
 	string lowerCaseStr;
 	vector<string> commands;
+	vector<string> spaceGame = {"space!"};
 
 	//convert input to lower case
-	for (int i = 0; i < inputStr.length(); i++) {
+	for (size_t i = 0; i < inputStr.length(); i++) {
 		lowerCaseStr.push_back(tolower(inputStr[i]));
 	}
 
@@ -37,6 +38,7 @@ vector<string> parse(const string& inputStr, char delim)
 	//check for double verbs up front
 	if (commands.size() == 2) {
 		commands = concatDoubleVerbs(commands);
+		commands = concatDoubleMovements(commands);
 	}
 
 	if (commands.size() == 1) {
@@ -46,7 +48,6 @@ vector<string> parse(const string& inputStr, char delim)
 
 	if (commands.size() == 2) {
 		commands = validateDoubleEntry(commands);
-		//commands = validateCombo(commands);
 		return commands;
 	}
 
@@ -59,6 +60,8 @@ vector<string> parse(const string& inputStr, char delim)
 		commands = validateManyEntry(commands);
 		return commands;
 	}
+
+	return spaceGame;
 }
 
 
@@ -69,7 +72,7 @@ bool validateVerb(vector<string> commands)
 {
 	bool valid = false;
 
-	for(int i = 0; i < verbs.size(); i++){
+	for(size_t i = 0; i < verbs.size(); i++){
 		if(commands[0] == verbs[i]){
 			valid = true;
 		}
@@ -80,10 +83,9 @@ bool validateVerb(vector<string> commands)
 
 
 bool validateMovement(vector<string> commands, int indexToCheck) {
-	int index = indexToCheck;
 	bool valid = false;
 
-	for (int i = 0; i < exits.size(); i++) {
+	for (size_t i = 0; i < exits.size(); i++) {
 		if (commands[indexToCheck] == exits[i]) {
 			valid = true;
 		}
@@ -97,8 +99,8 @@ bool validateNoun(vector<string> commands)
 {
 	bool found = false;
 
-	for (int i = 1; i < commands.size(); i++) {
-		for (int j = 0; j < nouns.size(); j++) {
+	for (size_t i = 1; i < commands.size(); i++) {
+		for (size_t j = 0; j < nouns.size(); j++) {
 			if (commands[i] == nouns[j]) {
 				found = true;
 			}
@@ -110,27 +112,49 @@ bool validateNoun(vector<string> commands)
 
 
 vector<string> validateSingleEntry(vector<string> &commands) {
-	bool isValid = false;
 	bool validVerb = false;
 	bool validMovement = false;
-	vector<string> movementVerbs = { "go", "move" };
+	bool foundSoloVerb = false;
 
 	validVerb = validateVerb(commands);
 	
 	//if single entry is a valid verb
 	if (validVerb) {
+
 		//check that it is not a movement verb without a destination
-		for (int i = 0; i < movementVerbs.size(); i++) {
+		for (size_t i = 0; i < movementVerbs.size(); i++) {
 			if (commands[0] == movementVerbs[i]) {
+				commands.clear();
 				commands.push_back("Please enter an exit or direction...");
+				return commands;
 			}
 		}
-		return commands;
+
+		//check if entry can act as a single verb
+		for (size_t i = 0; i < soloVerbs.size(); i++) {
+			if (commands[0] == soloVerbs[i]) {
+				foundSoloVerb = true;
+			}
+		}
+
+		if (!foundSoloVerb) {
+			commands.clear();
+			commands.push_back("Please enter a verb/noun combination...");
+			return commands;
+		}
+		else {
+			return commands;
+		}
 	}
 
 	//if single entry and not a verb, then check for an exit
 	if (!validVerb) {
 		validMovement = validateMovement(commands, 0);
+	}
+
+	if (validMovement) {
+		commands.insert(commands.begin(), "go");
+		return commands;
 	}
 
 	//if verb is invalid and movement valid - return as valid input
@@ -150,23 +174,33 @@ vector<string> validateDoubleEntry(vector<string> &commands) {
 	bool validNoun = false;
 
 	validVerb = validateVerb(commands);
-	//cout << "**check for double entry verb: " << validVerb << endl;
 
 	validMovement = validateMovement(commands, 1);
-	//cout << "**check for double entry exit: " << validMovement << endl;
 
 	validNoun = validateNoun(commands);
-	//cout << "**check for doulbe entry noun: " << validNoun << endl;
 
 	if (validVerb && validMovement) {
-		if (commands[0] == "go" || commands[0] == "move") {
-			//cout << "return valid verb/exit" << endl;
+		commands = swapVerbs(commands);
+		return commands;
+		/*
+		if (commands[0] == "go") {
 			return commands;
 		}
+
+		if (commands[0] == "move") {
+			commands[0] = "go";
+			return commands;
+		}*/
 	}
 
 	if (validVerb && validNoun) {
-		//cout << "return valid verb/noun" << endl;
+		commands = swapVerbs(commands);
+
+		if (commands[0] == "look at") {
+			return commands;
+		}
+
+		commands = validateCombo(commands);
 		return commands;
 	}
 
@@ -182,6 +216,7 @@ vector<string> validateTripleEntry(vector<string> &commands) {
 	
 	//check for double nouns
 	commands = concatDoubleNouns(commands);
+	commands = concatDoubleMovements(commands);
 
 	if (commands.size() == 2) {
 		commands = validateDoubleEntry(commands);
@@ -206,6 +241,7 @@ vector<string> validateManyEntry(vector<string> &commands) {
 
 	//check for double nouns
 	commands = concatDoubleNouns(commands);
+	commands = concatDoubleMovements(commands);
 
 	if (commands.size() == 2) {
 		commands = validateDoubleEntry(commands);
@@ -221,6 +257,80 @@ vector<string> validateManyEntry(vector<string> &commands) {
 	commands.clear();
 	commands.push_back("Invalid entry...");
 	return commands;
+}
+
+/***************************************************************************************
+*These functions recognize and concatenate dictionary terms with a space into one entry
+****************************************************************************************/
+vector<string> concatDoubleMovements(vector <string> &commands) {
+	int index = getDoubleExitIndex(commands);
+
+	if (index == -1) {
+		return commands;
+	}
+
+	if (commands[index] == "quarters" && commands[index - 1] == "captains") {
+		commands[index - 1] = "captains quarters";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
+	if (commands[index] == "room" && commands[index - 1] == "strategy") {
+		commands[index - 1] = "strategy room";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
+	if (commands[index] == "room" && commands[index - 1] == "transporter") {
+		commands[index - 1] = "transporter room";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
+	if (commands[index] == "room" && commands[index - 1] == "command") {
+		commands[index - 1] = "command room";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
+
+	if (commands[index] == "room" && commands[index - 1] == "break") {
+		commands[index - 1] = "break room";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
+	if (commands[index] == "closet" && commands[index - 1] == "supply") {
+		commands[index - 1] = "supply closet";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
+	if (commands[index] == "pod" && commands[index - 1] == "escape") {
+		commands[index - 1] = "escape pod";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
+	return commands;
+}
+
+int getDoubleExitIndex(vector<string> commands) {
+	int foundIdx = -1;
+
+	vector<string> doubleExits = {
+		"quarters", "room", "pod", "closet"
+	};
+
+	for (size_t i = 0; i < commands.size(); i++) {
+		for (size_t j = 0; j < doubleExits.size(); j++) {
+			if (commands[i] == doubleExits[j]) {
+				foundIdx = i;
+			}
+		}
+	}
+
+	return foundIdx;
 }
 
 
@@ -240,6 +350,11 @@ vector<string> concatDoubleVerbs(vector<string> &commands) {
 		commands.erase(commands.begin() + 1);
 	}
 
+	if (commands[0] == "pick" && commands[1] == "up") {
+		commands[0] = "pick up";
+		commands.erase(commands.begin() + 1);
+	}
+
 	return commands;
 }
 
@@ -249,11 +364,11 @@ int getDoubleNounIndex(vector <string> commands) {
 
 	vector<string> doubleNouns = {
 		"manual", "badge", "key", "goggles", "maker",
-		"meter", "pipe", "supplies", "monitor"
+		"meter", "pipe", "supplies", "monitor","suit"
 	};
 
-	for(int i = 0; i < commands.size(); i++) {
-		for (int j = 0; j < doubleNouns.size(); j++) {
+	for(size_t i = 0; i < commands.size(); i++) {
+		for (size_t j = 0; j < doubleNouns.size(); j++) {
 			if (commands[i] == doubleNouns[j]) {
 				foundIdx = i;
 			}
@@ -264,7 +379,6 @@ int getDoubleNounIndex(vector <string> commands) {
 }
 
 
-//combines 2 worded nouns seperated by spaces back into a single string
 vector<string> concatDoubleNouns(vector<string> &commands){
 
 	int index = getDoubleNounIndex(commands);
@@ -327,6 +441,12 @@ vector<string> concatDoubleNouns(vector<string> &commands){
 		return commands;
 	}
 
+	if (commands[index] == "suit" && commands[index - 1] == "mech") {
+		commands[index - 1] = "mech suit";
+		commands.erase(commands.begin() + index);
+		return commands;
+	}
+
 	return commands;
 	
 }
@@ -335,10 +455,9 @@ vector<string> concatDoubleNouns(vector<string> &commands){
 //removes unnecessary articles and prepositions from the input
 vector<string> stripTrashWords(vector<string> &commands)
 {
-	bool found = false;
 
-	for (int i = 0; i < commands.size(); i++) {
-		for (int j = 0; j < removables.size(); j++) {
+	for (size_t i = 0; i < commands.size(); i++) {
+		for (size_t j = 0; j < removables.size(); j++) {
 			if (commands[i] == removables[j]) {
 				commands.erase(commands.begin() + i);
 				i--;
@@ -347,4 +466,123 @@ vector<string> stripTrashWords(vector<string> &commands)
 	}
 
 	return commands;
+}
+
+
+//allows the user to enter adjectives for game verbs
+vector<string> swapVerbs(vector<string> &commands) {
+	//go
+	if (commands[0] == "move") {
+		commands[0] = "go";
+	}
+	//take
+	if (commands[0] == "grab" || commands[0] == "pick up") {
+		commands[0] = "take";
+	}
+	//drop
+	if (commands[0] == "leave") {
+		commands[0] = "drop";
+	}
+	//read
+	if (commands[0] == "read") {
+		commands[0] = "look at";
+	}
+	//close
+	if (commands[0] == "shut") {
+		commands[0] = "close";
+	}
+	//shoot
+	if (commands[0] == "fire") {
+		commands[0] = "shoot";
+	}
+	return commands;
+}
+
+
+vector<string> validateCombo(vector<string> &commands) {
+	typedef multimap<string, string> dicto;
+	bool valid = false;
+
+	dicto dict = {
+	//take items
+		{"take", "phaser"},
+		{"take", "armor"},
+		{"take", "radio"},
+		{"take", "employee manual"},
+		{"take", "security badge"},
+		{"take", "desk key"},
+		{"take", "charger"},
+		{"take", "thermal goggles"},
+	//drop items
+		{"drop", "phaser"},
+		{"drop", "armor"},
+		{"drop", "radio"},
+		{"drop", "employee manual"},
+		{"drop", "security badge"},
+		{"drop", "desk key"},
+		{"drop", "charger"},
+		{"drop", "thermal goggles"},
+	//open
+		{"open", "employee manual"},
+		{"open", "dresser"},
+		{"open", "dryer"},
+		{"open", "binder"},
+		{"open", "safe"},
+		{"open", "desk"},
+	//close
+		{"close", "employee manual"},
+		{"close", "dresser" },
+		{"close", "dryer" },
+		{"close", "binder" },
+		{"close", "safe" },
+		{"close", "desk" },
+	//push
+		{"push", "dresser"},
+		{"push", "chair"},
+		{"push", "button"},
+		{"push", "desk"},
+	//turn on 
+		{"turn on", "television"},
+		{"turn on", "mech suit"},
+		{"turn on", "coffee maker"},
+	//turn off
+		{ "turn off", "television" },
+		{ "turn off", "mech suit" },
+		{ "turn off", "coffee maker" },
+	//drink
+		{"drink", "coffee"},
+		{"drink", "beaker"},
+		{"drink", "alcohol"},
+	//scan
+		{"scan", "security badge"},
+		{"scan", "desk key"},
+	//shoot
+		{"shoot", "alien"},
+	//shake
+		{"shake", "lopez"},
+		{"shake", "kelvin"},
+		{"shake", "melvin"},
+	//listen
+		{"listen", "cd"},
+		{"listen", "radio"}
+	};
+
+	dicto::iterator pos;
+
+	string key = commands[0];
+	string value = commands[1];
+	for (pos = dict.lower_bound(key); pos != dict.upper_bound(key); ++pos) {
+		if (pos->second == value) {
+			valid = true;
+		}
+	}
+
+	if (valid) {
+		return commands;
+	}
+	else {
+		commands.clear();
+		commands.push_back("You can't do that...");
+		return commands;
+	}
 }
