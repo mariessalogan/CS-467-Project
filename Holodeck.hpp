@@ -8,7 +8,6 @@ that will be linked together by the Gamestate function.
 #define HOLODECK_H
 #include <string>
 #include <stdio.h>
-#include "gameState.hpp"
 #include "Room.hpp"
 using namespace std;
 class Holodeck
@@ -18,7 +17,7 @@ class Holodeck
    
    public:
     //functions
-    void actionFunction(Gamestate *G);
+    void actionFunction(GameState *G);
     
     
 };
