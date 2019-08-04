@@ -10,7 +10,7 @@ feature
 #include "CommandCenter.hpp"
 using namespace std;
 
-  void CommandCenter::actionFunction(Gamestate *G)
+  void CommandCenter::actionFunction(GameState *G)
   {
     
       if(metRequ(G) == true)
@@ -30,7 +30,7 @@ using namespace std;
       else
       {
         //Ask justin about a set function??
-        G.setGameLost(true);
+        G->setGameLost(true);
       }
     
   }
@@ -41,7 +41,7 @@ bool CommandCenter::metRequ(GameState *G)
     int reqs = 0;
     for(int i = 0;i < 8; i++)
     {
-       //if item is armor, phaser gun, or goggles then increment
+    /*   //if item is armor, phaser gun, or goggles then increment
       if(G->inventory == "armor")
       {
           reqs++;
@@ -53,7 +53,7 @@ bool CommandCenter::metRequ(GameState *G)
       else if(G->inventory == "goggles")
       {
         reqs++;
-      }
+      }*/
       else
         continue;
     }
