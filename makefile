@@ -1,6 +1,9 @@
 
 CFLAGS = -g -Wall -std=c++11
 
+readFile: GameState.o Room.o Item.o readFile.cpp parser.o
+	g++ $(CFLAGS) GameState.o Room.o Item.o readFile.cpp parser.o -o readFile
+
 mainLoopTest: GameState.o Room.o Item.o mainLoopTest.cpp parser.o
 	g++ $(CFLAGS) GameState.o Room.o Item.o mainLoopTest.cpp parser.o -o mainLoopTest
 
@@ -23,4 +26,4 @@ parser.o: parser.hpp parser.cpp
 	g++ $(CFLAGS) -c parser.hpp parser.cpp
 	
 clean: 
-	rm *.o *.gch mainTest
+	rm *.o *.gch mainTest mainLoopTest

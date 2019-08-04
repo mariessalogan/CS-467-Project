@@ -1,0 +1,4 @@
+Workshop
+Workshop long description TBD
+Workshop short description TBD
+false

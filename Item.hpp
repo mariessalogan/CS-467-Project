@@ -20,9 +20,11 @@ class Item
    
    public:
     //functions
-    Item();
+    Item(string name, string desc1, bool pickup, string desc2, string secondVerb);
     string getName();
     string getDesc1();
+    string getDesc2();
+    string getSecondVerb();
     void getDesc(string verb);
     bool getPickup();
     virtual void actionFunction(string verb);

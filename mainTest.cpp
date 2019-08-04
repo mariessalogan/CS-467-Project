@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <unistd.h>
 
 using namespace std;
 
@@ -21,7 +22,34 @@ using namespace std;
 int main(){
 
 	GameState * game = new GameState();
+ 	
+ 	char * path ;
+ 	char pathName [] = "./default";
+ 	path = pathName;
 
+ 	cout << "Reading in GameState file from default folder." << endl;
+ 	cout << "***************************************************************************" << endl;
+	game->readInGameState(path);
+
+
+ 	cout << "Reading in room files from default folder." << endl;
+ 	cout << "***************************************************************************" << endl;
+	game->readInRooms(path);
+
+	//Testing file read in
+	cout << "Testing successful file read in." << endl;
+	cout << "***************************************************************************" << endl;
+	for(int i = 0 ; i < 17 ; i++){
+		cout << game->getShipLocal(i)->getName() << endl;
+		cout << "	" << "Long Desc: " << game->getShipLocal(i)->getLongDesc() << endl;
+		cout << "	" << "Short Desc: " << game->getShipLocal(i)->getShortDesc() << endl;
+		cout << "	" << "Visited: " << game->getShipLocal(i)->getVisited() << endl;
+		cout << endl;
+	}
+
+
+	cout << "Testing GameState Private Variables:" << endl;
+	cout << "***************************************************************************" << endl;
 	cout << "Oxygen Levels: " << game->getOxygen() << endl;
 	cout << "gameWon: " << game->getGameWon() << endl;
 	cout << "gameQuit: " << game->getGameQuit() << endl;
@@ -49,31 +77,15 @@ int main(){
 	game->decInventorySize();
 	cout << "Decrement inventory to 7: " << game->getInventorySize() << endl;
 
-	cout << "Current Room Name: " << game->getPosition()->getName() << endl;
+	cout << "Testing Position, Current Room Name: " << game->getPosition()->getName() << endl;
 
-	cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
+	//cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
 
-	cout << "Item name in current Room: " << game->getPosition()->getItem("Employee Manual")->getName() << endl;
+	//cout << "Item name in current Room: " << game->getPosition()->getItem("Employee Manual")->getName() << endl;
 
-	cout << "Testing printing item descriptions: " ;
-	game->printItems();
+	//cout << "Testing printing item descriptions: " ;
+	//game->printItems();
 
-	//added for room and item testing
-/*
-	Room * newRoom = new Room();
-	Item * newItem = new Item();
-
-	cout << "\nRoom Name: ";
-	cout << newRoom->getName() << "\n";
-
-	cout << "Room description:\n";
-	cout << newRoom->getLongDesc() << "\n";
-
-	cout << "Item name:  ";
-	cout << newItem->getName() << "\n";
-
-	cout << "Item Description: ";
-	cout << newItem->getDesc1() << "\n";
-*/
+	
 	return 0;
 }

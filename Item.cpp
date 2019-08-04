@@ -10,12 +10,12 @@ This is the implementation of the base class for the Items Class
 using namespace std;
 
 //Room constructor
-Item::Item(){
-  name = "Employee Manual";
-  desc1 = "This is a manual that will list the commands that you can use in the game.\n";
-  pickup = NULL;
-  desc2 = "second description\n";
-  secondVerb = "second verb\n";
+Item::Item(string name, string desc1, bool pickup, string desc2, string secondVerb){
+  this->name = name;
+  this->desc1 = desc1;
+  this->pickup = pickup;
+  this->desc2 = desc2;
+  this->secondVerb = secondVerb;
 }
 
 string Item::getName(){
@@ -24,6 +24,14 @@ string Item::getName(){
 
 string Item::getDesc1(){
   return desc1;
+}
+
+string Item::getDesc2(){
+  return desc2;
+}
+
+string Item::getSecondVerb(){
+  return secondVerb;
 }
 //This function determines whether or not to get Desc 1 or Desc2
 void Item::getDesc(string verb)

@@ -41,17 +41,14 @@ int main() {
 
 		parsedLine = parse(input, ' ');
 
-		cout << "**parsed input: " << endl;
-		for( auto token: parsedLine){
-			cout << token << endl;
-		}
-		
+		game->enactVerb(parsedLine);
 
+		/*
 		if(parsedLine[0] == "look"){
 			game->printCurRoomDesc();
 		}
 		else if(parsedLine[0] == "grab"){
-			game->_takeItem(parsedLine[1]);
+			game->_takeItem("Employee Manual");
 		}
 		else if(parsedLine[0] == "look at"){
 			game->getPosition()->getItem(parsedLine[1])->getDesc1();
@@ -62,8 +59,8 @@ int main() {
 		else{
 			cout << "Invalid entry" << endl;
 		}	
-	
-
+		
+	*/
 		input.clear();
 
 	}

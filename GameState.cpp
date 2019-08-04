@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <unistd.h>
 
 using namespace std;
 
@@ -21,23 +22,35 @@ using namespace std;
 //Demo Constructor
 GameState::GameState(){
 
-	int i;
-	
+	//Create blank rooms
+	for(int i = 0 ; i < 17 ; i++){
 
-	//Update these once I get more data on room constructors. 
-	for(i = 0 ; i < 16 ; i++){
-		ship[i] = NULL;
+		ship[i] = new Room();
+		/*
+		if(i == 3){
+			ship[i] = new Holodeck();
+		}
+		else if(i == 12){
+			ship[i] = new CommandCenter();
+		}
+		else{
+			ship[i] = new Room();
+		}
+		*/
 	}
 
-	Room * testRoom = new Room();
-	Item * testItem = new Item();
+	//Link rooms together.
+	linkRooms();
 
-	position = testRoom;
-	ship[1] = testRoom;
+	//Room * testRoom = new Room();
+	//Item * testItem = new Item();
 
-	testRoom->setItemToPointer(testItem);
+	//position = testRoom;
+	//ship[1] = testRoom;
 
-	oxygen = 100; 
+	//testRoom->setItemToPointer(testItem);
+
+	oxygen = -1; 
 	gameWon = false;
 	gameQuit = false;
 	
@@ -67,7 +80,7 @@ GameState::GameState(){
 	winDesc = "You have successfully escaped the space ship.  You take a sip of the vodka, and stare out the window at the rapidly diminishing space ship you once called home. The lights on it flicker and go out and you're left staring at the vast emptiness of space.  You put on the hibernation mask, take a deep breath and go into hibernation until you arrive back at the capital. You are safe.\n";
 	lossDesc = "You Lost, haha!";
 
-	for(i = 0 ; i < 8 ; i++){
+	for(int i = 0 ; i < 8 ; i++){
 		inventory[i] = NULL;
 	}
 
@@ -93,12 +106,185 @@ GameState::GameState(){
 
 //Destructor
 GameState::~GameState(){
-	cout << "The destructor is now running." << endl;
+	
+
+	//Free allocated rooms.
+	for(int i = 0 ; i < 17 ; i++){
+		free(ship[i]);
+	}
+
+}
+
+void GameState::linkRooms(){
+
+	//Bunk
+	ship[0]->setSouth(ship[2]);
+
+	//Captians Quarters
+	ship[1]->setEast(ship[2]);
+
+	//Set Break Room
+	ship[2]->setNorth(ship[0]);
+	ship[2]->setEast(ship[3]);
+	ship[2]->setSouth(ship[5]);
+	ship[2]->setWest(ship[1]);
+
+	//Holodeck
+	ship[3]->setWest(ship[2]);
+	ship[3]->setEast(ship[4]);
+
+	//Strategy Room
+	ship[4]->setWest(ship[3]);
+	ship[4]->setSouth(ship[6]);
+
+	//Cafeteria
+	ship[5]->setNorth(ship[2]);
+	ship[5]->setEast(ship[6]);
+	ship[5]->setSouth(ship[9]);
+
+	//Hallway
+	ship[6]->setNorth(ship[4]);
+	ship[6]->setSouth(ship[10]);
+	ship[6]->setWest(ship[5]);
+
+	//Supply Closet
+	ship[7]->setSouth(ship[11]);
+
+	//Transporter Room
+	ship[8]->setEast(ship[9]);
+	ship[8]->setSouth(ship[12]);
+
+	//Corridor
+	ship[9]->setNorth(ship[5]);
+	ship[9]->setSouth(ship[13]);
+	ship[9]->setWest(ship[8]);
+
+	//Armory
+	ship[10]->setNorth(ship[6]);
+	ship[10]->setEast(ship[11]);
+
+	//Quartermaster
+	ship[11]->setNorth(ship[7]);
+	ship[11]->setSouth(ship[15]);
+	ship[11]->setWest(ship[10]);
+
+	//Command Center
+	ship[12]->setNorth(ship[8]);
+	ship[12]->setEast(ship[13]);
+	ship[12]->setSouth(ship[16]);
+
+	//MedBay
+	ship[13]->setNorth(ship[9]);
+	ship[13]->setWest(ship[12]);
+
+	//Lab
+	ship[14]->setEast(ship[15]);
+
+	//Workshop
+	ship[15]->setNorth(ship[11]);
+	ship[15]->setWest(ship[14]);
+
+	//Escape Pod
+	ship[16]->setWest(ship[12]);
+
+}
+
+void GameState::readInGameState(char * path){
+	int success = chdir(path);
+	if(success == -1){
+		cout << "error in chdir readInGameState." << endl;
+	}
+
+	string position;
+	string oxygen;
+	string inventorySize;
+	fstream inputFile;
+
+	inputFile.open("GameState.txt"); //Add error handling here. 
+	
+	getline(inputFile, position);
+	getline(inputFile, oxygen);
+	getline(inputFile, inventorySize);
+
+	setPosition(getShipLocal(stoi(position)));
+	setOxygen(stoi(oxygen));
+	setInventorySize(stoi(inventorySize));
+
+}
+
+//Reads in name, long description, short description, and visited bool from room files. 
+void GameState::readInRooms(char * path){
+
+	//Change working directory to path.
+
+	//Loop through each ship pointer. 
+
+	//Read in file contents for each room. 
+
+	int success = chdir(path);
+
+	if(success == -1){
+		cout << "error in chdir readInRooms" << endl;
+	}
+
+	string name;
+	string longDesc;
+	string shortDesc;
+	string visitedString;
+	string filePrefix = "Room";
+	string fileSuffix = ".txt";
+	string fileName;
+	fstream inputFile;
+
+
+
+	//Setup to handle generic rooms currently. Need to rewrite for
+	//holodeck and command center. 
+	for(int i = 0 ; i < 17 ; i++){
+		
+		//Create room file names "Room0.txt"
+		fileName = filePrefix + to_string(i) + fileSuffix;
+
+		inputFile.open(fileName); //add error handling here!!!
+
+		//Get file contents
+		getline(inputFile, name);
+		getline(inputFile, longDesc);
+		getline(inputFile, shortDesc);
+		getline(inputFile, visitedString);
+
+		//Set room to file data
+		ship[i]->setName(name);
+		ship[i]->setLongDesc(longDesc);
+		ship[i]->setShortDesc(shortDesc);
+
+		if(visitedString == "true"){
+			ship[i]->setVisited(true);
+		}
+		else{
+			ship[i]->setVisited(false);
+		}
+
+		//Reset file name for next iteration
+		fileName = "";
+
+		inputFile.close();
+	}
+
+
 }
 
 /******************************************************************************************************************/
 //Getter functions
 /******************************************************************************************************************/
+
+//Testing function.
+Room * GameState::getShipLocal(int roomNum){
+	if(roomNum > -1 && roomNum < 17){
+		return ship[roomNum];
+	}
+	return NULL;
+}
 
 //Return pointer to current room.
 Room * GameState::getPosition(){
@@ -113,6 +299,11 @@ int GameState::getOxygen(){
 //Return game win bool.
 bool GameState::getGameWon(){
 	return gameWon;
+}
+
+//Return game lost bool. 
+bool GameState::getGameLost(){
+	return gameLost;
 }
 
 //Return game quit bool. 
@@ -132,6 +323,28 @@ int GameState::getInventorySize(){
 void GameState::printIntro() {
 	cout << intro << endl;
 	return;
+}
+
+//Print adjacent room names to inform player of exits
+void GameState::printExits(){
+	
+	cout << "The room exits " ; 
+
+	if(position->getNorth() != NULL){
+		cout << "north to the " << position->getNorth()->getName() << " ";
+	}
+	else if(position->getEast() != NULL){
+		cout << "east to the " << position->getEast()->getName() << " ";
+	}
+	else if(position->getSouth() != NULL){
+		cout << "south to the " << position->getSouth()->getName() << " ";
+	}
+	else if(position->getWest() != NULL){
+		cout << "west to the " << position->getWest()->getName() << " ";
+	}
+	cout << endl;
+
+
 }
 
 //Print game won description.
@@ -194,6 +407,22 @@ void GameState::decOxygen(){
 	}
 	return;
 }
+
+//Set gameWon bool
+void GameState::setGameWon(bool state){
+	gameWon = state;
+}
+
+//Set gameLost bool
+void GameState::setGameLost(bool state){
+	gameLost = state;
+}
+
+//Set gameQuit bool 
+void GameState::setGameQuit(bool state){
+	gameQuit = state; 
+}
+
 
 //Set inventory size to specific value.
 void GameState::setInventorySize(int numItems){
@@ -465,15 +694,21 @@ void GameState::enactVerb(vector<string> parsedInput) {
 	string noun;
 	string verb; 
 
+	cout << "Size of parsedInput: " << parsedInput.size() << endl;
+
 	//Copy contents from vector.
 	if(parsedInput.size() == 2){
 		verb = parsedInput[0];
 		noun = parsedInput[1];
+		cout << "noun in enactVerb: " << noun << endl;
+		cout << "verb in enactVerb: " << verb << endl;
 	}
 	else{
 		verb = parsedInput[0];
+		cout << "verb in enactVerb: " << verb << endl;
 	}
 
+	
 
 	//verb == look
 	if (verb == "look") {
