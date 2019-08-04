@@ -41,16 +41,16 @@ bool CommandCenter::metRequ(GameState *G)
     int reqs = 0;
     for(int i = 0;i < 8; i++)
     {
-      //if item is armor, phaser gun, or goggles then increment
-      if(strcmp(G->inventory, "armor"))
+       //if item is armor, phaser gun, or goggles then increment
+      if(G->inventory == "armor")
       {
           reqs++;
       }
-      else if(strcmp(G->inventory, "phaser gun"))
+      else if(G->inventory == "phaser gun")
       {
           reqs++;
       }
-      else if(strcmp(G->inventory, "goggles"))
+      else if(G->inventory == "goggles")
       {
         reqs++;
       }
