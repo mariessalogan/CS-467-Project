@@ -39,24 +39,23 @@ using namespace std;
 bool CommandCenter::metRequ(GameState *G)
 {
     int reqs = 0;
-    for(int i = 0;i < 8; i++)
-    {
-    /*   //if item is armor, phaser gun, or goggles then increment
-      if(G->inventory == "armor")
+    
+       //if item is armor, phaser gun, or goggles then increment
+      if(G->_checkInventory("armor") != NULL)
       {
           reqs++;
       }
-      else if(G->inventory == "phaser gun")
+      if(G->_checkInventory("phaser gun") != NULL)
       {
           reqs++;
       }
-      else if(G->inventory == "goggles")
+      else if(G->_checkInventory("goggles") != NULL)
       {
         reqs++;
-      }*/
+      }
       else
         continue;
-    }
+    
     if(reqs == 3)
     {
       return true;
