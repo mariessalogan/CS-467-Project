@@ -10,7 +10,7 @@ This is the implementation of the base class for the Items Class
 using namespace std;
 
 //Room constructor
-Item::Item(string name, string desc1, bool pickup, string desc2, string secondVerb){
+Item::Item(){
   this->name = name;
   this->desc1 = desc1;
   this->pickup = pickup;
