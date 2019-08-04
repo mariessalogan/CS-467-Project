@@ -53,9 +53,7 @@ bool CommandCenter::metRequ(GameState *G)
       {
         reqs++;
       }
-      else
-        continue;
-    
+
     if(reqs == 3)
     {
       return true;
