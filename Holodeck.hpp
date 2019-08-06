@@ -9,7 +9,10 @@ that will be linked together by the Gamestate function.
 #include <string>
 #include <stdio.h>
 #include "Room.hpp"
+#include "GameState.hpp"
+
 using namespace std;
+
 class Holodeck
 {
   private:
