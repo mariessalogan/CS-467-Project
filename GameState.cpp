@@ -189,6 +189,9 @@ void GameState::linkRooms(){
 
 }
 
+//Accepts a character pointer to the directory to read in files. 
+//Populates gamestate object with file data. Finally it sets current 
+//working directroy to main game folder. 
 void GameState::readInGameState(char * path){
 	int success = chdir(path);
 	if(success == -1){
@@ -210,16 +213,18 @@ void GameState::readInGameState(char * path){
 	setOxygen(stoi(oxygen));
 	setInventorySize(stoi(inventorySize));
 
+	//Move out of read in folder to main game directory. 
+	success = chdir("..");
+	if(success == -1){
+		cout << "error in chdir readInGameState." << endl;
+	}
+
 }
 
-//Reads in name, long description, short description, and visited bool from room files. 
+//Accepts a character pointer to the directory to read in files. 
+//Populates ship array with room data. Finally it sets current 
+//working direcotry to main game folder. 
 void GameState::readInRooms(char * path){
-
-	//Change working directory to path.
-
-	//Loop through each ship pointer. 
-
-	//Read in file contents for each room. 
 
 	int success = chdir(path);
 
@@ -235,8 +240,6 @@ void GameState::readInRooms(char * path){
 	string fileSuffix = ".txt";
 	string fileName;
 	fstream inputFile;
-
-
 
 	//Setup to handle generic rooms currently. Need to rewrite for
 	//holodeck and command center. 
@@ -271,8 +274,140 @@ void GameState::readInRooms(char * path){
 		inputFile.close();
 	}
 
+	//Return cwd to main game folder. 
+	success = chdir("..");
+	if(success == -1){
+		cout << "error in chdir readInGameState." << endl;
+	}
 
 }
+/*
+void GameState::readInItems(){
+
+}
+
+void GameState::setItemLocation(){
+
+}
+*/
+void GameState::saveGameState(){
+	
+	//Build path to save folder
+	char * path ; 
+	char pathName [] = "/saves";
+	char cwdName [1000];
+
+	memset(cwdName, '\0', sizeof(cwdName));
+	getcwd(cwdName, sizeof(cwdName));
+	strcat(cwdName, pathName);
+	path = cwdName;
+
+	int success = chdir(path);
+	if(success == -1){
+		cout << "error in chdir in saveRooms" << endl;
+	}
+
+	string position;
+	string oxygen;
+	string inventorySize;
+	
+	string fileName = "GameState.txt"; 
+	fstream outputFile;
+
+	//Create the file
+	outputFile.open(fileName, ios::out);
+
+	//Determine array location of current position
+	for(int i = 0 ; i < 17 ; i ++){
+		if(ship[i] == getPosition()){
+			position = to_string(i);
+		}
+	}
+
+	oxygen = to_string(getOxygen());
+	inventorySize = to_string(getInventorySize());
+
+	outputFile << position << "\n";
+	outputFile << oxygen << "\n";
+	outputFile << inventorySize << "\n";
+
+	outputFile.close(); 
+
+	success = chdir("..");
+	if(success == -1){
+		cout << "error in chdir in saveGameState" << endl;
+	}
+
+}
+
+//Changes current working directory to saves folder. Prints room data
+//to files. Finally changes current working directory to main game
+//folder. 
+void GameState::saveRooms(){
+	
+	//Build the path to the save folder
+	char * path ; 
+	char pathName [] = "/saves";
+	char cwdName [1000];
+
+	memset(cwdName, '\0', sizeof(cwdName));
+	getcwd(cwdName, sizeof(cwdName));
+	strcat(cwdName, pathName);
+	path = cwdName;
+
+	int success = chdir(path);
+	if(success == -1){
+		cout << "error in chdir in saveRooms" << endl;
+	}
+
+	string name; 
+	string longDesc; 
+	string shortDesc;
+	string visitedString;
+	bool visited; 
+
+	string filePrefix = "Room";
+	string fileSuffix = ".txt";
+	string fileName; 
+	fstream outputFile;
+
+	//Loop through ship
+	for(int i = 0 ; i < 17 ; i++){
+
+		//Create room file name. 
+		fileName = filePrefix + to_string(i) + fileSuffix;
+
+		//Create the file
+		outputFile.open(fileName, ios::out); 
+
+		name = ship[i]->getName();
+		longDesc = ship[i]->getLongDesc();
+		shortDesc = ship[i]->getShortDesc();
+		visited = ship[i]->getVisited();
+
+		if(visited == true){
+			visitedString = "true";
+		}
+		else{
+			visitedString = "false";
+		}
+
+		outputFile << name << "\n";
+		outputFile << longDesc << "\n";
+		outputFile << shortDesc << "\n";
+		outputFile << visitedString << "\n";
+
+		outputFile.close();
+
+		fileName = "";
+
+	}
+	success = chdir("..");
+	if(success == -1){
+		cout << "error in chdir in saveRooms" << endl;
+	}
+}
+
 
 /******************************************************************************************************************/
 //Getter functions
@@ -328,19 +463,20 @@ void GameState::printIntro() {
 //Print adjacent room names to inform player of exits
 void GameState::printExits(){
 	
-	cout << "The room exits " ; 
+	cout << "\n";
+	cout << "The room exits are:" << endl ; 
 
 	if(position->getNorth() != NULL){
-		cout << "north to the " << position->getNorth()->getName() << " ";
+		cout << "North to the " << position->getNorth()->getName() << endl;
 	}
-	else if(position->getEast() != NULL){
-		cout << "east to the " << position->getEast()->getName() << " ";
+	if(position->getEast() != NULL){
+		cout << "East to the " << position->getEast()->getName() << endl;
 	}
-	else if(position->getSouth() != NULL){
-		cout << "south to the " << position->getSouth()->getName() << " ";
+	if(position->getSouth() != NULL){
+		cout << "South to the " << position->getSouth()->getName() << endl;
 	}
-	else if(position->getWest() != NULL){
-		cout << "west to the " << position->getWest()->getName() << " ";
+	if(position->getWest() != NULL){
+		cout << "West to the " << position->getWest()->getName() << endl;
 	}
 	cout << endl;
 
@@ -370,6 +506,8 @@ void GameState::printCurRoomDesc() {
 	else {
 		cout << position->getShortDesc() << endl;
 	}
+
+	cout << endl;
 }
 
 void GameState::printItems(){
@@ -673,13 +811,37 @@ void GameState::_printInventory(){
 
 //Figure out file structure. Need to export GameState and room data.
 void GameState::_saveGame() {
-
+	saveGameState();
+	saveRooms();
+	cout << "Game Saved!" << endl;
 }
 
 
 void GameState::_quitGame() {
-	gameQuit = true;
+	
+	cout << "Are you sure you want to quit? Y/n" << endl;
+	char anwser; 
+	bool invalidResp = true;
 
+	while(invalidResp){
+		
+		cout << "\n>";
+		cin >> anwser;
+
+		if(anwser == 'Y'){
+		cout << "Thanks for playing!" << endl;
+		gameQuit = true;
+		invalidResp = false;
+		}
+		else if(anwser == 'n'){
+			invalidResp = false;
+		}
+		else{
+			cout << "Please type Y for yes or n for no." << endl;
+		}
+	}
+	
+	return;
 }
 
 
@@ -694,18 +856,16 @@ void GameState::enactVerb(vector<string> parsedInput) {
 	string noun;
 	string verb; 
 
-	cout << "Size of parsedInput: " << parsedInput.size() << endl;
-
 	//Copy contents from vector.
 	if(parsedInput.size() == 2){
 		verb = parsedInput[0];
 		noun = parsedInput[1];
-		cout << "noun in enactVerb: " << noun << endl;
-		cout << "verb in enactVerb: " << verb << endl;
+		//cout << "noun in enactVerb: " << noun << endl;
+		//cout << "verb in enactVerb: " << verb << endl;
 	}
 	else{
 		verb = parsedInput[0];
-		cout << "verb in enactVerb: " << verb << endl;
+		//cout << "verb in enactVerb: " << verb << endl;
 	}
 
 	
@@ -734,7 +894,7 @@ void GameState::enactVerb(vector<string> parsedInput) {
 	}
 	//Function not created yet.
 	else if (verb == "save") {
-
+		_saveGame();
 	}
 	else if (verb == "quit") {
 		_quitGame();
@@ -745,52 +905,5 @@ void GameState::enactVerb(vector<string> parsedInput) {
 	else if (verb == "act") {
 
 	}
-
-	//verb == lookAt
-		//Determine location of item
-			//If item not present print no item message
-		//Print item description
-
-	//verb == move
-		//Determine if noun refers to valid room
-			//If invalid inform player
-			//else Change position pointer
-			//Decrement oxygen stat
-
-	//verb == take
-		//Find item in room
-			//If not found print message
-			//else Find open slot in inventory
-			//Set empty inventory slot to point to item
-			//Update inventorySize
-			//Set item slot in room to null
-
-	//verb == drop
-		//Find item in inventory
-		//Find open slot in room item array
-		//Set empty room slot to point to item
-		//Set inventory slot to null
-		//decrement inventory size
-
-	//verb == inventory
-		//Loop through contents of inventory
-		//Print a message
-		//Print names of inventory items
-
-	//verb == help
-		//Print a message
-		//Print list of game verbs. 
-
-	//verb == save
-		//Check for the existence of a save directory
-		//If not present create it
-		//Loop through rooms, print room data into individual file for each room
-		//
-
-	//verb == quit
-
-	//verb == action
-
-
 
 }

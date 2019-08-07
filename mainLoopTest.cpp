@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <unistd.h>
 
 using namespace std;
 
@@ -22,45 +23,45 @@ int main() {
 
 	GameState * game = new GameState();
 
-	game->printIntro();
 
-	game->printCurRoomDesc();
+
+ 	char * path ;
+ 	char pathName [] = "/default";
+ 	char cwdName [1000];
+ 	memset(cwdName, '\0', sizeof(cwdName));
+ 	getcwd(cwdName, sizeof(cwdName));
+ 	strcat(cwdName, pathName);
+ 	path = cwdName;
+	
+	game->readInGameState(path);
+	game->readInRooms(path);
+
+	game->printIntro();
 
 	while(game->getGameQuit() == false){
 	
+
 		string input; 
 		vector<string> parsedLine;
+		
+		game->printCurRoomDesc();
+
+		//PRINT STATEMENT FOR DEBUGGING
+		cout << "Current room Name: " << game->getPosition()->getName() << endl;
+		cout << "O2 Level: " << game->getOxygen() << endl;
+		
+		game->printExits();
 
 		cout << "> ";
 
 		getline(cin, input);
 
-		if(input == "quit"){
-			game->_quitGame();
-		} 
+		cout << "\n";
 
 		parsedLine = parse(input, ' ');
 
 		game->enactVerb(parsedLine);
 
-		/*
-		if(parsedLine[0] == "look"){
-			game->printCurRoomDesc();
-		}
-		else if(parsedLine[0] == "grab"){
-			game->_takeItem("Employee Manual");
-		}
-		else if(parsedLine[0] == "look at"){
-			game->getPosition()->getItem(parsedLine[1])->getDesc1();
-		}
-		else if(parsedLine[0] == "drop"){
-			game->_dropItem(parsedLine[1]);
-		}
-		else{
-			cout << "Invalid entry" << endl;
-		}	
-		
-	*/
 		input.clear();
 
 	}

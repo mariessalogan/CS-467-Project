@@ -24,8 +24,13 @@ int main(){
 	GameState * game = new GameState();
  	
  	char * path ;
- 	char pathName [] = "./default";
- 	path = pathName;
+ 	char pathName [] = "/default";
+ 	char cwdName [1000];
+ 	memset(cwdName, '\0', sizeof(cwdName));
+ 	getcwd(cwdName, sizeof(cwdName));
+ 	strcat(cwdName, pathName);
+
+ 	path = cwdName;
 
  	cout << "Reading in GameState file from default folder." << endl;
  	cout << "***************************************************************************" << endl;
@@ -78,6 +83,10 @@ int main(){
 	cout << "Decrement inventory to 7: " << game->getInventorySize() << endl;
 
 	cout << "Testing Position, Current Room Name: " << game->getPosition()->getName() << endl;
+
+	cout << "Testing Game Save functionality" << endl;
+
+	game->_saveGame();
 
 	//cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
 

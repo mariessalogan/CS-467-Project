@@ -42,6 +42,8 @@ class GameState{
 		void linkRooms();									//Connect all room exits.
 		void readInGameState(char * path);
 		void readInRooms(char * path);
+		void saveGameState();
+		void saveRooms();
 		
 		//Getter functions
 		Room * getShipLocal(int roomNum);				//Return a pointer to a ship location specified by the roomNum;

@@ -148,29 +148,53 @@ string Room::getExits(){
 */
 
 Room * Room::getNorth(){
-  return north;
+  if(north != NULL){
+    return north;
+  }
+  return NULL;
 }
 Room * Room::getSouth(){
-  return south;
+  if(south != NULL){
+    return south;
+  }
+  return NULL;
 }
 Room * Room::getEast(){
-  return east;
+  if(east != NULL){
+    return east;
+  }
+  return NULL;
 }
 Room * Room::getWest(){
-  return west;
+  if(west != NULL){
+    return west;
+  }
+  return NULL;
 }
 
 string Room::getNorthName(){
-  return north->getName();
+  if(north != NULL){
+    return north->getName();
+  }
+  return "NULL";
 }
 string Room::getSouthName(){
-  return south->getName();
+  if(south != NULL){
+    return south->getName();
+  }
+  return "NULL";
 }
 string Room::getEastName(){
-  return east->getName();
+  if(east != NULL){
+    return east->getName();
+  }
+  return "NULL";
 }
 string Room::getWestName(){
-  return west->getName();
+  if(west != NULL){
+    return west->getName();
+  }
+  return "NULL";
 }
 
 
