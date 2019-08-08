@@ -11,27 +11,54 @@ using namespace std;
 
 //Room constructor
 Item::Item(){
-  name = "item";
-  desc1 = "Desc1";
-  pickup = false;
-  desc2 = "desc";
-  secondVerb = "hello";
+
+
+  pickup = NULL;
+  locked = NULL;
 }
 
+/*************************************************************
+*Setter functions
+*
+**************************************************************/
+void Item::setName(string nameInput)
+{
+  name = nameInput;
+}
+void Item::setDesc1(string desc1Input)
+{
+  desc1 = desc1Input;
+}
+void Item::setDesc2(string desc2Input)
+{
+  desc2 = desc2Input;
+}
+void Item::setPickup(bool value)
+{
+  pickup = value;
+}
+void Item::setSecondVerb(string secVerb)
+{
+  secondVerb = secVerb;
+}
+void Item::setLocked(bool value)
+{
+  locked = value;
+}
+void Item::setLocationName(string name)
+{
+  locationName = name;
+}
+/*************************************************************
+*Getter functions
+*
+**************************************************************/
 string Item::getName(){
   return name;
 }
 
 string Item::getDesc1(){
   return desc1;
-}
-
-string Item::getDesc2(){
-  return desc2;
-}
-
-string Item::getSecondVerb(){
-  return secondVerb;
 }
 //This function determines whether or not to get Desc 1 or Desc2
 void Item::getDesc(string verb)
@@ -47,14 +74,3 @@ bool Item::getPickup(){
   return pickup;
 }
 
-void Item::actionFunction(string verb)
-{
-  if(verb == "look")
-  {
-    getDesc(verb);
-  }
-  else
-  {
-    cout << "Error, you cannot do that.\n";
-  }
-}
