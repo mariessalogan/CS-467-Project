@@ -9,6 +9,8 @@ of the features and different types of Items.
 #include <stdio.h>
 #include <cstring>
 using namespace std;
+class GameState;
+
 class Item
 {
   private:
@@ -17,22 +19,32 @@ class Item
     string desc2;
     bool pickup;
     string secondVerb;
-    bool charged;//for phaser, but should we do locked
+    bool locked;//for phaser to check if charged as well
     string locationName;//for location of item
    
    public:
     //functions
     Item();
     
-    //add setters and getters
+    //setters
+    void setName(string nameInput);
+    void setDesc1(string desc1Input);
+    void setDesc2(string desc2Input);
+    void setPickup(bool value);
+    void setSecondVerb(string secVerb);
+    void setLocked(bool value);
+    void setLocationName(string name);
+
+    //getters
     string getName();
     string getDesc1();
     string getDesc2();
-    string getSecondVerb();
     void getDesc(string verb);
     bool getPickup();
+    bool getLocked();
+    string getLocationName();
 
     //virtual function for actions on unique items
-    virtual void actionFunction(string verb);
+    virtual void actionFunction(GameState*G, string verb){};
 };
 #endif
