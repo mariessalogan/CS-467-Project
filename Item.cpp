@@ -11,11 +11,9 @@ using namespace std;
 
 //Room constructor
 Item::Item(){
-  name = "Employee Manual";
-  desc1 = "This is a manual that will list the commands that you can use in the game.\n";
+
+
   pickup = NULL;
-  desc2 = "second description\n";
-  secondVerb = "second verb\n";
   locked = NULL;
 }
 
@@ -51,7 +49,6 @@ void Item::setLocationName(string name)
 {
   locationName = name;
 }
-
 /*************************************************************
 *Getter functions
 *
@@ -77,11 +74,3 @@ bool Item::getPickup(){
   return pickup;
 }
 
-bool Item::getLocked()
-{
-  return locked;
-}
-string Item::getLocationName()
-{
-  return locationName;
-}
