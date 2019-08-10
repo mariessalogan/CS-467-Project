@@ -8,6 +8,7 @@
 #include "GameState.hpp"
 #include "Room.hpp"
 #include "Item.hpp"
+#include "Coffee.hpp"
 #include "parser.hpp"
 #include <string>
 #include <iostream>
@@ -88,7 +89,29 @@ int main(){
 
 	game->_saveGame();
 
-	//cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
+	Item * testItem = new Item();
+	testItem->setName("Captain's Badge");
+	testItem->setDesc1("whatever");
+	testItem->setDesc2("ok");
+	testItem->setPickup(true);
+	testItem->setSecondVerb("run");
+	testItem->setLocked(false);
+	testItem->setLocationName("bunk");
+	game->getPosition()->setItem(testItem);
+
+    game->_takeItem("Captain's Badge");
+
+    game->_printInventory();
+	cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
+
+	Coffee * drink = new Coffee();
+	drink->setName("coffee");
+	drink->setLocked(false);
+	cout << "Oxygen before coffee: " << game->getOxygen() << endl;
+	drink->actionFunction(game, "drink");
+
+	cout << "Oxygen incremented after coffee: " << game->getOxygen() << endl;
+
 
 	//cout << "Item name in current Room: " << game->getPosition()->getItem("Employee Manual")->getName() << endl;
 
