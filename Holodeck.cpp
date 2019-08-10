@@ -9,16 +9,24 @@ This is the implementation of the holodeck that will affect the oxygen level
 #include "Holodeck.hpp"
 using namespace std;
 
+  void Holodeck::setPushed(bool value)
+  {
+     pushed = value;
+  }
+  bool Holodeck::getPushed()
+  {
+     return pushed;
+  }
   void Holodeck::actionFunction(GameState *G)
   {
-    if(pushed == false)
+    if(this->getPushed() == false)
     {
       //find out current oxygen on gamestate and add 5
       int oxygen = G->getOxygen();
       oxygen += 5;
       G->setOxygen(oxygen);
       //set button pushed to true so it knows to not increment by 5 again.
-      pushed = true;
+      this->setPushed(true);
     }
     else
     {
