@@ -16,7 +16,7 @@ using namespace std;
 class CommandCenter
 {
   private:
-    int dead;
+    bool dead;
    
    public:
     //functions
