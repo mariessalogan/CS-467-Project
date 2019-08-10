@@ -1,6 +1,6 @@
 /**********************************************************************************
-Class Implementation - Items Base Class 
-This is the implementation of the base class for the Items Class 
+Class Implementation - Coffee Class 
+This is the implementation of the coffee and holodeck button class 
 **********************************************************************************/
 #include <string>
 #include <iostream>
@@ -18,11 +18,26 @@ void Coffee::actionFunction(GameState * G, string verb)
 		int oxygen = 5 + G->getOxygen();
 		this->setLocked(true);
 		G->setOxygen(oxygen);
-		cout << "You feel energized!\n";
+		if(G->getPosition()->getName() == "Holodeck")
+		{
+			cout << "You press the button and it turns the Holodeck off.  You can hear the atmo engine powering up.\n";
+		}
+		else
+		{
+			cout << "You feel energized!\n";
+		}
 	}
 	else
 	{
-		cout << "You have already drank enough coffee.\n";
+		if(G->getPosition()->getName() == "Holodeck")
+		{
+			cout << "You press the button and it turns the Holodeck off.  You can hear the atmo engine powering up.\n";
+		}
+		else
+		{
+			cout << "You have already drank enough coffee.\n";		
+		}
+		
 	}
 	
 }
