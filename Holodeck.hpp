@@ -13,12 +13,16 @@ that will be linked together by the Gamestate function.
 
 using namespace std;
 
-class Holodeck
+class Holodeck : public Room
 {
   private:
     bool pushed;
    
    public:
+    //setter
+    void setPushed(bool value);
+    //getter 
+    bool getPushed();
     //functions
     void actionFunction(GameState *G);
     
