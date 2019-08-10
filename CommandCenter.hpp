@@ -13,7 +13,7 @@ together by the Gamestate function.
 
 using namespace std;
 
-class CommandCenter
+class CommandCenter : Public Room
 {
   private:
     bool dead;
