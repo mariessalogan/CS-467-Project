@@ -10,6 +10,15 @@ feature
 #include "CommandCenter.hpp"
 using namespace std;
 
+  void CommandCenter::setDead(bool value)
+  {
+        dead = value; 
+  } 
+ bool CommandCenter::getDead()
+  {
+        return dead; 
+  } 
+
   void CommandCenter::actionFunction(GameState *G)
   {
     
