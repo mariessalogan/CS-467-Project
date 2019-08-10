@@ -19,6 +19,10 @@ class CommandCenter
     bool dead;
    
    public:
+    //setter
+    void setDead(bool value);
+    //getter
+    bool getDead();
     //functions
     void actionFunction(GameState *G);
     bool metRequ(GameState *G);
