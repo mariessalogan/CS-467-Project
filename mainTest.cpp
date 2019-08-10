@@ -104,9 +104,10 @@ int main(){
     game->_printInventory();
 	cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
 
-	Coffee * drink = new Coffee();
+	Item *drink = new Coffee();
 	drink->setName("coffee");
 	drink->setLocked(false);
+	cout << "drink name: " << drink->getName() << "\n";
 	cout << "Oxygen before coffee: " << game->getOxygen() << endl;
 	drink->actionFunction(game, "drink");
 

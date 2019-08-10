@@ -11,11 +11,12 @@ using namespace std;
 
 void Coffee::actionFunction(GameState * G, string verb)
 {
+	
 	//if locked then coffee was already drunk
-	if(locked == false)
+	if(verb == "drink" && this->getLocked() == false)
 	{
 		int oxygen = 5 + G->getOxygen();
-		locked = true;
+		this->setLocked(true);
 		G->setOxygen(oxygen);
 		cout << "You feel energized!\n";
 	}
@@ -23,4 +24,5 @@ void Coffee::actionFunction(GameState * G, string verb)
 	{
 		cout << "You have already drank enough coffee.\n";
 	}
+	
 }

@@ -74,3 +74,8 @@ bool Item::getPickup(){
   return pickup;
 }
 
+bool Item::getLocked()
+{
+  return locked;
+}
+

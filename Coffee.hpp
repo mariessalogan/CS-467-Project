@@ -20,6 +20,6 @@ class Coffee : public Item
    public:
    
     //virtual function for actions on unique items
-    void actionFunction(GameState* G, string verb){};
+    void actionFunction(GameState* G, string verb);
 };
 #endif
