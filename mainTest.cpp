@@ -8,7 +8,7 @@
 #include "GameState.hpp"
 #include "Room.hpp"
 #include "Item.hpp"
-#include "Coffee.hpp"
+#include "Consumable.hpp"
 #include "parser.hpp"
 #include <string>
 #include <iostream>
@@ -104,14 +104,14 @@ int main(){
     game->_printInventory();
 	cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
 
-	Item *drink = new Coffee();
-	drink->setName("coffee");
+	Item *drink = new Consumable();
+	drink->setName("Consumable");
 	drink->setLocked(false);
 	cout << "drink name: " << drink->getName() << "\n";
-	cout << "Oxygen before coffee: " << game->getOxygen() << endl;
+	cout << "Oxygen before Consumable: " << game->getOxygen() << endl;
 	drink->actionFunction(game, "drink");
 
-	cout << "Oxygen incremented after coffee: " << game->getOxygen() << endl;
+	cout << "Oxygen incremented after Consumable: " << game->getOxygen() << endl;
 
 
 	//cout << "Item name in current Room: " << game->getPosition()->getItem("Employee Manual")->getName() << endl;

@@ -4,11 +4,11 @@ CFLAGS = -g -Wall -std=c++11
 mainLoopTest: GameState.o Room.o Item.o mainLoopTest.cpp parser.o CommandCenter.o Holodeck.o
 	g++ $(CFLAGS) GameState.o Room.o Item.o mainLoopTest.cpp parser.o CommandCenter.o Holodeck.o -o mainLoopTest
 
-mainTest: GameState.o Room.o Item.o mainTest.o parser.o Coffee.o
-	g++ $(CFLAGS) GameState.o Room.o Item.o mainTest.o parser.o Coffee.o -o mainTest
+mainTest: GameState.o Room.o Item.o mainTest.o parser.o Consumable.o
+	g++ $(CFLAGS) GameState.o Room.o Item.o mainTest.o parser.o Consumable.o -o mainTest
 
-mainTest.o: mainTest.cpp GameState.hpp Item.hpp Room.hpp Holodeck.hpp CommandCenter.hpp  Coffee.hpp
-	g++ $(CFLAGS) -c mainTest.cpp GameState.hpp Item.hpp Room.hpp Holodeck.hpp CommandCenter.hpp Coffee.hpp
+mainTest.o: mainTest.cpp GameState.hpp Item.hpp Room.hpp Holodeck.hpp CommandCenter.hpp  Consumable.hpp
+	g++ $(CFLAGS) -c mainTest.cpp GameState.hpp Item.hpp Room.hpp Holodeck.hpp CommandCenter.hpp Consumable.hpp
 
 GameState.o: GameState.hpp GameState.cpp Item.hpp Room.hpp Holodeck.hpp CommandCenter.hpp
 	g++ $(CFLAGS) -c GameState.hpp GameState.cpp Item.hpp Room.hpp Holodeck.hpp CommandCenter.hpp
@@ -25,8 +25,8 @@ Holodeck.o: Holodeck.hpp Holodeck.cpp
 CommandCenter.o: CommandCenter.hpp CommandCenter.cpp
 	g++ $(CFLAGS) -c CommandCenter.hpp CommandCenter.cpp
 
-Coffee.o: Coffee.hpp Coffee.cpp
-	g++ $(CFLAGS) -c Coffee.hpp Coffee.cpp
+Consumable.o: Consumable.hpp Consumable.cpp
+	g++ $(CFLAGS) -c Consumable.hpp Consumable.cpp
 
 parser.o: parser.hpp parser.cpp
 	g++ $(CFLAGS) -c parser.hpp parser.cpp
