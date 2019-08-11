@@ -21,17 +21,55 @@ using namespace std;
 
 int main() {
 
+	cout << R"(	
+  _________                             ________                     ._.
+ /   _____/__________    ____  ____    /  _____/_____    _____   ____| |
+ \_____  \\____ \__  \ _/ ___\/ __ \  /   \  ___\__  \  /     \_/ __ \ |
+ /        \  |_> > __ \\  \__\  ___/  \    \_\  \/ __ \|  Y Y  \  ___/\|
+/_______  /   __(____  /\___  >___  >  \______  (____  /__|_|  /\___  >_
+        \/|__|       \/     \/    \/          \/     \/      \/     \/\/
+)" << endl << endl;
+
 	GameState * game = new GameState();
+	bool menu = false;
+	char * path;
 
-
-
- 	char * path ;
- 	char pathName [] = "/default";
+	
  	char cwdName [1000];
- 	memset(cwdName, '\0', sizeof(cwdName));
- 	getcwd(cwdName, sizeof(cwdName));
- 	strcat(cwdName, pathName);
- 	path = cwdName;
+	memset(cwdName, '\0', sizeof(cwdName));
+	getcwd(cwdName, sizeof(cwdName));
+
+	cout << "\t1) New Game" << endl;
+	cout << "\t2) Load Game" << endl;
+	cout << "\t3) Exit " << endl << endl;
+
+	while(!menu){
+		string menuChoice;
+
+		cout << "> ";
+
+		getline(cin, menuChoice);
+
+		if(menuChoice == "1"){
+			char newPathName [] = "/default";
+		 	strcat(cwdName, newPathName);
+ 			path = cwdName;
+			menu = true;
+		}
+		else if(menuChoice == "2"){
+			char savePathName [] = "/saves";
+ 			strcat(cwdName, savePathName);
+ 			path = cwdName;
+			menu = true;
+		}
+		else if(menuChoice == "3"){
+			exit(0);
+		}
+		else{
+			cout << "Invalid Entry..." << endl;
+		}
+	}
+//--------------------------------------------------------------------
 	
 	game->readInGameState(path);
 	game->readInRooms(path);

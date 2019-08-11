@@ -287,8 +287,8 @@ vector<string> concatDoubleMovements(vector <string> &commands) {
 		return commands;
 	}
 
-	if (commands[index] == "room" && commands[index - 1] == "command") {
-		commands[index - 1] = "command room";
+	if (commands[index] == "center" && commands[index - 1] == "command") {
+		commands[index - 1] = "command center";
 		commands.erase(commands.begin() + index);
 		return commands;
 	}

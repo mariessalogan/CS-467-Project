@@ -30,10 +30,10 @@ static const vector<string> nouns =
 		};
 
 static const vector<string> exits =
-		{"north", "south", "east", "west", "bunk", "break room", "captains quarters",
+		{"north", "south", "east", "west", "bunk", "break room", "captain's quarters",
 		"bathroom", "cafeteria", "holodeck", "strategy room", "armory", "quartermaster",
-		"workshop", "lab", "corridor", "transporter room", "command room", "supply closet",
-		"medbay", "escape pod"};
+		"workshop", "lab", "corridor", "transporter room", "command center", "supply closet",
+		"medbay", "escape pod", "hallway"};
 
 static const vector<string> removables =
 		{ "under", "on", "off", "all", "the", "above", "below",
