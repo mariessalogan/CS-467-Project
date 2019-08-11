@@ -20,7 +20,7 @@ vector<string> parse(const string& inputStr, char delim)
 {
 	string lowerCaseStr;
 	vector<string> commands;
-	vector<string> spaceGame = {"space!"};
+	vector<string> spaceGame = {"invalid"};
 
 	//convert input to lower case
 	for (size_t i = 0; i < inputStr.length(); i++) {
@@ -125,7 +125,7 @@ vector<string> validateSingleEntry(vector<string> &commands) {
 		for (size_t i = 0; i < movementVerbs.size(); i++) {
 			if (commands[0] == movementVerbs[i]) {
 				commands.clear();
-				commands.push_back("Please enter an exit or direction...");
+				commands.push_back("invalid");
 				return commands;
 			}
 		}
@@ -139,7 +139,7 @@ vector<string> validateSingleEntry(vector<string> &commands) {
 
 		if (!foundSoloVerb) {
 			commands.clear();
-			commands.push_back("Please enter a verb/noun combination...");
+			commands.push_back("invalid");
 			return commands;
 		}
 		else {
@@ -163,7 +163,7 @@ vector<string> validateSingleEntry(vector<string> &commands) {
 	}
 
 	commands.clear();
-	commands.push_back("Invalid entry...");
+	commands.push_back("invalid");
 	return commands;
 }
 
@@ -205,7 +205,7 @@ vector<string> validateDoubleEntry(vector<string> &commands) {
 	}
 
 	commands.clear();
-	commands.push_back("Invalid entry...");
+	commands.push_back("invalid");
 	return commands;
 }
 
@@ -230,7 +230,7 @@ vector<string> validateTripleEntry(vector<string> &commands) {
 	}
 
 	commands.clear();
-	commands.push_back("Invalid entry...");
+	commands.push_back("invalid");
 	return commands;
 }
 
@@ -255,7 +255,7 @@ vector<string> validateManyEntry(vector<string> &commands) {
 	}
 
 	commands.clear();
-	commands.push_back("Invalid entry...");
+	commands.push_back("invalid");
 	return commands;
 }
 
@@ -582,7 +582,7 @@ vector<string> validateCombo(vector<string> &commands) {
 	}
 	else {
 		commands.clear();
-		commands.push_back("You can't do that...");
+		commands.push_back("invalid");
 		return commands;
 	}
 }
