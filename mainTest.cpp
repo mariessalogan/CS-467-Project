@@ -97,7 +97,7 @@ int main(){
 	testItem->setDesc2("ok");
 	testItem->setPickup(true);
 	testItem->setSecondVerb("run");
-	testItem->setLocked(false);
+	testItem->setConditionMet(false);
 	testItem->setLocationName("bunk");
 	game->getPosition()->setItem(testItem);
 	testItem->actionFunction(game, "shake");
@@ -110,7 +110,7 @@ int main(){
 
 	Item *drink = new Consumable();
 	drink->setName("Coffee");
-	drink->setLocked(false);
+	drink->setConditionMet(false);
 	cout << "drink name: " << drink->getName() << "\n";
 	cout << "Oxygen before Consumable: " << game->getOxygen() << endl;
 	drink->actionFunction(game, "drink");
@@ -119,7 +119,7 @@ int main(){
  	
 	Container *box = new Container();
 	box->setName("Coffeemaker");
-	box->setLocked(false);
+	box->setConditionMet(false);
 	box->setItem(drink);
 	box->actionFunction(game, "open");
 	cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;

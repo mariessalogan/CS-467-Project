@@ -34,7 +34,7 @@ string Container::getRequirement()
 void Container::actionFunction(GameState * G, string verb)
 {
 	
-	if(this->getLocked() == true)
+	if(this->getConditionMet() == true)
 	{
 		if(this->getName() == "Coffeemaker")
 		{
@@ -49,6 +49,7 @@ void Container::actionFunction(GameState * G, string verb)
 		}
 		else
 		{
+			this->setConditionMet(true);
 			G->getPosition()->setItemToPointer(storedItem);
 			
 			cout << "successfully added item to room container\n";

@@ -19,7 +19,7 @@ class Item
     string desc2;
     bool pickup;
     string secondVerb;
-    bool locked;//for phaser to check if charged as well
+    bool conditionMet;//for phaser to check if charged as well
     string locationName;//for location of item
    
    public:
@@ -32,7 +32,7 @@ class Item
     void setDesc2(string desc2Input);
     void setPickup(bool value);
     void setSecondVerb(string secVerb);
-    void setLocked(bool value);
+    void setConditionMet(bool value);
     void setLocationName(string name);
 
     //getters
@@ -41,10 +41,10 @@ class Item
     string getDesc2();
     void getDesc(string verb);
     bool getPickup();
-    bool getLocked();
+    bool getConditionMet();
     string getLocationName();
 
     //virtual function for actions on unique items
-    virtual void actionFunction(GameState*G, string verb){};
+    virtual void actionFunction(GameState*G, string verb){ };
 };
 #endif

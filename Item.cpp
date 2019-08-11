@@ -14,7 +14,7 @@ Item::Item(){
 
 
   pickup = NULL;
-  locked = NULL;
+  conditionMet = NULL;
 }
 
 /*************************************************************
@@ -41,9 +41,9 @@ void Item::setSecondVerb(string secVerb)
 {
   secondVerb = secVerb;
 }
-void Item::setLocked(bool value)
+void Item::setConditionMet(bool value)
 {
-  locked = value;
+  conditionMet = value;
 }
 void Item::setLocationName(string name)
 {
@@ -60,6 +60,10 @@ string Item::getName(){
 string Item::getDesc1(){
   return desc1;
 }
+
+string Item::getDesc2(){
+  return desc2;
+}
 //This function determines whether or not to get Desc 1 or Desc2
 void Item::getDesc(string verb)
 {
@@ -74,8 +78,8 @@ bool Item::getPickup(){
   return pickup;
 }
 
-bool Item::getLocked()
+bool Item::getConditionMet()
 {
-  return locked;
+  return conditionMet;
 }
 
