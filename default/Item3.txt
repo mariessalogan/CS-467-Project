@@ -2,6 +2,6 @@ Employee Manual
 Commands - Open, Close, Pick up, Shake, Look, Look At, go, move, take, grab, help, inventory, drop, leave, save, load, quit, turn on, turn off, drink, read, scan, shoot, listen
 NULL
 true
-NULL
+read
 true
 Bunk
