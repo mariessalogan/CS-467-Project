@@ -10,6 +10,7 @@
 #include "Item.hpp"
 #include "Consumable.hpp"
 #include "Container.hpp"
+#include "EscapePod.hpp"
 #include "parser.hpp"
 #include <string>
 #include <iostream>
@@ -99,6 +100,8 @@ int main(){
 	testItem->setLocked(false);
 	testItem->setLocationName("bunk");
 	game->getPosition()->setItem(testItem);
+	testItem->actionFunction(game, "shake");
+	cout << "Desc2: " << testItem->getDesc2() << "\n";
 
     game->_takeItem("Captain's Badge");
 	game->getPosition()->setItemCount(0);
@@ -122,6 +125,11 @@ int main(){
 	cout << "Item count in current Room: " << game->getPosition()->getItemCount() << endl;
 	cout << "Items in room are: ";
 	game->getPosition()->printItemNames();
+
+	EscapePod *escape = new EscapePod();
+	cout << "Room before escape pod: " << game->getGameWon() << "\n";
+	escape->actionFunction(game, "verb");
+	cout << "Room after escape pod: " << game->getGameWon() << "\n";
 
 
 	//cout << "Item name in current Room: " << game->getPosition()->getItem("Employee Manual")->getName() << endl;
