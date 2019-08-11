@@ -18,7 +18,6 @@
 
 using namespace std;
 
-
 int main() {
 
 	cout << R"(
@@ -38,7 +37,6 @@ int main() {
 	GameState * game = new GameState();
 	bool menu = false;
 	char * path;
-
 	
  	char cwdName [1000];
 	memset(cwdName, '\0', sizeof(cwdName));
@@ -51,8 +49,7 @@ int main() {
 	while(!menu){
 		string menuChoice;
 
-		cout << "> Choose option 1, 2, or 3" << endl;
-		cout << "> ";
+		cout << "> Select option 1, 2, or 3: ";
 
 		getline(cin, menuChoice);
 
@@ -80,10 +77,13 @@ int main() {
 	game->readInGameState(path);
 	game->readInRooms(path);
 
+	cout << string(5, '\n');
+
 	game->printIntro();
 
+	sleep(6);
+
 	while(game->getGameQuit() == false){
-	
 
 		string input; 
 		vector<string> parsedLine;
