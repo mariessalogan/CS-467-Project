@@ -1,0 +1,7 @@
+coffee
+The dark coffee shines in it’s mug, it makes you think of saturday mornings with your partner.  You hope that one day you will be back there on your front porch, in a rocking chair.  \n
+You take in a deep breath and smell the dark, nutty aroma of the coffee.  You never thought you’d be happy to smell the cafeteria’s coffee, but it grounds you (no pun intended).  You take a long drink and feel energized.  You think you’re going to start moving faster for a bit with this coffee flowing through your veins.\n
+true
+drink
+true
+coffee maker
