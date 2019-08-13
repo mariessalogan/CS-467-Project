@@ -1,0 +1,6 @@
+This is a small cassette that is used to recharge phaser guns.  You should carry this with you so your phaser will be charged.  
+NULL
+true
+NULL
+true
+safe
