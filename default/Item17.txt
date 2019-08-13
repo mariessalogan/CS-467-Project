@@ -1,6 +1,6 @@
 starbuck
-Starbuck was one of the most fearsome warriors in the crew.  She is covered in slashes and has several phaser wounds in her arms and legs. She fought tooth and nail to the very end.  Her blue eyes are staring defiantly ahead of her, even in death. 
-Starbuck is still very dead.
+Starbuck was one of the most fearsome warriors in the crew.  She is covered in slashes and has several phaser wounds in her arms and legs. She fought tooth and nail to the very end.  Her blue eyes are staring defiantly ahead of her, even in death. \n
+Starbuck is still very dead.\n
 false
 shake
 true
