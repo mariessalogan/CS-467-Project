@@ -1,0 +1,7 @@
+heart monitor
+It drones on a constant beep as the monitor was not turned off before the patient was moved out of the bed and away from the monitor.  It’s alarm will go off until the ship loses power, a sullen reminder that most people on the ship are dead. You steel your nerves and determine not to be another corpse on the ship.\n
+NULL
+false
+NULL
+true
+medbay
