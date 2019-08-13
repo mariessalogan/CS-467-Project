@@ -1,4 +1,5 @@
-This has a picture of the captain on the front of it along with his employee ID number.  This will open any doors or safes that are locked in the ship.  This would be handy to carry around.
+security badge
+This has a picture of the captain on the front of it along with his employee ID number.  This will open any doors or safes that are locked in the ship.  This would be handy to carry around.\n
 NULL
 true
 scan
