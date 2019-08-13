@@ -1,0 +1,6 @@
+The armor is a new kevlar variant.  It has a newly discovered lacquer that protects from phaser blasts and blades.  This would be good to pick up and keep with you, in case the thing that killed Lopez is still on the ship with you.
+NULL
+true
+NULL
+true
+captain’s bathroom
