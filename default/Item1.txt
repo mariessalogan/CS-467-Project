@@ -1,6 +1,6 @@
 phaser
-The phaser is completely depleted of a charge, so you will need to find a charger before you can shoot it
-The phaser is charged and ready to protect you against any aliens that may come your way.
+The phaser is completely depleted of a charge, so you will need to find a charger before you can shoot it\n
+The phaser is charged and ready to protect you against any aliens that may come your way.\n
 true
 shoot
 true
