@@ -1,4 +1,5 @@
-As you lean in closely, you can see it is a handprint.  The light catches it and you realize that it is blood that left the mark.  Whoever left it behind must have been running with a wound to the escape pods. 
+bloody handprint
+As you lean in closely, you can see it is a handprint.  The light catches it and you realize that it is blood that left the mark.  Whoever left it behind must have been running with a wound to the escape pods.\n
 NULL
 false
 NULL
