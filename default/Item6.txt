@@ -1,0 +1,6 @@
+The goggles have a band that goes around the back of your head to hold it secure.  The goggles are a single pane of glass with a tech inside that can track heat signatures.  This will be useful against any creature who has cloaking ability, it might be smart to pick this up.
+NULL
+true
+NULL
+true
+desk
