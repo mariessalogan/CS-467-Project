@@ -1,7 +1,6 @@
-Picture
 The glass inside the frame is cracked now, and as if someone is playing a cruel joke, the fracture adds a line of separation between you and the rest of your family.  You stare at your partner’s glowing smile and look at the delighted faces on your children and you are filled with a strength, a need, to get home to them.
 NULL
 false
 NULL
 true
-Bunk
+bunk
