@@ -82,7 +82,21 @@ void Room::setFeature(Item *feature)
 
 void Room::setItem(Item *item)
 {
-  itemInventory[itemCount] = item;
+  if(this->getItemCount() < 8)
+  {
+    itemInventory[this->getItemCount()] = item;
+  }
+  else
+  {
+    for(int i = 7; i >= 0; i--)
+    {
+      if(itemInventory[i] == NULL)
+      {
+        itemInventory[i] = item;
+        break;
+      }
+    }
+  }
 }
 
 void Room::setItemCount(int count){

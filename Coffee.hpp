@@ -1,25 +1,24 @@
 /**********************************************************************************
-Class Definition - Phaser Class Definition
-This is the definition of the phaser class
+Class Definition - Consumable Class Definition
+This is the definition of the base class for the Consumable
 **********************************************************************************/
-#ifndef PHASER_H
-#define PHASER_H
+#ifndef CONSUMABLE_H
+#define CONSUMABLE_H
 #include <string>
 #include <stdio.h>
 #include <cstring>
-#include "Item.hpp"
 #include "GameState.hpp"
+#include "Item.hpp"
 
 using namespace std;
-class Item
-{
-   private:
 
+class Consumable : public Item
+{
+  private:
    
    public:
-    
-
+   
     //virtual function for actions on unique items
-    void actionFunction(GameState *G, string verb){};
+    void actionFunction(GameState* G, string verb);
 };
 #endif
