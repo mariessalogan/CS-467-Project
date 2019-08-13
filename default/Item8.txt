@@ -1,7 +1,6 @@
-Dresser
 The dresser is on its side, cracks are scattered across the cheap plastic.  A few of the drawers were pulled out and the clothes it previously contained are scattered in a pile underneath it.  Your underwear labeled “Wednesday” is stuck on the corner of one of the drawers. 
 NULL
 false
 NULL
 true
-Bunk
+bunk
