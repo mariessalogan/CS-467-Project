@@ -1,3 +1,4 @@
+uniform
 The uniforms come in different colors.  The uniform that your rank wears is a gold color.  There are red and blue colors for the other sectors of the military.  You scoff at the red shirts, neatly pressed and folded on the left, you’re glad you never had to be a part of that sector, it was a joke and had the highest turnover.
 NULL
 false
