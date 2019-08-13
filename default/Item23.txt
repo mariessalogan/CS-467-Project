@@ -1,0 +1,6 @@
+Most of the instructions are a diagram of how a phaser is built.  You never had the patience to learn this stuff, you’re not an engineer or a part of the science sector, so you just expect it to work.  The only thing you remember is that you need to have a phaser with a viable charger nearby so that it works.  You remind yourself that you will need to have a phaser and charger in your pack if you need to fight any hostiles.
+NULL
+false
+NULL
+true
+workshop
