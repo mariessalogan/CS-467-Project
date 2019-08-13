@@ -1,0 +1,9 @@
+kelvin
+Kelvin doesn’t have any noticeable marks on him that show that he was attacked or killed by some nefarious death.  In fact, he almost looks asleep.  Maybe you should shake him to see if he will wake up?\n
+You shake Kelvin to see if he’s still alive and can be woken up.  His body is limp in your hands, and you realize that he must have had a heart attack or some other type of reaction when Melvin was killed in his arms.  You hear a clinking sound and look down.  There is a key that you might need to take a closer look at.\n
+false
+shake
+true
+supply closet
+desk key
+NULL
