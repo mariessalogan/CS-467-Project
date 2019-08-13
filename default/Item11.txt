@@ -1,6 +1,6 @@
 tv
-The old tv is switched on.  They were watching historical movies, so you know immediately that Lopez was in charge of the remote.  You look up at the ancient film as the lead heroine attacks an alien in a yellow mech suit. You casually wonder how ancient people got caught up in 2d movies, the immersive holo-movies that are current now are so much more interesting. 
-The tv is off, there is a layer of dust on the tv, the break room is usually skipped by the cleaning droid because of the constant presence of relaxing crew members.
+The old tv is switched on.  They were watching historical movies, so you know immediately that Lopez was in charge of the remote.  You look up at the ancient film as the lead heroine attacks an alien in a yellow mech suit. You casually wonder how ancient people got caught up in 2d movies, the immersive holo-movies that are current now are so much more interesting. \n
+The tv is off, there is a layer of dust on the tv, the break room is usually skipped by the cleaning droid because of the constant presence of relaxing crew members.\n
 false
 turn off
 true
