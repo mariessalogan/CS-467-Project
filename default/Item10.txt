@@ -1,6 +1,6 @@
 You stare at Lopez’ face in shock.  You flash back to your last words with him… \“Why did I join? Really cadet, that’s a question you’re asking me?\” Lopez chuckles, \“Well if you want the joke-y answer, I joined because I wanted to shoot some ET’s and phone home about it. But if you want the serious answer, I joined because it was the only way to put food on the table for my family.  I live for them, and I fight for them.\”... Your eyes cloud with tears at the thought of his family, but you blink them away and stand up proud, the way he would have stood in your place.
-NULL
+Lopez is indeed dead.
 false
-NULL
+shake
 true
 break room
