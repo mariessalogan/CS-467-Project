@@ -1,0 +1,9 @@
+desk
+The desk has a locked drawer that might have something useful if you can find the desk key.  The person who owned this desk seems scattered and likely had a lot of projects going on.  There are journals with loads of scientific data and formulas.  There are coffee stains on half of the documents. \n
+You have already opened the drawer in the desk. The person who owned this desk seems scattered and likely had a lot of projects going on.  There are journals with loads of scientific data and formulas.  There are coffee stains on half of the documents. \n
+false
+open
+false
+lab
+goggles
+desk key
