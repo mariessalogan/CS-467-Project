@@ -1,5 +1,6 @@
-Captain Kirk must have recorded a message to play on loop.  You hear his voice start playing, “Firefly J234 is in distress, I repeat, Firefly J234 is in distress.  We have been boarded by a hostile extraterrestrial.  The hostile is invisible and armed. The hostile has dismantled our main power core and our ship has come to a halt with limited oxygen.  Assistance is needed.”
-There’s a return message from HQ, “Distress call received, please transmit your coordinates and any information you have gathered on the hostile. We cannot send aid until we have more information about the hostile.”
+communicator
+Captain Kirk must have recorded a message to play on loop.  You hear his voice start playing, “Firefly J234 is in distress, I repeat, Firefly J234 is in distress.  We have been boarded by a hostile extraterrestrial.  The hostile is invisible and armed. The hostile has dismantled our main power core and our ship has come to a halt with limited oxygen.  Assistance is needed.”\n
+There’s a return message from HQ, “Distress call received, please transmit your coordinates and any information you have gathered on the hostile. We cannot send aid until we have more information about the hostile.”\n
 true
 listen
 true
