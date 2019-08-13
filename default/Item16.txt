@@ -1,5 +1,5 @@
 binder
-The binder is titled: Terrestrials of Zyxx - INTEL.  Inside there is information about the terrestrials in the quadrant that we are riding through.  Some info catches your eye.  They are proficient in arms and have claws and talons that can cut through human flesh.  They are also invisible and can only be seen with thermal goggles.
+The binder is titled: Terrestrials of Zyxx - INTEL.  Inside there is information about the terrestrials in the quadrant that we are riding through.  Some info catches your eye.  They are proficient in arms and have claws and talons that can cut through human flesh.  They are also invisible and can only be seen with thermal goggles.\n
 NULL
 false
 read
