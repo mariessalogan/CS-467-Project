@@ -1,0 +1,9 @@
+coffee maker
+The coffee maker is one of the few appliances that does not have phaser holes blasted into it.  In fact, when you look closer you see that someone has placed fresh coffee grounds in a filter and into the coffee maker.  If you turn on the coffeemaker you could have a very delicious drink in a moment.  \n
+The coffee is brewed and smells amazing. You look fondly at the coffee maker, the best of all kitchen compliances, the bringer of delicious, yummy happiness. 
+false
+turn on
+true
+cafeteria
+coffee
+unknown
