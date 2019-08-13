@@ -1,0 +1,6 @@
+Mal must have been shot trying to recover Starbuck’s body.  He was a loyal man who always stood by his people.  He had personally saved several shock troops in another skirmish with a different set of aliens.  You will miss his gruff demeanor that covers up the teddy bear that he always was.
+Mal is still dead.
+false
+shake
+true
+hallway
