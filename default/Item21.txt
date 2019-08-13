@@ -1,0 +1,6 @@
+You look at the warning and it lets you know that the main power core is failing and the atmo engine cannot last much longer without intervention.  It recommends bringing the power core back online or to find an Escape pod ASAP.
+It's a warning to find the escape pod.
+false
+read
+true
+quartermaster
