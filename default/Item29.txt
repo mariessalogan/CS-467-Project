@@ -1,0 +1,7 @@
+alien
+The alien lays dead on the ground.  After his death his invisibility abilities went away and now you can see the being responsible for the death of so many friends. He is about 6 feet tall, with a long tail and blue-ish purple skin.  It reminds you of some octopus that are back in the oceans of terra firma.  It has 4 arms that end in a series of claws.  He looks vicious and built for war.  You make a mental note of all of this information because when you leave here you’ll have to report all of this to the scientists back at HQ. \n
+The alien is dead.\n
+false
+NULL
+true
+command center
