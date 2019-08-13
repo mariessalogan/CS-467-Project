@@ -1,5 +1,5 @@
 menu
-The chalkboard is decorated in different colorful words, the cooks way of trying to make the crew members excited about the usually bland food. It read:, Entree: Leeloo’s Chicken.. GOooooood or Neptuna Casserole  Sides:  Saturn’s Onion rings or pomme de terrestrials(mashed potatoes) Dessert: Moon pies and Mars bars\n
+The chalkboard is decorated in different colorful words, the cooks way of trying to make the crew members excited about the usually bland food. It read:\n Entree: Leeloo’s Chicken.. GOooooood or Neptuna Casserole \nSides:  Saturn’s Onion rings or pomme de terrestrials(mashed potatoes)\nDessert: Moon pies and Mars bars\n
 NULL
 false
 NULL
