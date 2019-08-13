@@ -1,3 +1,4 @@
+mech suit
 The suit is about 8 feet tall.  It is made from bright yellow metal and is used for loading/unloading goods, but has been used in fights before.  It can double as a suit of armor and a way to overpower a large enemy in a pinch.  Currently it’s hanging from a crane, there are phaser blast marks all over it.  It must not have been fixed after the last skirmish.  Was it laziness or was it too damaged to fix?
 Nothing happens...
 false
