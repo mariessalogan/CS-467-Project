@@ -1,0 +1,9 @@
+safe
+The safe is small, and used to contain the phaser chargers.  There is some security measure that was passed that all ammo needs to be in a safe when stored in the same room as phasers or rifles.  If you open it, there might be a charger inside to charge a phaser.\n
+ The safe has been opened already.  The badge reader is still shining green.\n
+ false
+ open
+ false
+ armory
+ charger
+ security badge
