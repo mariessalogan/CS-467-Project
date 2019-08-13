@@ -1,0 +1,7 @@
+surgical supplies
+The tray is stainless steel and has a paper cloth over top of it. On top of the cloth is a scalpel, some needles, and surgical thread.  The doctors  must have been preparing for some sort of surgery when they were interrupted. \n
+NULL
+false
+NULL
+true
+medbay
