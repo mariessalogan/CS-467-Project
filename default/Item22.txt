@@ -1,4 +1,5 @@
-You pick up the blowtorch and mess with the trigger.  “ouch!” you yell as you burn yourself and sheepishly put it back down.  You’re glad no one was around to see that.
+blowtorch
+You pick up the blowtorch and mess with the trigger.  “ouch!” you yell as you burn yourself and sheepishly put it back down.  You’re glad no one was around to see that.\n
 NULL
 false
 NULL
