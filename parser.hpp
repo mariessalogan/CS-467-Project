@@ -21,8 +21,8 @@ static const vector<string> verbs =
 		"scan", "shoot", "fire", "listen"};
 
 static const vector<string> nouns = 
-		{"employee manual", "phaser", "armor", "radio", "security badge", "desk key",
-		"thermal goggles", "charger", "dresser", "photo", "lopez", "television", "bar", "cd",
+		{"employee manual", "phaser", "armor", "communicator", "security badge", "desk key",
+		"thermal goggles", "charger", "dresser", "picture", "lopez", "television", "bar", "cd",
 		"scanner", "dryer", "mirror", "menu", "coffee maker", "coffee", "button",
 		"oxygen meter", "chair", "binder", "starbuck", "mal", "safe", "mech suit", "blowtorch",
 		"uniform", "beaker", "desk", "steam pipe", "kirk", "transporter", "alien", 

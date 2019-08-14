@@ -507,7 +507,7 @@ vector<string> validateCombo(vector<string> &commands) {
 	//take items
 		{"take", "phaser"},
 		{"take", "armor"},
-		{"take", "radio"},
+		{"take", "communicator"},
 		{"take", "employee manual"},
 		{"take", "security badge"},
 		{"take", "desk key"},
@@ -516,7 +516,7 @@ vector<string> validateCombo(vector<string> &commands) {
 	//drop items
 		{"drop", "phaser"},
 		{"drop", "armor"},
-		{"drop", "radio"},
+		{"drop", "communicator"},
 		{"drop", "employee manual"},
 		{"drop", "security badge"},
 		{"drop", "desk key"},
@@ -564,7 +564,7 @@ vector<string> validateCombo(vector<string> &commands) {
 		{"shake", "melvin"},
 	//listen
 		{"listen", "cd"},
-		{"listen", "radio"}
+		{"listen", "communicator"}
 	};
 
 	dicto::iterator pos;
