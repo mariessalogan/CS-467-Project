@@ -542,11 +542,11 @@ vector<string> validateCombo(vector<string> &commands) {
 		{"push", "button"},
 		{"push", "desk"},
 	//turn on 
-		{"turn on", "television"},
+		{"turn on", "tv"},
 		{"turn on", "mech suit"},
 		{"turn on", "coffee maker"},
 	//turn off
-		{ "turn off", "television" },
+		{ "turn off", "tv" },
 		{ "turn off", "mech suit" },
 		{ "turn off", "coffee maker" },
 	//drink
@@ -562,6 +562,8 @@ vector<string> validateCombo(vector<string> &commands) {
 		{"shake", "lopez"},
 		{"shake", "kelvin"},
 		{"shake", "melvin"},
+		{"shake", "starbuck"},
+		{"shake", "mal"},
 	//listen
 		{"listen", "cd"},
 		{"listen", "communicator"}
