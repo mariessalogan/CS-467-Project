@@ -13,12 +13,12 @@ void Consumable::actionFunction(GameState * G, string verb)
 {
 	
 	//if conditionMet then Consumable was already drunk
-	if(this->getConditionMet() == false)
+	if(this->getConditionMet() == true)
 	{
 		int oxygen = 5 + G->getOxygen();
 		this->setConditionMet(true);
 		G->setOxygen(oxygen);
-		if(G->getPosition()->getName() == "Holodeck")
+		if(G->getPosition()->getName() == "holodeck")
 		{
 			cout << "You press the button and it turns the Holodeck off.  You can hear the atmo engine powering up.\n";
 			G->getPosition()->setLongDesc("The room is dark and dim without the holodeck projection.  The walls are a simple white color, boring and uninteresting.  The kill switch is still depressed from when you pressed it.\n");
@@ -31,7 +31,7 @@ void Consumable::actionFunction(GameState * G, string verb)
 	}
 	else
 	{
-		if(G->getPosition()->getName() == "Holodeck")
+		if(G->getPosition()->getName() == "holodeck")
 		{
 			cout << "You have already turned the holodeck off.\n";
 		}
