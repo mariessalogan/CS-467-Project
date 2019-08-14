@@ -4,4 +4,4 @@ NULL
 true
 scan
 true
-strategy room
+inventory

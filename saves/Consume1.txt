@@ -4,4 +4,4 @@ The phaser is charged and ready to protect you against any aliens that may come 
 true
 shoot
 true
-break room
+inventory

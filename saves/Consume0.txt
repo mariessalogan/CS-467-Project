@@ -4,4 +4,4 @@ NULL
 true
 read
 true
-bunk
+inventory

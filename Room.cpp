@@ -217,10 +217,13 @@ string Room::getWestName(){
 Item * Room::getFeature(string featureName){
 //check if features are in Room
   for(int i = 0; i < 3; i++){
-    if(featureName == features[i]->getName()){
-      return features[i];
+    if(features[i] != NULL){
+      if(featureName == features[i]->getName()){
+        return features[i];
+      }
     }
   }
+  
   return NULL;
 }
 
