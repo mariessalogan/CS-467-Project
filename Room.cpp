@@ -17,6 +17,7 @@ Room::Room(){
   itemInventory[0] = NULL;
   features[0] = NULL;
   features[1] = NULL;
+  features[2] = NULL;
   north = NULL;
   east = NULL;
   west = NULL;
@@ -74,9 +75,11 @@ void Room::setFeature(Item *feature)
   {
     features[0] = feature;
   }
-  else
-  {
+  else if(features[1] == NULL){
     features[1] = feature;
+  }
+  else{
+    features[2] = feature;
   }
 }
 
@@ -213,7 +216,7 @@ string Room::getWestName(){
 
 Item * Room::getFeature(string featureName){
 //check if features are in Room
-  for(int i = 0; i < 2; i++){
+  for(int i = 0; i < 3; i++){
     if(featureName == features[i]->getName()){
       return features[i];
     }
@@ -259,7 +262,7 @@ void Room::printItemNames(){
 //This may need to be reworked 
 void Room::printFeatureNames(){
 
-  for(int i = 0 ; i < 2 ; i++){
+  for(int i = 0 ; i < 3 ; i++){
     if(features[i] != NULL){      
       cout << "You see a " << features[i]->getName() << ". " << endl;
     }

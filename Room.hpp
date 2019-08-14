@@ -23,7 +23,7 @@ class Room
     bool visited;
     int itemCount;
     Item * itemInventory[8];
-    Item * features[2];
+    Item * features[3];
     Room * north;
     Room * east;
     Room * south;

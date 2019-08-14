@@ -1470,11 +1470,9 @@ void GameState::enactVerb(vector<string> parsedInput, GameState * game) {
 	else if(verb == "invalid"){
 		cout << "You cannot do that!" << endl;
 	}
-	//Check with Hamiltion what the passed verb will be to call 
-	//unique object functions. Check with Mareissa on how this is
-	//called in item.
-	else if (verb == "act") {
-
+	
+	else{
+		_itemAction(verb, noun, game);
 	}
 
 }
