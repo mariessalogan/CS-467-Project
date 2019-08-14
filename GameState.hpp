@@ -66,6 +66,7 @@ class GameState{
 		int getInventorySize();							//Return number of items in inventory
 		
 		//Print functions
+		void textWrap(string output);
 		void printIntro();								//Print game intro for new game
 		void printExits();								//Print names of adjacent rooms for exits. 
 		void printWinDesc();							//Print game won message

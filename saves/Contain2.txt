@@ -3,6 +3,6 @@ The safe is small, and used to contain the phaser chargers.  There is some secur
 The safe has been opened already.  The badge reader is still shining green.
 false
 open
-false
+true
 armory
-charger
+security badge

@@ -247,30 +247,22 @@ int Room::getItemCount(){
 
 //This may need to be reworked 
 void Room::printItemNames(){
-  
+  cout << "Room Items:" << endl;
   if(itemCount != 0){
     for(int i = 0 ; i < 8 ; i++){
       if(itemInventory[i] != NULL){
-        cout << "You see a " << itemInventory[i]->getName() << ". " ;
+        cout << "    *" << itemInventory[i]->getName() << endl ;
       }
     }
   }
-  else{
-    cout << "No item available" << endl;
-  }
-
- 
 }
 
 //This may need to be reworked 
 void Room::printFeatureNames(){
-
+	cout << "Room Features:" << endl;
   for(int i = 0 ; i < 3 ; i++){
     if(features[i] != NULL){      
-      cout << "You see a " << features[i]->getName() << ". " << endl;
-    }
-    else{
-      cout << "No feature available" << endl;
+      cout << "    *" << features[i]->getName() << endl;
     }
   }
 }

@@ -959,29 +959,59 @@ int GameState::getInventorySize(){
 /******************************************************************************************************************/
 //Print functions
 /******************************************************************************************************************/
+
+//Sets output to print to 80 characters long, inserting newlines were needed to wrap text appropriately. 
+//Code adapted from http://alexrodgers.co.uk/2012/08/09/c-word-wrap-for-console-output-tutorial/
+void GameState::textWrap(string output){
+	
+	//Sets the message width
+	unsigned int consoleBuffer = 80;
+	
+	for(unsigned int i = 0 ; i < (output.length() - 1) ; i++){
+		if((i % consoleBuffer) == 0){
+				
+			//If last character is white space, insert a new line
+			if(output[i] == ' '){
+				output[i] = '\n';
+			}
+			//Else backtrace until while space is found and insert new line.
+			else{
+				for( int j = i ; j > 0 ; j--){
+					if(output[j] == ' '){
+						output[j] = '\n';
+						break;
+					}
+				}
+			}
+		} 
+	}
+	
+	cout << output ;
+	return;
+}
+
 //Print game intro.
 void GameState::printIntro() {
-	cout << intro << endl;
+	textWrap(intro);
 	return;
 }
 
 //Print adjacent room names to inform player of exits
 void GameState::printExits(){
 	
-	cout << "\n";
-	cout << "The room exits are:" << endl ; 
+	cout << "Exits:" << endl ; 
 
 	if(position->getNorth() != NULL){
-		cout << "North to the " << position->getNorth()->getName() << endl;
+		cout << "    *North: " << position->getNorth()->getName() << endl;
 	}
 	if(position->getEast() != NULL){
-		cout << "East to the " << position->getEast()->getName() << endl;
+		cout << "    *East: " << position->getEast()->getName() << endl;
 	}
 	if(position->getSouth() != NULL){
-		cout << "South to the " << position->getSouth()->getName() << endl;
+		cout << "    *South: " << position->getSouth()->getName() << endl;
 	}
 	if(position->getWest() != NULL){
-		cout << "West to the " << position->getWest()->getName() << endl;
+		cout << "    *West: " << position->getWest()->getName() << endl;
 	}
 	cout << endl;
 
@@ -990,13 +1020,13 @@ void GameState::printExits(){
 
 //Print game won description.
 void GameState::printWinDesc() {
-	cout << winDesc << endl;
+	textWrap(winDesc);
 	return;
 }
 
 //Print game lost / game over description
 void GameState::printLossDesc() {
-	cout << lossDesc << endl;
+	textWrap(lossDesc);
 	return;
 }
 
@@ -1005,11 +1035,15 @@ void GameState::printLossDesc() {
 void GameState::printCurRoomDesc() {
 
 	if (position->getVisited() == false) {
-		cout << "\n" << position->getLongDesc() << endl;
+		cout << endl ;
+		textWrap(position->getLongDesc());
+		cout << endl;
 		position->setVisited(true);
 	}
 	else {
-		cout << "\n" << position->getShortDesc() << endl;
+		cout << endl;
+		textWrap(position->getShortDesc());
+		cout << endl;
 	}
 
 	cout << endl;
@@ -1175,7 +1209,8 @@ bool GameState::_checkCurrentRoom(string noun){
 
 //Prints long room description
 void GameState::_look(){
-	cout << position->getLongDesc() << endl;
+	textWrap(position->getLongDesc());
+	cout << endl;
 	return;
 }
 
@@ -1186,7 +1221,6 @@ void GameState::_look(){
 void GameState::_lookAt(string noun){
 
 	Item * lookedItem = NULL;
-	string successLook = "You look at the ";
 	string failedLook = "You cannot look at that.";
 
 	//Check if noun is a feature.
@@ -1204,8 +1238,8 @@ void GameState::_lookAt(string noun){
 
 	//Print corresponding result
 	if(lookedItem != NULL){
-		cout << successLook << noun << endl;
-		cout << lookedItem->getDesc1() << endl;
+		textWrap(lookedItem->getDesc1()) ;
+		cout << endl;
 	}
 	else{
 		cout << failedLook << endl;
@@ -1272,7 +1306,7 @@ void GameState::_takeItem(string noun){
 		//Change the location name in the item. 
 		itemToTake->setLocationName("inventory");
 
-		cout << "You picked up the " << noun << endl;
+		cout << "You picked up the " << noun << "." << endl;
 
 		itemToTake = NULL;
 	}
@@ -1311,7 +1345,7 @@ void GameState::_dropItem(string noun){
 		//Change the location name in the item to the current room name.
 		itemToDrop->setLocationName(position->getName());
 
-		cout << "You dropped the " << noun << endl;
+		cout << "You dropped the " << noun << "." << endl;
 
 		itemToDrop = NULL;
 	}
@@ -1322,18 +1356,22 @@ void GameState::_dropItem(string noun){
 	return;
 }
 
-//Print the list of acceptable verbs to the user. 0
+//Print help message along with list of game commands.
 void GameState::_help(){
 
 	int i;
+	cout << "---------------------Space Escape Help------------------------" << endl;
+	cout << "*Reach the escape pod before the oxygen meter reaches zero!" << endl;
+	cout << "*Items can be picked up and can interact with certain features." << endl;
+	cout << "*Features are interactive but cannot be picked up. Some features " << endl;
+	cout << "may require certain items to further the game." << endl;
+	cout << endl;
+	cout << "*Here is a list of acceptable game commands:" << endl;
 	
-	cout << "Here is a list of acceptable game commands:" << endl;
-	
-	for(i = 0 ; i < 19 ; i++){
-		cout << verbList[i] << ", ";
+	for(i = 0 ; i < 20 ; i++){
+		cout << "    *" << verbList[i] << endl;
 	}
-	cout << verbList[19]<< "." << endl;
-
+	cout << "--------------------------------------------------------------" << endl << endl;
 	return;
 }
 
@@ -1342,12 +1380,12 @@ void GameState::_printInventory(){
 
 	int i;
 
-	cout << "You have the following items in inventory:" << endl;
+	cout << "Inventory:" << endl;
 
 	//Check for holes in inventory array due to item drops. 
 	for(i = 0 ; i < 8 ; i++){
 		if(inventory[i] != NULL){
-			cout << inventory[i]->getName() << endl;
+			cout << "    *" <<inventory[i]->getName() << endl;
 		}
 	}
 
@@ -1366,18 +1404,21 @@ void GameState::_saveGame() {
 void GameState::_quitGame() {
 	
 	cout << "Are you sure you want to quit? Y/n" << endl;
-	char anwser; 
+	char anwser;
+	string input ;
 	bool invalidResp = true;
 
 	while(invalidResp){
 		
 		cout << "\n>";
-		cin >> anwser;
+		getline(cin, input);
+		
+		anwser = input[0];
 
 		if(anwser == 'Y'){
-		cout << "Thanks for playing!" << endl;
-		gameQuit = true;
-		invalidResp = false;
+			cout << "Thanks for playing!" << endl;
+			gameQuit = true;
+			invalidResp = false;
 		}
 		else if(anwser == 'n'){
 			invalidResp = false;

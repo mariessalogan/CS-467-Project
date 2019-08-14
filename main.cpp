@@ -94,12 +94,9 @@ int main() {
 		game->printCurRoomDesc();
 
 		//PRINT STATEMENT FOR DEBUGGING
-		cout << "Current room Name: " << game->getPosition()->getName() << endl;
-		cout << "O2 Level: " << game->getOxygen() << endl;
-		
-		//game->printItemsForAllRooms();
-		//game->printAllItems();
-
+		cout << "---------------Stats---------------" << endl;
+		cout << "Location: " << game->getPosition()->getName() << endl;
+		cout << "Oxygen: " << game->getOxygen() << "%" << endl;
 		cout << endl;
 		game->getPosition()->printItemNames();
 		cout << endl;
@@ -123,7 +120,8 @@ int main() {
 		//Check O2 Stat
 		if(game->getOxygen() <= 0){
 			cout << "ALERT ALERT!!! OXYGEN LEVELS NOW TOO LOW TO MAINTAIN LIFE SUPPORT!!!" << endl << endl;
-			cout << "Unable to escape in time you slowly lose conciousness and die as the last molecules of oxygen vent from the ship." << endl;
+			string o2Dead = "Unable to escape in time you slowly lose conciousness and die as the last molecules of oxygen vent from the ship.";
+			game->textWrap(o2Dead);
 			game->setGameLost(true);
 		}
 
@@ -147,20 +145,21 @@ int main() {
 			}
 
 			if(requirements == 4){
-				cout << "You enter the bright room of the command center. You see the captain’s chair in the center of the room, and the pilots desk is filled with dinosaurs  One of the T-rexes looked like he had suddenly but inevitably betrayed a stegosaurus. You see movement on the left side of the room thanks to your thermal goggles. As soon as you notice the heat signature of the alien, it lands a blow across your chest. Luckily you are wearing the armor that you found earlier.  His claw bounces off the armor, and you swing your phaser up in response. You squeeze the trigger twice, just as you were trained and they both land squarely between the alien’s eyes. The alien falls over dead." << endl;
+				string commandCenterWin = "You enter the bright room of the command center. You see the captain’s chair in the center of the room, and the pilots desk is filled with dinosaurs  One of the T-rexes looked like he had suddenly but inevitably betrayed a stegosaurus. You see movement on the left side of the room thanks to your thermal goggles. As soon as you notice the heat signature of the alien, it lands a blow across your chest. Luckily you are wearing the armor that you found earlier.  His claw bounces off the armor, and you swing your phaser up in response. You squeeze the trigger twice, just as you were trained and they both land squarely between the alien’s eyes. The alien falls over dead.";
+				game->textWrap(commandCenterWin);
 			}
 			else{
-				cout << "You enter the bright room of the command center. You see the captain’s chair in the center of the room, and the pilots desk is filled with dinosaurs. One of the T-rexes looked like he had suddenly but inevitably betrayed a stegosaurus. You are suddenly knocked back and there is a white hot pain across your chest. You look down and see blood gushing from your chest, it looks like a claw made the wound. “There must be an alien in here,” is your last thought as you fade away, your last moments spent in confusion." << endl;
+				string commandCenterLoss = "You enter the bright room of the command center. You see the captain’s chair in the center of the room, and the pilots desk is filled with dinosaurs. One of the T-rexes looked like he had suddenly but inevitably betrayed a stegosaurus. You are suddenly knocked back and there is a white hot pain across your chest. You look down and see blood gushing from your chest, it looks like a claw made the wound. “There must be an alien in here,” is your last thought as you fade away, your last moments spent in confusion.";
+				game->textWrap(commandCenterLoss);
 				game->setGameLost(true);
 			}
 			
 		}
 		//Check if in the escape pod
 		else if(game->getPosition()->getName() == "escape pod"){
-
-			cout << "Safety at last! You stumble into the escape pod, where there is an ergonomic chair that will fold out into a hibernation bed when activated. Someone has thoughtfully placed a bottle of vodka with a glass next to the chair, likely a soldier was using the pod as a room for some private drinking. You look to the right and see a porthole that shows the vast expanse of space. You can see a planet surrounded by four moons far away, otherwise it’s a black blanket dotted with distant stars. You breathe a sigh of relief, sit in the chair and press the button to activate the escape pod.  You sip at the vodka as you watch the spaceship slowly get smaller out of the porthole. \n";
-	
-
+			
+			string escapePodWin = "Safety at last! You stumble into the escape pod, where there is an ergonomic chair that will fold out into a hibernation bed when activated. Someone has thoughtfully placed a bottle of vodka with a glass next to the chair, likely a soldier was using the pod as a room for some private drinking. You look to the right and see a porthole that shows the vast expanse of space. You can see a planet surrounded by four moons far away, otherwise it’s a black blanket dotted with distant stars. You breathe a sigh of relief, sit in the chair and press the button to activate the escape pod.  You sip at the vodka as you watch the spaceship slowly get smaller out of the porthole.";
+			game->textWrap(escapePodWin); 
 			game->setGameWon(true);
 		}
 

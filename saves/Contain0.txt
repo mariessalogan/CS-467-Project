@@ -5,4 +5,4 @@ false
 open
 false
 captain's quarters
-armor
+security badge
