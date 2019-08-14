@@ -269,8 +269,8 @@ vector<string> concatDoubleMovements(vector <string> &commands) {
 		return commands;
 	}
 
-	if (commands[index] == "quarters" && commands[index - 1] == "captains") {
-		commands[index - 1] = "captains quarters";
+	if (commands[index] == "quarters" && commands[index - 1] == "captain's") {
+		commands[index - 1] = "captain's quarters";
 		commands.erase(commands.begin() + index);
 		return commands;
 	}
@@ -319,7 +319,7 @@ int getDoubleExitIndex(vector<string> commands) {
 	int foundIdx = -1;
 
 	vector<string> doubleExits = {
-		"quarters", "room", "pod", "closet"
+		"quarters", "room", "pod", "closet", "center"
 	};
 
 	for (size_t i = 0; i < commands.size(); i++) {
