@@ -27,11 +27,12 @@ static const vector<string> nouns =
 		"oxygen meter", "chair", "binder", "starbuck", "mal", "safe", "mech suit", "blowtorch",
 		"uniform", "beaker", "desk", "steam pipe", "kirk", "transporter", "alien", 
 		"screen", "melvin", "kelvin", "surgical supplies", "heart monitor", "port", "alcohol", "beaker",
+		"bathroom"
 		};
 
 static const vector<string> exits =
 		{"north", "south", "east", "west", "bunk", "break room", "captain's quarters",
-		"bathroom", "cafeteria", "holodeck", "strategy room", "armory", "quartermaster",
+		"cafeteria", "holodeck", "strategy room", "armory", "quartermaster",
 		"workshop", "lab", "corridor", "transporter room", "command center", "supply closet",
 		"medbay", "escape pod", "hallway"};
 

@@ -529,6 +529,7 @@ vector<string> validateCombo(vector<string> &commands) {
 		{"open", "binder"},
 		{"open", "safe"},
 		{"open", "desk"},
+		{"open", "bathroom"},
 	//close
 		{"close", "employee manual"},
 		{"close", "dresser" },
