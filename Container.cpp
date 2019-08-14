@@ -34,13 +34,14 @@ string Container::getRequirement()
 void Container::actionFunction(GameState * G, string verb)
 {
 	
-	if(this->getConditionMet() == true)
+	if(this->getConditionMet() == false)
 	{
-		if(this->getName() == "Coffeemaker")
+		cout << "You need " << this->getRequirement() << "\n\n";
+		if(this->getName() == "coffee maker")
 		{
 			cout << "There is no more coffee.\n";
 		}
-		else if(G->_checkInventory(requirement) == NULL)
+		else if(G->_checkInventory(this->getRequirement()) == NULL)
 		{
 			
 			
@@ -58,7 +59,7 @@ void Container::actionFunction(GameState * G, string verb)
 	}
 	else
 		{
-			if(this->getName() == "Coffeemaker")
+			if(this->getName() == "coffee maker")
 			{
 				G->getPosition()->setItemToPointer(storedItem);
 				
