@@ -5,16 +5,20 @@
 * Class: CS 467 Capstone Summer '19
 * Description: Header file for the GameState class. 
 ******************************************************************************/
-#ifndef GAMESTATE_H
-#define GAMESTATE_H
+#ifndef GAMESTATE_HPP
+#define GAMESTATE_HPP
 #include "Room.hpp"									
 #include "Item.hpp"
+#include "Consumable.hpp"
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <unistd.h>
+#include <cstdlib>
+
+class Container;
 
 using namespace std;
 
@@ -22,6 +26,9 @@ class GameState{
 
 	private: 
 		Room * ship [17];
+		Item * regularItems [33];
+		Container * containers[5];
+		Item * consumables[2];
 		Room * position;
 		int oxygen; 
 		bool gameWon;
@@ -42,8 +49,12 @@ class GameState{
 		void linkRooms();									//Connect all room exits.
 		void readInGameState(char * path);
 		void readInRooms(char * path);
+		void readInItems(char * path);
+		void setItemLocations();
 		void saveGameState();
 		void saveRooms();
+		void saveItems();
+
 		
 		//Getter functions
 		Room * getShipLocal(int roomNum);				//Return a pointer to a ship location specified by the roomNum;
@@ -60,8 +71,10 @@ class GameState{
 		void printWinDesc();							//Print game won message
 		void printLossDesc();							//Print game loss message
 		void printCurRoomDesc();						//Prints long or short desc for room depending on room.visted bool. Sets visited to true after printing the long desc.
-		void printItems();								//Prints all the item descriptions for a room
-		void printFeatures();							//Prints all the feature descriptions for a room. 
+		void printRoomItems();								//Prints all the item descriptions for a room
+		void printRoomFeatures();							//Prints all the feature descriptions for a room. 
+		void printItemsForAllRooms();
+		void printAllItems();
 
 		//Setter / Modifier functions
 		void setPosition(Room * newRoom);				//Set position to new room
@@ -92,8 +105,8 @@ class GameState{
 		void _printInventory();							//Prints names of items in inventory
 		void _saveGame();
 		void _quitGame();
-		void _itemAction(string verb, string noun, GameState game);	//Calls unique function of item / feature
-		void enactVerb(vector<string> parsedInput);		//Main switch function for receiving input from parser
+		void _itemAction(string verb, string noun, GameState * game);	//Calls unique function of item / feature
+		void enactVerb(vector<string> parsedInput, GameState * game);		//Main switch function for receiving input from parser
 		
 	};
 

@@ -6,4 +6,3 @@ open
 false
 armory
 charger
-security badge

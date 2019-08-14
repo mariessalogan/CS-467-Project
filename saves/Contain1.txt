@@ -6,4 +6,3 @@ turn on
 true
 cafeteria
 coffee
-NULL

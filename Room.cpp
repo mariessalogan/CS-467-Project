@@ -82,20 +82,19 @@ void Room::setFeature(Item *feature)
 
 void Room::setItem(Item *item)
 {
-  if(this->getItemCount() < 8)
+  int idx = -1;
+  if(itemCount < 8)
   {
-    itemInventory[this->getItemCount()] = item;
-  }
-  else
-  {
-    for(int i = 7; i >= 0; i--)
-    {
-      if(itemInventory[i] == NULL)
-      {
-        itemInventory[i] = item;
-        break;
+    for(int i = 7 ; i >= 0 ; i--){
+      if(itemInventory[i] == NULL){
+        idx = i;
       }
     }
+    itemInventory[idx] = item;
+    itemCount++; 
+  }
+  else{
+    cout << "There is no room to drop the item in this room!" << endl;
   }
 }
 
@@ -249,7 +248,9 @@ void Room::printItemNames(){
         cout << "You see a " << itemInventory[i]->getName() << ". " ;
       }
     }
-    cout << endl;
+  }
+  else{
+    cout << "No item available" << endl;
   }
 
  
@@ -259,8 +260,12 @@ void Room::printItemNames(){
 void Room::printFeatureNames(){
 
   for(int i = 0 ; i < 2 ; i++){
-    if(itemInventory[i] != NULL){      
-      cout << "You see a " << features[i]->getName() << ". ";
+    if(features[i] != NULL){      
+      cout << "You see a " << features[i]->getName() << ". " << endl;
+    }
+    else{
+      cout << "No feature available" << endl;
     }
   }
 }
+

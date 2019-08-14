@@ -6,12 +6,17 @@
 * Description: Implementation of GameState class and functions. 
 ******************************************************************************/
 #include "GameState.hpp"
+#include "Room.hpp"
+#include "Item.hpp"
+#include "Consumable.hpp"
+#include "Container.hpp"
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <unistd.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -22,34 +27,32 @@ using namespace std;
 //Demo Constructor
 GameState::GameState(){
 
-	//Create blank rooms
-	for(int i = 0 ; i < 17 ; i++){
+	int i;
 
+	//Create blank rooms
+	for(i = 0 ; i < 17 ; i++){
+		
 		ship[i] = new Room();
-		/*
-		if(i == 3){
-			ship[i] = new Holodeck();
-		}
-		else if(i == 12){
-			ship[i] = new CommandCenter();
-		}
-		else{
-			ship[i] = new Room();
-		}
-		*/
+	}
+
+	//Create blank regular items
+	for(i = 0 ; i < 33 ; i++){
+		regularItems[i] = new Item();
+	}
+
+	//Create blank containers
+	for(i = 0 ; i < 5 ; i ++){
+		containers[i] = new Container;
+	}
+
+	for(i = 0 ; i < 2 ; i ++){
+		consumables[i] = new Consumable;
 	}
 
 	//Link rooms together.
 	linkRooms();
 
-	//Room * testRoom = new Room();
-	//Item * testItem = new Item();
-
-	//position = testRoom;
-	//ship[1] = testRoom;
-
-	//testRoom->setItemToPointer(testItem);
-
+	
 	oxygen = -1; 
 	gameWon = false;
 	gameQuit = false;
@@ -76,8 +79,8 @@ GameState::GameState(){
 	verbList[19] = "listen";
 
 	//Changed by Mariessa except loss desc.  We may need to have 2? one for loss of oxygen and the other for death by alien
-	intro = "You are a member of the Elite Space Force for the Federated Alliance.  A month ago you departed from the capital to explore the uncharted reaches of the galaxy. Your mission was to search for other cultures and create diplomatic relations. Last night was your turn for night watch. After a normal night, you retired to your bed at 0500 hours. All is well... Or so you thought.\n" ;
-	winDesc = "You have successfully escaped the space ship.  You take a sip of the vodka, and stare out the window at the rapidly diminishing space ship you once called home. The lights on it flicker and go out and you're left staring at the vast emptiness of space.  You put on the hibernation mask, take a deep breath and go into hibernation until you arrive back at the capital. You are safe.\n";
+	intro = "You are a member of the Elite Space Force for the Federated Alliance. A month ago you departed from the capital to explore the uncharted reaches of the galaxy. Your mission was to search for other cultures and create diplomatic relations. Last night was your turn for night watch. After a normal night, you retired to your bed at 0500 hours. All is well... Or so you thought.\n" ;
+	winDesc = "Safety at last! You stumble into the escape pod, where there is an ergonomic chair that will fold out into a hibernation bed when activated. Someone has thoughtfully placed a bottle of vodka with a glass next to the chair, likely a soldier was using the pod as a room for some private drinking. You look to the right and see a porthole that shows the vast expanse of space. You can see a planet surrounded by four moons far away, otherwise it’s a black blanket dotted with distant stars. You breathe a sigh of relief, sit in the chair and press the button to activate the escape pod. You sip at the vodka as you watch the spaceship slowly get smaller out of the porthole. \n";
 	lossDesc = "You Lost, haha!";
 
 	for(int i = 0 ; i < 8 ; i++){
@@ -108,9 +111,23 @@ GameState::GameState(){
 GameState::~GameState(){
 	
 
-	//Free allocated rooms.
-	for(int i = 0 ; i < 17 ; i++){
+	int i;
+	
+	for(i = 0 ; i < 17 ; i++){
 		free(ship[i]);
+	}
+
+	for(i = 0 ; i < 33 ; i++){
+		free(regularItems[i]);
+	}
+
+
+	for(i = 0 ; i < 5 ; i ++){
+		free(containers[i]);
+	}
+
+	for(i = 0 ; i < 2 ; i ++){
+		free(consumables[i]);
 	}
 
 }
@@ -236,6 +253,8 @@ void GameState::readInRooms(char * path){
 	string longDesc;
 	string shortDesc;
 	string visitedString;
+	string dead = "Null";
+	string pushed = "Null";
 	string filePrefix = "Room";
 	string fileSuffix = ".txt";
 	string fileName;
@@ -268,6 +287,7 @@ void GameState::readInRooms(char * path){
 			ship[i]->setVisited(false);
 		}
 
+		
 		//Reset file name for next iteration
 		fileName = "";
 
@@ -281,15 +301,324 @@ void GameState::readInRooms(char * path){
 	}
 
 }
-/*
-void GameState::readInItems(){
+
+void GameState::readInItems(char * path){
+
+	int i;
+	int success = chdir(path);
+
+	if(success == -1){
+		cout << "error in chdir readInItems" << endl;
+	}
+
+	string name; 
+	string desc1; 
+	string desc2; 
+	string pickup; 
+	string secondVerb;
+	string conditionMet;
+	string locationName;
+	string requirement;
+	fstream inputFile;
+
+	string itemPrefix = "Item";
+	string containPrefix = "Contain";
+	string consumePrefix = "Consume";
+	string suffix = ".txt";
+	string fileName = "";
+
+	//Populate regular items array.
+	for(i = 0 ; i < 33 ; i++){
+		
+		fileName = itemPrefix + to_string(i) + suffix; 
+		
+		inputFile.open(fileName);
+
+		//Get file contents
+		getline(inputFile, name);
+		getline(inputFile, desc1);
+		getline(inputFile, desc2);
+		getline(inputFile, pickup);
+		getline(inputFile, secondVerb);
+		getline(inputFile, conditionMet);
+		getline(inputFile, locationName);
+
+		//Set data in item
+		regularItems[i]->setName(name);
+		regularItems[i]->setDesc1(desc1);
+		regularItems[i]->setDesc2(desc2);
+
+		if(pickup == "true"){
+			regularItems[i]->setPickup(true);
+		}
+		else if(pickup == "false"){
+			regularItems[i]->setPickup(false);
+		}
+
+		regularItems[i]->setSecondVerb(secondVerb);
+
+		if(conditionMet == "true"){
+			regularItems[i]->setConditionMet(true);
+		}
+		else if(conditionMet == "false"){
+			regularItems[i]->setConditionMet(false);
+		}
+
+		regularItems[i]->setLocationName(locationName);
+
+		fileName = "";
+		
+		inputFile.close();
+	}
+
+	//Populate consumables array.
+	for(i = 0 ; i < 2 ; i++){
+		
+		fileName = consumePrefix + to_string(i) + suffix; 
+		
+		inputFile.open(fileName);
+
+		//Get file contents
+		getline(inputFile, name);
+		getline(inputFile, desc1);
+		getline(inputFile, desc2);
+		getline(inputFile, pickup);
+		getline(inputFile, secondVerb);
+		getline(inputFile, conditionMet);
+		getline(inputFile, locationName);
+
+		//Set data in item
+		consumables[i]->setName(name);
+		consumables[i]->setDesc1(desc1);
+		consumables[i]->setDesc2(desc2);
+
+		if(pickup == "true"){
+			consumables[i]->setPickup(true);
+		}
+		else if(pickup == "false"){
+			consumables[i]->setPickup(false);
+		}
+
+		consumables[i]->setSecondVerb(secondVerb);
+
+		if(conditionMet == "true"){
+			consumables[i]->setConditionMet(true);
+		}
+		else if(conditionMet == "false"){
+			consumables[i]->setConditionMet(false);
+		}
+
+		consumables[i]->setLocationName(locationName);
+
+		fileName = "";
+		
+		inputFile.close();
+	}
+
+	//Populate containers
+	for(i = 0 ; i < 5 ; i++){
+		fileName = containPrefix + to_string(i) + suffix;
+
+		inputFile.open(fileName);
+
+		//Get file contents
+		getline(inputFile, name);
+		getline(inputFile, desc1);
+		getline(inputFile, desc2);
+		getline(inputFile, pickup);
+		getline(inputFile, secondVerb);
+		getline(inputFile, conditionMet);
+		getline(inputFile, locationName);
+		getline(inputFile, requirement);
+
+
+		containers[i]->setName(name);
+		containers[i]->setDesc1(desc1);
+		containers[i]->setDesc2(desc2);
+
+		if(pickup == "true"){
+			containers[i]->setPickup(true);
+		}
+		else if(pickup == "false"){
+			containers[i]->setPickup(false);
+		}
+
+		containers[i]->setSecondVerb(secondVerb);
+
+		if(conditionMet == "true"){
+			containers[i]->setConditionMet(true);
+		}
+		else if(conditionMet == "false"){
+			containers[i]->setConditionMet(false);
+		}
+
+		containers[i]->setLocationName(locationName);
+		containers[i]->setRequirement(requirement);
+
+		fileName = "";
+		
+		inputFile.close();
+
+	}
+
+	//Return cwd to main game folder. 
+	success = chdir("..");
+	if(success == -1){
+		cout << "error in chdir readInItems." << endl;
+	}
 
 }
 
-void GameState::setItemLocation(){
+//Sets item locations for regular item array, containers, and consumables. 
+//Items must already be populated with file data before this function is called!
+void GameState::setItemLocations(){
+
+	int i ; 
+
+	//Set containers
+	for(i = 0 ; i < 5 ; i++){
+
+		//Check ship, containers cannot be in inventory or in themselves.
+		for(int j = 0 ; j < 17 ; j++){
+			if((containers[i]->getLocationName()) == (ship[j]->getName())){
+
+				//Check if item is feature or not
+				if(containers[i]->getPickup() == false){
+					ship[j]->setFeature(containers[i]);
+					break;
+				
+				}
+				else if(regularItems[i]->getPickup() == true){
+					ship[j]->setItem(containers[i]);
+					break;
+					
+				}
+			}
+		}
+	}
+		
+
+	//Set regular items 
+	for(i = 0 ; i < 33 ; i++){
+		
+		//Check if item is in inventory and place accordingly. 
+		if(regularItems[i]->getLocationName() == "inventory"){
+
+			int emptySlot = -1;
+
+			//Find empty slot in inventory array
+			for(int j = 0 ; j < 8 ; j++){
+				if(inventory[j] == NULL){
+					emptySlot = i;
+	
+				}
+			}
+			//Confirm that slot is found and item is not a feature.
+			if(emptySlot != -1 && (regularItems[i]->getPickup() == true)){
+				
+				//Set inventory to item
+				inventory[emptySlot] = regularItems[i];
+			}
+			else{
+				cout << "Error on setItemLocation, adding to inventory." << endl;
+			}
+			
+		}
+		//If item is not in inventory it must be in a container or ship room.
+		else{
+			
+			//Check containers
+			for(int j = 0 ; j < 5 ; j++){
+				if((regularItems[i]->getLocationName()) == (containers[j]->getName())){
+					containers[j]->setItem(regularItems[i]); 
+					break;
+				}
+			}
+	
+
+			//Check ship names
+			for(int j = 0 ; j < 17 ; j++){
+				if((regularItems[i]->getLocationName()) == (ship[j]->getName())){
+
+					//Check if item is feature or not
+					if(regularItems[i]->getPickup() == false){
+						ship[j]->setFeature(regularItems[i]);
+						break;
+					}
+					else if(regularItems[i]->getPickup() == true){
+						ship[j]->setItem(regularItems[i]);
+						break;
+				
+					}
+				}
+			}
+
+
+		}
+	}
+
+
+	//Set consumables items 
+	for(i = 0 ; i < 2 ; i++){
+		
+		//Check if item is in inventory and place accordingly. 
+		if(consumables[i]->getLocationName() == "inventory"){
+
+			int emptySlot = -1;
+
+			//Find empty slot in inventory array
+			for(int j = 0 ; j < 8 ; j++){
+				if(inventory[j] == NULL){
+					emptySlot = i;
+				}
+			}
+			//Confirm that slot is found and item is not a feature.
+			if(emptySlot != -1 && (consumables[i]->getPickup() == true)){
+				
+				//Set inventory to item
+				inventory[emptySlot] = consumables[i];
+			}
+			else{
+				cout << "Error on setItemLocation, adding to inventory." << endl;
+			}
+			
+		}
+		//If item is not in inventory but is not a feature check containers. 
+		else{
+			//Check containers
+			for(int j = 0 ; j < 5 ; j++){
+				if((consumables[i]->getLocationName()) == (containers[j]->getName())){
+					containers[j]->setItem(consumables[i]);
+					break;
+				}
+			}
+	
+
+			//Check ship names
+			for(int j = 0 ; j < 17 ; j++){
+				if((consumables[i]->getLocationName()) == (ship[j]->getName())){
+
+					//Check if item is feature or not
+					if(consumables[i]->getPickup() == false){
+						ship[j]->setFeature(consumables[i]);
+						break;
+						
+					}
+					else if(consumables[i]->getPickup() == true){
+						ship[j]->setItem(consumables[i]);
+						break;
+						
+					}
+				}
+			}
+
+
+		}
+	}
+
 
 }
-*/
+
 void GameState::saveGameState(){
 	
 	//Build path to save folder
@@ -397,6 +726,7 @@ void GameState::saveRooms(){
 		outputFile << shortDesc << "\n";
 		outputFile << visitedString << "\n";
 
+	
 		outputFile.close();
 
 		fileName = "";
@@ -408,6 +738,181 @@ void GameState::saveRooms(){
 	}
 }
 
+void GameState::saveItems(){
+	
+	//Build the path to the save folder
+	char * path ; 
+	char pathName [] = "/saves";
+	char cwdName [1000];
+
+	memset(cwdName, '\0', sizeof(cwdName));
+	getcwd(cwdName, sizeof(cwdName));
+	strcat(cwdName, pathName);
+	path = cwdName;
+
+	int success = chdir(path);
+	if(success == -1){
+		cout << "error in chdir in saveItems" << endl;
+	}
+	
+	string name; 
+	string desc1; 
+	string desc2;
+	bool pickup;  
+	string secondVerb;
+	bool conditionMet;
+	string location;
+	string requirement;
+	fstream outputFile;
+
+	string itemPrefix = "Item";
+	string containPrefix = "Contain";
+	string consumePrefix = "Consume";
+	string suffix = ".txt";
+	string fileName = "";
+
+	//Export regular items
+	for(int i = 0 ; i < 33 ; i++){
+
+		//Create item file name. 
+		fileName = itemPrefix + to_string(i) + suffix;
+
+		//Create the file
+		outputFile.open(fileName, ios::out); 
+
+		name = regularItems[i]->getName();
+		desc1 = regularItems[i]->getDesc1();
+		desc2 = regularItems[i]->getDesc2();
+		pickup = regularItems[i]->getPickup();
+		secondVerb = regularItems[i]->getSecondVerb();
+		conditionMet = regularItems[i]->getConditionMet();
+		location = regularItems[i]->getLocationName();
+
+		outputFile << name << "\n";
+		outputFile << desc1 << "\n";
+		outputFile << desc2 << "\n";
+
+		if(pickup == true){
+			outputFile << "true\n" ;
+		}
+		else if(pickup == false){
+			outputFile << "false\n";
+		}
+
+		outputFile << secondVerb << "\n";
+
+		if(conditionMet == true){
+			outputFile << "true\n";
+		}
+		else if(conditionMet == false){
+			outputFile << "false\n";
+		}
+
+		outputFile << location << "\n";
+	
+		outputFile.close();
+
+		fileName = "";
+
+	}
+
+	//Export consumables
+	for(int i = 0 ; i < 2 ; i++){
+
+		//Create item file name. 
+		fileName = consumePrefix + to_string(i) + suffix;
+
+		//Create the file
+		outputFile.open(fileName, ios::out); 
+
+		name = regularItems[i]->getName();
+		desc1 = regularItems[i]->getDesc1();
+		desc2 = regularItems[i]->getDesc2();
+		pickup = regularItems[i]->getPickup();
+		secondVerb = regularItems[i]->getSecondVerb();
+		conditionMet = regularItems[i]->getConditionMet();
+		location = regularItems[i]->getLocationName();
+
+		outputFile << name << "\n";
+		outputFile << desc1 << "\n";
+		outputFile << desc2 << "\n";
+
+		if(pickup == true){
+			outputFile << "true\n" ;
+		}
+		else if(pickup == false){
+			outputFile << "false\n";
+		}
+
+		outputFile << secondVerb << "\n";
+
+		if(conditionMet == true){
+			outputFile << "true\n";
+		}
+		else if(conditionMet == false){
+			outputFile << "false\n";
+		}
+
+		outputFile << location << "\n";
+	
+		outputFile.close();
+
+		fileName = "";
+
+	}
+
+	//Export containers
+	for(int i = 0 ; i < 5 ; i++){
+		
+		//Create item file name. 
+		fileName = containPrefix + to_string(i) + suffix;
+
+		//Create the file
+		outputFile.open(fileName, ios::out); 
+
+		name = containers[i]->getName();
+		desc1 = containers[i]->getDesc1();
+		desc2 = containers[i]->getDesc2();
+		pickup = containers[i]->getPickup();
+		secondVerb = containers[i]->getSecondVerb();
+		conditionMet = containers[i]->getConditionMet();
+		location = containers[i]->getLocationName();
+		requirement = containers[i]->getRequirement();
+
+		outputFile << name << "\n";
+		outputFile << desc1 << "\n";
+		outputFile << desc2 << "\n";
+
+		if(pickup == true){
+			outputFile << "true\n" ;
+		}
+		else if(pickup == false){
+			outputFile << "false\n";
+		}
+
+		outputFile << secondVerb << "\n";
+
+		if(conditionMet == true){
+			outputFile << "true\n";
+		}
+		else if(conditionMet == false){
+			outputFile << "false\n";
+		}
+
+		outputFile << location << "\n";
+		
+		outputFile << requirement << "\n";
+
+		outputFile.close();
+
+		fileName = "";
+
+	}
+	success = chdir("..");
+	if(success == -1){
+		cout << "error in chdir in saveRooms" << endl;
+	}
+}
 
 /******************************************************************************************************************/
 //Getter functions
@@ -500,26 +1005,59 @@ void GameState::printLossDesc() {
 void GameState::printCurRoomDesc() {
 
 	if (position->getVisited() == false) {
-		cout << position->getLongDesc() << endl;
+		cout << "\n" << position->getLongDesc() << endl;
 		position->setVisited(true);
 	}
 	else {
-		cout << position->getShortDesc() << endl;
+		cout << "\n" << position->getShortDesc() << endl;
 	}
 
 	cout << endl;
 }
 
-void GameState::printItems(){
+void GameState::printRoomItems(){
 	
 	position->printItemNames();
 	return;
 }
 
-void GameState::printFeatures(){
+void GameState::printRoomFeatures(){
 	
 	position->printFeatureNames();
 	return;
+}
+
+void GameState::printItemsForAllRooms(){
+
+	cout << "----Items by room----" << endl;
+	for(int i = 0 ; i < 17 ; i ++){
+		cout << "-----Room: " << ship[i]->getName() << "----" << endl;
+		cout << "Items\n" << endl;
+		ship[i]->printItemNames();
+		cout << endl;
+		cout << "Freatures\n" << endl;
+		ship[i]->printFeatureNames();
+		cout << endl;
+	}
+}
+
+void GameState::printAllItems(){
+
+	cout << "----Regular Items----" << endl;
+	for(int i = 0 ; i < 33 ; i++){
+		cout << "Name: " << regularItems[i]->getName() << endl;
+		cout << "	Target Room: " << regularItems[i]->getLocationName() << endl;
+	}
+	cout << "----Containers----" << endl;
+	for(int i = 0 ; i < 5 ; i++){
+		cout << "Name: " << containers[i]->getName() << endl;
+		cout << "	Target Room: " << containers[i]->getLocationName() << endl;
+	}
+	cout << "----Consumables----" << endl;
+	for(int i = 0 ; i < 2 ; i++){
+		cout << "Name: " << consumables[i]->getName() << endl;
+		cout << "	Target Room: " << consumables[i]->getLocationName() << endl;
+	}
 }
 
 /******************************************************************************************************************/
@@ -731,6 +1269,9 @@ void GameState::_takeItem(string noun){
 		//Set room itemArr pointer to null and decrement itemCount in room
 		position->setItemToNull(noun);
 
+		//Change the location name in the item. 
+		itemToTake->setLocationName("inventory");
+
 		cout << "You picked up the " << noun << endl;
 
 		itemToTake = NULL;
@@ -764,7 +1305,11 @@ void GameState::_dropItem(string noun){
 				
 		}
 	
+		//Drop item in the room
 		position->setItemToPointer(itemToDrop);
+
+		//Change the location name in the item to the current room name.
+		itemToDrop->setLocationName(position->getName());
 
 		cout << "You dropped the " << noun << endl;
 
@@ -813,6 +1358,7 @@ void GameState::_printInventory(){
 void GameState::_saveGame() {
 	saveGameState();
 	saveRooms();
+	saveItems();
 	cout << "Game Saved!" << endl;
 }
 
@@ -846,12 +1392,34 @@ void GameState::_quitGame() {
 
 
 //Check with Maressia on how this is passing to items. 
-void GameState::_itemAction(string verb, string noun, GameState game) {
+void GameState::_itemAction(string verb, string noun, GameState * game) {
 
+	Item * subject = NULL;
+	
+	//Find item to act upon
+	if(_checkInventory(noun) != NULL){
+		subject = _checkInventory(noun);
+	}
+	else if(_checkForItem(noun) != NULL){
+		subject = _checkForItem(noun);
+	}
+	else if(_checkForFeature(noun) != NULL){
+		subject = _checkForFeature(noun);
+	}
+
+	//Call item function.
+	if(subject != NULL){
+		subject->actionFunction(game, verb);
+	}
+	else{
+		cout << "You cannot do that!" << endl;
+	}
+
+	return;
 }
 
 
-void GameState::enactVerb(vector<string> parsedInput) {
+void GameState::enactVerb(vector<string> parsedInput, GameState * game) {
 
 	string noun;
 	string verb; 
@@ -860,12 +1428,12 @@ void GameState::enactVerb(vector<string> parsedInput) {
 	if(parsedInput.size() == 2){
 		verb = parsedInput[0];
 		noun = parsedInput[1];
-		//cout << "noun in enactVerb: " << noun << endl;
-		//cout << "verb in enactVerb: " << verb << endl;
+		cout << "noun in enactVerb: " << noun << endl ;
+		cout << "verb in enactVerb: " << verb << endl << endl;
 	}
 	else{
 		verb = parsedInput[0];
-		//cout << "verb in enactVerb: " << verb << endl;
+		cout << "verb in enactVerb: " << verb << endl << endl;
 	}
 
 	
@@ -898,6 +1466,9 @@ void GameState::enactVerb(vector<string> parsedInput) {
 	}
 	else if (verb == "quit") {
 		_quitGame();
+	}
+	else if(verb == "invalid"){
+		cout << "You cannot do that!" << endl;
 	}
 	//Check with Hamiltion what the passed verb will be to call 
 	//unique object functions. Check with Mareissa on how this is

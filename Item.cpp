@@ -78,8 +78,27 @@ bool Item::getPickup(){
   return pickup;
 }
 
+string Item::getSecondVerb(){
+  return secondVerb;
+}
+
 bool Item::getConditionMet()
 {
   return conditionMet;
 }
 
+string Item::getLocationName(){
+  return locationName;
+}
+
+void Item::actionFunction(GameState * G, string verb){
+  
+
+  if(verb == secondVerb){
+    cout << desc2 << endl;
+  }
+  else
+  {
+    cout << "Error, you cannot do that.\n";
+  }
+}

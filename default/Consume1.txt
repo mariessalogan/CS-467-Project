@@ -1,6 +1,6 @@
 button
-You approach the kill switch, it is a large, round button.  It is sticking out, but once you push it, it will be stuck pushed down until the holodeck is started again… If it’s ever started again.  At least it would give you more time to find an escape pod if you push it.\n
-You have already pushed the button.\n
+You approach the kill switch, it is a large, round button. It is sticking out, but once you push it, it will be stuck pushed down until the holodeck is started again… If it’s ever started again.  At least it would give you more time to find an escape pod if you push it.
+You have already pushed the button.
 false
 push
 true

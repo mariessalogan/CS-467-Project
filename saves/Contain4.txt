@@ -6,4 +6,3 @@ shake
 true
 supply closet
 desk key
-NULL
