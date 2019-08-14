@@ -27,7 +27,7 @@ static const vector<string> nouns =
 		"oxygen meter", "chair", "binder", "starbuck", "mal", "safe", "mech suit", "blowtorch",
 		"uniform", "beaker", "desk", "steam pipe", "kirk", "transporter", "alien", 
 		"screen", "melvin", "kelvin", "surgical supplies", "heart monitor", "port", "alcohol", "beaker",
-		"bathroom"
+		"bathroom", "instructions", "handprint"
 		};
 
 static const vector<string> exits =
