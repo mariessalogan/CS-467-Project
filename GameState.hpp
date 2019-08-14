@@ -1,7 +1,7 @@
 /*****************************************************************************
 * Program: Adventure Time Text Based Game
 * Author: Justin Azevedo
-* Date: 7/15/19
+* Date: 8-13-19
 * Class: CS 467 Capstone Summer '19
 * Description: Header file for the GameState class. 
 ******************************************************************************/

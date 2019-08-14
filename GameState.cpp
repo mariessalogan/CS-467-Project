@@ -1,7 +1,7 @@
 /*****************************************************************************
 * Program: Adventure Time Text Based Game
 * Author: Justin Azevedo
-* Last Modified: 7-27-19
+* Last Modified: 8-13-19
 * Class: CS 467 Capstone Summer '19
 * Description: Implementation of GameState class and functions. 
 ******************************************************************************/
