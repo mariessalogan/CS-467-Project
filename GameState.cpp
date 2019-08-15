@@ -89,7 +89,6 @@ GameState::GameState(){
 		    |  |    |  `--'  | |  `--'  |    |  `----.|  `--'  | .----)   |   |  |____ |__| |__| |__| 
 		    |__|     \______/   \______/     |_______| \______/  |_______/    |_______|(__) (__) (__)
 		    )";
-	
 	for(int i = 0 ; i < 8 ; i++){
 		inventory[i] = NULL;
 	}
@@ -1006,7 +1005,7 @@ void GameState::printIntro() {
 //Print adjacent room names to inform player of exits
 void GameState::printExits(){
 	
-	cout << "Exits:" << endl ; 
+	cout << "\033[1;36mExits:" << endl ; 
 
 	if(position->getNorth() != NULL){
 		cout << "    *North: " << position->getNorth()->getName() << endl;
@@ -1018,9 +1017,9 @@ void GameState::printExits(){
 		cout << "    *South: " << position->getSouth()->getName() << endl;
 	}
 	if(position->getWest() != NULL){
-		cout << "    *West: " << position->getWest()->getName() << endl;
+		cout << "    *West: " << position->getWest()->getName() << "\n";
 	}
-	cout << endl;
+	cout << "\033[0m\n";
 
 
 }
@@ -1033,7 +1032,7 @@ void GameState::printWinDesc() {
 
 //Print game lost / game over description
 void GameState::printLossDesc() {
-	cout << lossDesc << "\n\n";
+	cout << "\033[1;31m" << lossDesc << "\033[0m\\n\n";
 	return;
 }
 
@@ -1387,12 +1386,12 @@ void GameState::_printInventory(){
 
 	int i;
 
-	cout << "Inventory:" << endl;
+	cout << "\033[1;32mInventory:\033[0m" << endl;
 
 	//Check for holes in inventory array due to item drops. 
 	for(i = 0 ; i < 8 ; i++){
 		if(inventory[i] != NULL){
-			cout << "    *" <<inventory[i]->getName() << endl;
+			cout << "\033[1;32m    *" <<inventory[i]->getName() << "\033[0m\n";
 		}
 	}
 
