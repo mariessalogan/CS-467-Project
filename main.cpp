@@ -19,7 +19,7 @@
 using namespace std;
 
 int main() {
-
+	cout << "\033[1;32m";
 	cout << R"(
   ____                    ____                         _____                            
  |  _ \  ___  ___ _ __   / ___| _ __   __ _  ___ ___  | ____|___  ___ __ _ _ __   ___ _ 
@@ -33,7 +33,7 @@ int main() {
             |_| |_| |_|\___| |_____|___/\___\__,_| .__/ \___|_| |_|_|_| |_|\__, |       
                                                  |_|                       |___/  
 )" << endl << endl;
-
+    cout << "\033[0m\n";
 	GameState * game = new GameState();
 	bool menu = false;
 	char * path;
@@ -95,7 +95,7 @@ int main() {
 
 		//PRINT STATEMENT FOR DEBUGGING
 		cout << "---------------Stats---------------" << endl;
-		cout << "Location: " << game->getPosition()->getName() << endl;
+		cout << "\033[1;33mLocation: " << game->getPosition()->getName() << "%\033[0m" << endl;
 		cout << "\033[1;31mOxygen: " << game->getOxygen() << "%\033[0m" << endl;
 		cout << endl;
 		game->getPosition()->printItemNames();
@@ -167,7 +167,7 @@ int main() {
 		if(game->getGameWon() == true){
 			gameOver = true; 
 			game->printWinDesc();
-			cout << "____    ____  ______    __    __     ____    __    ____  __  .__   __.  __   __   __\n\\   \\  /   / /  __  \\  |  |  |  |    \\   \\  /  \\  /   / |  | |  \\ |  | |  | |  | |  | \n \\   \\/   / |  |  |  | |  |  |  |     \\   \\/    \\/   /  |  | |   \\|  | |  | |  | |  | \n  \\_    _/  |  |  |  | |  |  |  |      \\            /   |  | |  . `  | |  | |  | |  | \n    |  |    |  `--'  | |  `--'  |       \\    /\\    /    |  | |  |\\   | |__| |__| |__| \n    |__|     \\______/   \\______/         \\__/  \\__/     |__| |__| \\__| (__) (__) (__)\n";	
+			cout << "\033[1;32m____    ____  ______    __    __     ____    __    ____  __  .__   __.  __   __   __\n\\   \\  /   / /  __  \\  |  |  |  |    \\   \\  /  \\  /   / |  | |  \\ |  | |  | |  | |  | \n \\   \\/   / |  |  |  | |  |  |  |     \\   \\/    \\/   /  |  | |   \\|  | |  | |  | |  | \n  \\_    _/  |  |  |  | |  |  |  |      \\            /   |  | |  . `  | |  | |  | |  | \n    |  |    |  `--'  | |  `--'  |       \\    /\\    /    |  | |  |\\   | |__| |__| |__| \n    |__|     \\______/   \\______/         \\__/  \\__/     |__| |__| \\__| (__) (__) (__)\033[0m\n";	
 		}
 		else if(game->getGameLost() == true){
 			gameOver = true;
