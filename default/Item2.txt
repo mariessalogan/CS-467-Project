@@ -4,4 +4,4 @@ NULL
 true
 NULL
 true
-captain’s bathroom
+bathroom
