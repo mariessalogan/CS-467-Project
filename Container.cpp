@@ -56,7 +56,7 @@ void Container::actionFunction(GameState * G, string verb)
 		{
 			this->setConditionMet(true);
 			G->getPosition()->setItemToPointer(storedItem);
-			if(this->getName() == "captain's bathroom")
+			if(this->getName() == "bathroom")
 			{
 				cout << "You open the room and see armor thrown on the ground, right by the door.  It must have been tossed aside by the captain when he was running out of the room.  You look further into the room and see a marble, palatial bathtub with half burned scented candles. You look up and there are mirrors on the ceiling.  No wonder the crew members kept pranking him, this bathroom was obviously built with a purpose.\n";
 
