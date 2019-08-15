@@ -140,7 +140,7 @@ int main() {
 			if(game->_checkInventory("armor") != NULL){
 				requirements++;
 			}
-			if(game->_checkInventory("goggles") != NULL){
+			if(game->_checkInventory("thermal goggles") != NULL){
 				requirements++;
 			}
 
