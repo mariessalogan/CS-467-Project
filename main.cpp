@@ -96,7 +96,7 @@ int main() {
 		//PRINT STATEMENT FOR DEBUGGING
 		cout << "---------------Stats---------------" << endl;
 		cout << "Location: " << game->getPosition()->getName() << endl;
-		cout << "Oxygen: " << game->getOxygen() << "%" << endl;
+		cout << "\033[1;31mOxygen: " << game->getOxygen() << "%\033[0m" << endl;
 		cout << endl;
 		game->getPosition()->printItemNames();
 		cout << endl;
