@@ -1,6 +1,6 @@
-goggles
-The goggles have a band that goes around the back of your head to hold it secure. The goggles are a single pane of glass with a tech inside that can track heat signatures.  This will be useful against any creature who has cloaking ability, it might be smart to pick this up.
-You're smarter than this, you put it back down.
+beaker
+The chemical hood has long ago been shut off, so there is a visible gas being emitted from the beaker of bubbling chemicals and gathering under the hood.  The smell of the chemicals is acrid, and burns your nose.  You wonder what the scientists were working on when the attack came.  
+You start to drink this, then realize you’re not an idiot and put it back down.
 false
 drink
 true

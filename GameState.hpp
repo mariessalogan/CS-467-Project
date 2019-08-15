@@ -74,7 +74,7 @@ class GameState{
 		void printCurRoomDesc();						//Prints long or short desc for room depending on room.visted bool. Sets visited to true after printing the long desc.
 		void printRoomItems();								//Prints all the item descriptions for a room
 		void printRoomFeatures();							//Prints all the feature descriptions for a room. 
-		void printItemsForAllRooms();
+		void printItemLocations();
 		void printAllItems();
 
 		//Setter / Modifier functions

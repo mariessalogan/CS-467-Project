@@ -1,4 +1,4 @@
 workshop
 There is a workbench with tools hung on the wall next to it. The workbench has a blowtorch laying on it’s side, set aside in a hurry while the artisan ran to an escape pod most likely.  There is a broken phaser next to it, and phaser maintenance instructions are rolled out. 
 The blowtorch is sitting on the desk along with a broken phaser, and phaser maintenance instructions.
-false
+true

@@ -13,7 +13,7 @@ void Consumable::actionFunction(GameState * G, string verb)
 {
 	
 	//if conditionMet then Consumable was already drunk
-	if(this->getConditionMet() == true)
+	if(this->getConditionMet() == false)
 	{
 		int oxygen = 5 + G->getOxygen();
 		this->setConditionMet(true);
@@ -27,6 +27,7 @@ void Consumable::actionFunction(GameState * G, string verb)
 		else
 		{
 			cout << "You feel energized!\n";
+			G->getPosition()->setItemToNull("coffee");
 		}
 	}
 	else

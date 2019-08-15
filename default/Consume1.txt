@@ -3,5 +3,5 @@ You approach the kill switch, it is a large, round button. It is sticking out, b
 You have already pushed the button.
 false
 push
-true
+false
 holodeck

@@ -3,6 +3,6 @@ The coffee maker is one of the few appliances that does not have phaser holes bl
 The coffee is brewed and smells amazing. You look fondly at the coffee maker, the best of all kitchen compliances, the bringer of delicious, yummy happiness. 
 false
 turn on
-true
+false
 cafeteria
 NULL

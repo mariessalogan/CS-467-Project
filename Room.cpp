@@ -14,7 +14,9 @@ using namespace std;
 Room::Room(){
   visited = false;
   itemCount = 0;
-  itemInventory[0] = NULL;
+  for(int i = 0 ; i < 8 ; i++){
+	itemInventory[i] = NULL;
+  }
   features[0] = NULL;
   features[1] = NULL;
   features[2] = NULL;
@@ -83,14 +85,16 @@ void Room::setFeature(Item *feature)
   }
 }
 
+/*
 void Room::setItem(Item *item)
 {
   int idx = -1;
   if(itemCount < 8)
   {
-    for(int i = 7 ; i >= 0 ; i--){
+    for(int i = 0 ; i < 8 ; i++){
       if(itemInventory[i] == NULL){
         idx = i;
+        break;
       }
     }
     itemInventory[idx] = item;
@@ -100,7 +104,7 @@ void Room::setItem(Item *item)
     cout << "There is no room to drop the item in this room!" << endl;
   }
 }
-
+*/
 void Room::setItemCount(int count){
   itemCount = count;
   return;
@@ -110,22 +114,20 @@ void Room::setItemCount(int count){
 //set that slot to null and decrement itemCount for room. Used
 //when player picks up an item. 
 void Room::setItemToNull(string takeName){
-  for(int i = 0 ; i < 8 ; i++){
-    
-    if(takeName == itemInventory[i]->getName()){
-      itemInventory[i] = NULL;
-      itemCount--;
-      break;
-    }
-  
+  for(int i = 0 ; i < 8  ; i++){
+    if(itemInventory[i] != NULL){
+		if(takeName == itemInventory[i]->getName()){
+			itemInventory[i] = NULL;
+			itemCount--;
+			break;
+		}
+	}
   }
-  return;
 }
-
 //Find an empty slot in the room itemInventory. When found set that slot to
 //point to the dropped item. Increment itemCount for room. Used when player
 //drops and item. 
-void Room::setItemToPointer(Item * dropItem){
+void Room::setItem(Item * dropItem){
   for(int i = 0; i < 8 ; i++){
     if(itemInventory[i] == NULL){
       itemInventory[i] = dropItem;

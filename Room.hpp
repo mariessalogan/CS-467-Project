@@ -42,10 +42,10 @@ class Room
     void setEast(Room *newRoom);
     void setWest(Room *newRoom);
     void setFeature(Item * feature);
-    void setItem(Item * item);
+    void setItem(Item * dropItem);
     void setItemCount(int count);
     void setItemToNull(string takeName);
-    void setItemToPointer(Item * dropItem); 
+    //void setItemToPointer(Item * dropItem); 
 
     //get functions
     string getName();

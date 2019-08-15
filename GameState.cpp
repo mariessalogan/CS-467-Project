@@ -544,6 +544,7 @@ void GameState::setItemLocations(){
 
 			//Check ship names
 			for(int j = 0 ; j < 17 ; j++){
+				
 				if((regularItems[i]->getLocationName()) == (ship[j]->getName())){
 
 					//Check if item is feature or not
@@ -831,13 +832,13 @@ void GameState::saveItems(){
 		//Create the file
 		outputFile.open(fileName, ios::out); 
 
-		name = regularItems[i]->getName();
-		desc1 = regularItems[i]->getDesc1();
-		desc2 = regularItems[i]->getDesc2();
-		pickup = regularItems[i]->getPickup();
-		secondVerb = regularItems[i]->getSecondVerb();
-		conditionMet = regularItems[i]->getConditionMet();
-		location = regularItems[i]->getLocationName();
+		name = consumables[i]->getName();
+		desc1 = consumables[i]->getDesc1();
+		desc2 = consumables[i]->getDesc2();
+		pickup = consumables[i]->getPickup();
+		secondVerb = consumables[i]->getSecondVerb();
+		conditionMet = consumables[i]->getConditionMet();
+		location = consumables[i]->getLocationName();
 
 		outputFile << name << "\n";
 		outputFile << desc1 << "\n";
@@ -1067,7 +1068,7 @@ void GameState::printRoomFeatures(){
 	return;
 }
 
-void GameState::printItemsForAllRooms(){
+void GameState::printItemLocations(){
 
 	cout << "----Items by room----" << endl;
 	for(int i = 0 ; i < 17 ; i ++){
@@ -1079,9 +1080,22 @@ void GameState::printItemsForAllRooms(){
 		ship[i]->printFeatureNames();
 		cout << endl;
 	}
+	cout << "-----Items in containers----" << endl;
+	for(int i = 0 ; i < 5 ; i ++){
+		cout << "----Container: " << containers[i]->getName() << "----" << endl;
+		cout << "Item: " << containers[i]->getItem()->getName() << endl;
+	}
 }
 
 void GameState::printAllItems(){
+	
+	cout << "Captain's quarters: " << endl;
+	if(ship[1]->getItem("communicator") != NULL){
+		cout << ship[1]->getItem("communicator")->getName() << endl;
+	}
+	else{
+		cout << "No communicator in room" << endl;
+	}
 
 	cout << "----Regular Items----" << endl;
 	for(int i = 0 ; i < 33 ; i++){
@@ -1119,7 +1133,7 @@ void GameState::setOxygen(int oxygenLevel){
 //Decrement oxygen by one, called after player moves rooms.
 void GameState::decOxygen(){
 	if(oxygen > 0){
-		oxygen -= 1;
+		oxygen -= 2;
 	}
 	return;
 }
@@ -1346,7 +1360,7 @@ void GameState::_dropItem(string noun){
 		}
 	
 		//Drop item in the room
-		position->setItemToPointer(itemToDrop);
+		position->setItem(itemToDrop);
 
 		//Change the location name in the item to the current room name.
 		itemToDrop->setLocationName(position->getName());
@@ -1475,6 +1489,7 @@ void GameState::enactVerb(vector<string> parsedInput, GameState * game) {
 	if(parsedInput.size() == 2){
 		verb = parsedInput[0];
 		noun = parsedInput[1];
+		//Debugging statements
 		cout << "noun in enactVerb: " << noun << endl ;
 		cout << "verb in enactVerb: " << verb << endl << endl;
 	}

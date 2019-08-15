@@ -4,4 +4,4 @@ There’s a return message from HQ, “Distress call received, please transmit y
 true
 listen
 true
-captain’s quarters
+inventory

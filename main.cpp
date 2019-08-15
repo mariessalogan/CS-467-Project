@@ -1,7 +1,7 @@
 /************************************************************************************************
 * Program: Adventure Time Text Based Game
 * Author: Justin Azevedo
-* Last Modified: 8-13-19
+* Last Modified: 8-15-19
 * Class: CS 467 Capstone Summer '19
 * Description: Test main file for midway project evalution.
 ************************************************************************************************/
@@ -38,7 +38,7 @@ int main() {
 	bool menu = false;
 	char * path;
 	bool gameOver = false;
-	
+	string menuChoice;
  	char cwdName [1000];
 	memset(cwdName, '\0', sizeof(cwdName));
 	getcwd(cwdName, sizeof(cwdName));
@@ -47,8 +47,7 @@ int main() {
 	cout << "\t2) Load Game" << endl;
 	cout << "\t3) Exit " << endl << endl;
 
-	while(!menu){
-		string menuChoice;
+	while(!menu){		
 
 		cout << "> Select option 1, 2, or 3: ";
 
@@ -82,20 +81,23 @@ int main() {
 
 	cout << string(5, '\n');
 
-	game->printIntro();
+	if(menuChoice == "1"){
+		game->printIntro();
+		sleep(6);
+	
+	}
 
-	//sleep(6);
-
+	int requirements = 0;
+	
 	while(gameOver == false){
 
 		string input; 
 		vector<string> parsedLine;
-		
-		game->printCurRoomDesc();
 
-		//PRINT STATEMENT FOR DEBUGGING
+		game->printCurRoomDesc();
+		
 		cout << "---------------Stats---------------" << endl;
-		cout << "\033[1;33mLocation: " << game->getPosition()->getName() << "%\033[0m" << endl;
+		cout << "\033[1;33mLocation: " << game->getPosition()->getName() << "\033[0m" << endl;
 		cout << "\033[1;31mOxygen: " << game->getOxygen() << "%\033[0m" << endl;
 		cout << endl;
 		game->getPosition()->printItemNames();
@@ -126,10 +128,7 @@ int main() {
 		}
 
 		//Command Center Alein
-		if(game->getPosition()->getName() == "command center"){
-			
-			int requirements = 0;
-
+		if(game->getPosition()->getName() == "command center" && game->getGameQuit() == false && requirements != 4){
 			
 			if(game->_checkInventory("phaser") != NULL){
 				requirements++;
@@ -145,12 +144,20 @@ int main() {
 			}
 
 			if(requirements == 4){
+				
+				game->printCurRoomDesc();
+				cout << endl;
 				string commandCenterWin = "You enter the bright room of the command center. You see the captain’s chair in the center of the room, and the pilots desk is filled with dinosaurs  One of the T-rexes looked like he had suddenly but inevitably betrayed a stegosaurus. You see movement on the left side of the room thanks to your thermal goggles. As soon as you notice the heat signature of the alien, it lands a blow across your chest. Luckily you are wearing the armor that you found earlier.  His claw bounces off the armor, and you swing your phaser up in response. You squeeze the trigger twice, just as you were trained and they both land squarely between the alien’s eyes. The alien falls over dead.";
 				game->textWrap(commandCenterWin);
+				cout << endl << endl;
 			}
 			else{
+				
+				game->printCurRoomDesc();
+				cout << endl;
 				string commandCenterLoss = "You enter the bright room of the command center. You see the captain’s chair in the center of the room, and the pilots desk is filled with dinosaurs. One of the T-rexes looked like he had suddenly but inevitably betrayed a stegosaurus. You are suddenly knocked back and there is a white hot pain across your chest. You look down and see blood gushing from your chest, it looks like a claw made the wound. “There must be an alien in here,” is your last thought as you fade away, your last moments spent in confusion.";
 				game->textWrap(commandCenterLoss);
+				cout << endl << endl;
 				game->setGameLost(true);
 			}
 			
@@ -158,8 +165,6 @@ int main() {
 		//Check if in the escape pod
 		else if(game->getPosition()->getName() == "escape pod"){
 			
-			string escapePodWin = "Safety at last! You stumble into the escape pod, where there is an ergonomic chair that will fold out into a hibernation bed when activated. Someone has thoughtfully placed a bottle of vodka with a glass next to the chair, likely a soldier was using the pod as a room for some private drinking. You look to the right and see a porthole that shows the vast expanse of space. You can see a planet surrounded by four moons far away, otherwise it’s a black blanket dotted with distant stars. You breathe a sigh of relief, sit in the chair and press the button to activate the escape pod.  You sip at the vodka as you watch the spaceship slowly get smaller out of the porthole.";
-			game->textWrap(escapePodWin); 
 			game->setGameWon(true);
 		}
 
