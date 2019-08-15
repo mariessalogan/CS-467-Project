@@ -247,23 +247,25 @@ int Room::getItemCount(){
 
 //This may need to be reworked 
 void Room::printItemNames(){
-  cout << "Room Items:" << endl;
+  cout << "\033[1;35mRoom Items:" << endl;
   if(itemCount != 0){
     for(int i = 0 ; i < 8 ; i++){
       if(itemInventory[i] != NULL){
-        cout << "    *" << itemInventory[i]->getName() << endl ;
+        cout << "    *" << itemInventory[i]->getName() << "\n" ;
       }
     }
+   cout << "\033[0m\n";
   }
 }
 
 //This may need to be reworked 
 void Room::printFeatureNames(){
-	cout << "Room Features:" << endl;
+	cout << "\033[1;34mRoom Features:" << endl;
   for(int i = 0 ; i < 3 ; i++){
     if(features[i] != NULL){      
       cout << "    *" << features[i]->getName() << endl;
     }
   }
+  cout << "\033[0m\n";
 }
 
