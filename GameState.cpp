@@ -1032,7 +1032,7 @@ void GameState::printWinDesc() {
 
 //Print game lost / game over description
 void GameState::printLossDesc() {
-	cout << "\033[1;31m" << lossDesc << "\033[0m\\n\n";
+	cout << "\033[1;31m" << lossDesc << "\033[0m\n\n";
 	return;
 }
 
