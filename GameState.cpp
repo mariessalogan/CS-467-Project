@@ -1490,12 +1490,12 @@ void GameState::enactVerb(vector<string> parsedInput, GameState * game) {
 		verb = parsedInput[0];
 		noun = parsedInput[1];
 		//Debugging statements
-		cout << "noun in enactVerb: " << noun << endl ;
-		cout << "verb in enactVerb: " << verb << endl << endl;
+		//cout << "noun in enactVerb: " << noun << endl ;
+		//cout << "verb in enactVerb: " << verb << endl << endl;
 	}
 	else{
 		verb = parsedInput[0];
-		cout << "verb in enactVerb: " << verb << endl << endl;
+		//cout << "verb in enactVerb: " << verb << endl << endl;
 	}
 
 	

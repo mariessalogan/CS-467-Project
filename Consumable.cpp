@@ -20,7 +20,7 @@ void Consumable::actionFunction(GameState * G, string verb)
 		G->setOxygen(oxygen);
 		if(G->getPosition()->getName() == "holodeck")
 		{
-			cout << "You press the button and it turns the Holodeck off.  You can hear the atmo engine powering up.\n";
+			G->textWrap("You press the button and it turns the Holodeck off.  You can hear the atmo engine powering up.\n");
 			G->getPosition()->setLongDesc("The room is dark and dim without the holodeck projection.  The walls are a simple white color, boring and uninteresting.  The kill switch is still depressed from when you pressed it.\n");
 			G->getPosition()->setShortDesc("The room is dim and has white walls and floors.  You've already pressed the button for the kill switch.\n");
 		}

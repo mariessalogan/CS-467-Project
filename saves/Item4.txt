@@ -1,6 +1,6 @@
 security badge
 This has a picture of the captain on the front of it along with his employee ID number.  This will open any doors or safes that are locked in the ship.  This would be handy to carry around.
-NULL
+There is nothing to scan, you can try finding a locked door and opening it with the badge.
 true
 scan
 true

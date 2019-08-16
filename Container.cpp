@@ -58,16 +58,15 @@ void Container::actionFunction(GameState * G, string verb)
 			G->getPosition()->setItem(storedItem);
 			if(this->getName() == "bathroom")
 			{
-				cout << "You open the room and see armor thrown on the ground, right by the door.  It must have been tossed aside by the captain when he was running out of the room.  You look further into the room and see a marble, palatial bathtub with half burned scented candles. You look up and there are mirrors on the ceiling.  No wonder the crew members kept pranking him, this bathroom was obviously built with a purpose.\n";
-
+				G->textWrap("You open the room and see armor thrown on the ground, right by the door.  It must have been tossed aside by the captain when he was running out of the room.  You look further into the room and see a marble, palatial bathtub with half burned scented candles. You look up and there are mirrors on the ceiling.  No wonder the crew members kept pranking him, this bathroom was obviously built with a purpose.\n");
 			}
 			if(this->getName() == "safe")
 			{
-				cout << "You open the safe and find only one phaser charger inside. You should put this in your pack for later. \n";
+				G->textWrap("You open the safe and find only one phaser charger inside. You should put this in your pack for later. \n");
 			}
 			if(this->getName() == "desk")
 			{
-				cout << "You open the drawer and see a pair of thermal goggles sitting on top of a pile of pens.  They help you see things that are invisible to the naked eye, that might come in handy. \n";
+				G->textWrap("You open the drawer and see a pair of thermal goggles sitting on top of a pile of pens.  They help you see things that are invisible to the naked eye, that might come in handy. \n");
 			}
 		}
 	
@@ -85,7 +84,7 @@ void Container::actionFunction(GameState * G, string verb)
 			{
 				G->getPosition()->setItem(storedItem);
 				
-				cout << "As you shake Kelvin, a small metallic object falls to the ground. Kelvin is dead, but he had a key in his pocket. This may be important later.\n";
+				G->textWrap("As you shake Kelvin, a small metallic object falls to the ground. Kelvin is dead, but he had a key in his pocket. This may be important later.\n");
 				this->setConditionMet(false);
 			} 
 			else
